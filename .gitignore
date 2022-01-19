@@ -47,3 +47,9 @@ m4/lt~obsolete.m4
 # can automatically generate from config.status script
 # (which is called by configure script))
 Makefile
+build/*.o
+build/bash_color_test
+build/cgi_web
+build/cgi_web_test
+
+
