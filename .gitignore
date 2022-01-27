@@ -52,5 +52,7 @@ build/*.o
 build/bash_color_test
 build/cgi_web
 build/cgi_web_test
+cgi/*.cgi
+cgi/*.o
 
 
