@@ -1,6 +1,6 @@
 # cgi scripts
 
-all: main.o get.o
+all: main.o get.o upload
 	g++ main.cpp -o main.cgi
 	g++ get.o -o get.cgi
 	g++ getwp.cpp -o getwp.cgi
@@ -12,7 +12,8 @@ main.o:
 get.o:
 	g++ -c get.cpp -o get.o
 
-
+upload:
+	cp *.cgi /var/www/html/cgi
 
 .PHONY: clean
 clean:
