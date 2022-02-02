@@ -10,13 +10,11 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 
-    if(argc > 1)   
-    //if(argc > 4)
+    if(argc == 4)
     {
         string path = argv[1];
-        //regex pattern(argv[2]);
-
-        //string replace = argv[3];
+        regex pattern(argv[2]);
+        string replace = argv[3];
 
         string input;
         fstream file;
@@ -34,10 +32,10 @@ int main(int argc, char* argv[])
             file.close(); //close the file object.
         }
 
-        cout << input;
+        //cout << input;
 
         // write the results to an output iterator
-        std::regex_replace(std::ostreambuf_iterator<char>(std::cout), input.begin(), input.end(), regex("ABC"), "*");
+        std::regex_replace(std::ostreambuf_iterator<char>(std::cout), input.begin(), input.end(), pattern, replace);
     }
     else
     {
