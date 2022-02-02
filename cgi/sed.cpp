@@ -9,7 +9,6 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-
     if(argc == 4)
     {
         string path = argv[1];
@@ -26,20 +25,15 @@ int main(int argc, char* argv[])
             while(getline(file, tp))
             { 
                 //read data from file object and put it into string.
-                //cout << tp << "\n"; //print the data of the string
                 input += tp += "\n";
             }
             file.close(); //close the file object.
         }
-
-        //cout << input;
-
         // write the results to an output iterator
         std::regex_replace(std::ostreambuf_iterator<char>(std::cout), input.begin(), input.end(), pattern, replace);
     }
     else
     {
-        cout << "content-type: text/html" << endl << endl;
-        cout << "<h1>CGI C++ example</h1>" << endl;
+        cout << "Error: check paramaters...\n";
     }
 }
