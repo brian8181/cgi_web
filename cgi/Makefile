@@ -1,6 +1,6 @@
 # cgi scripts
 
-all: main.o get.o upload
+all: main.o get.o
 	g++ main.cpp -o main.cgi
 	g++ get.o -o get.cgi
 	g++ getwp.cpp -o getwp.cgi

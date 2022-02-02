@@ -1,5 +1,7 @@
 // get not params
 #include <iostream>
+#include <iterator>
+#include <regex>
 #include <fstream>
 #include <string>
 
@@ -7,25 +9,35 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    
-    if(argc > 4)
-    {
-        string input = argv[1];
-        string pattern = argv[2];
-        string replace = argv[3];
 
+    if(argc > 1)   
+    //if(argc > 4)
+    {
         string path = argv[1];
-        fstream newfile;
-        newfile.open(path, ios::in); //open a file to perform read operation using file object
-        if (newfile.is_open())
-        {   //checking whether the file is open
+        //regex pattern(argv[2]);
+
+        //string replace = argv[3];
+
+        string input;
+        fstream file;
+        file.open(path, ios::in); //open a file to perform read operation using file object
+        if (file.is_open())
+        {   
+            //checking whether the file is open
             string tp;
-            while(getline(newfile, tp))
-            { //read data from file object and put it into string.
-                cout << tp << "\n"; //print the data of the string
+            while(getline(file, tp))
+            { 
+                //read data from file object and put it into string.
+                //cout << tp << "\n"; //print the data of the string
+                input += tp += "\n";
             }
-            newfile.close(); //close the file object.
+            file.close(); //close the file object.
         }
+
+        cout << input;
+
+        // write the results to an output iterator
+        std::regex_replace(std::ostreambuf_iterator<char>(std::cout), input.begin(), input.end(), regex("ABC"), "*");
     }
     else
     {
