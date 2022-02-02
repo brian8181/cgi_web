@@ -11,6 +11,7 @@ int main(int argc, char* argv[])
 {
     if(argc == 4)
     {
+        // todo: validate inputs !
         string path = argv[1];
         regex pattern(argv[2]);
         string replace = argv[3];
