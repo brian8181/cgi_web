@@ -29,13 +29,13 @@ int main(int argc, char* argv[])
             file.close(); //close the file object.
         }
 
-        cout << src << endl;
+        //cout << src << endl;
 
         regex src_epx;
         try
 		{
 			//src_epx = regex("^{(.*)}$");
-            src_epx = regex("\\{ABC.*\\}");
+            src_epx = regex("\\{\\$.*\\}");
 		}
 		catch(regex_error& e)
 		{
@@ -52,7 +52,7 @@ int main(int argc, char* argv[])
 		{
             smatch match = *iter;
             cout << match.str() << endl;
-            cout << match.size() << endl;
+            //cout << match.size() << endl;
         }
     }
 }
