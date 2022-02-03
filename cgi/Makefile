@@ -5,6 +5,7 @@ all: main.o get.o
 	g++ get.o -o get.cgi
 	g++ getwp.cpp -o getwp.cgi
 	g++ sed.cpp -o sed.cgi
+	g++ find_tags.cpp -o find_tags.cgi
 
 main.o:
 	g++ -c main.cpp -o main.o
