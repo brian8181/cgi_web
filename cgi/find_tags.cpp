@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
         try
 		{
 			//src_epx = regex("^{(.*)}$");
-            src_epx = regex("\\{\\$.*\\}");
+            src_epx = regex("\\{\\$\\w+\\}");
 		}
 		catch(regex_error& e)
 		{
