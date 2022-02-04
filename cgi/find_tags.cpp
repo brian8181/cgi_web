@@ -30,19 +30,9 @@ int main(int argc, char* argv[])
         }
 
         //cout << src << endl;
-
-        regex src_epx;
-        try
-		{
-		    string name_exp = "\\$[A-Za-z]+\\w*";
-            src_epx = regex("\\{\\s*\\$([A-Za-z]+\\w*)\\s*\\}");
-		}
-		catch(regex_error& e)
-		{
-			cerr << "exception caught: " << e.what() << '\n';
-			cerr << "error of type " << e.code() << " was unhandled\n";
-		} 
-
+        string name_exp = "\\$[A-Za-z]+\\w*";
+        regex src_epx = regex("\\{\\s*\\$([A-Za-z]+\\w*)\\s*\\}");
+        
         auto begin = sregex_iterator(src.begin(), src.end(), src_epx);
 		auto end = sregex_iterator(); 
 		//int match_i = 0;
