@@ -34,8 +34,8 @@ int main(int argc, char* argv[])
         regex src_epx;
         try
 		{
-			//src_epx = regex("^{(.*)}$");
-            src_epx = regex("\\{\\$[A-Za-z]+\\w*\\}");
+		    string name_exp = "\\$[A-Za-z]+\\w*";
+            src_epx = regex("\\{\\s*\\$([A-Za-z]+\\w*)\\s*\\}");
 		}
 		catch(regex_error& e)
 		{
