@@ -34,15 +34,14 @@ int main(int argc, char* argv[])
         regex src_epx = regex("\\{\\s*\\$([A-Za-z]+\\w*)\\s*\\}");
         
         auto begin = sregex_iterator(src.begin(), src.end(), src_epx);
-		auto end = sregex_iterator(); 
-		//int match_i = 0;
-
+        auto end = sregex_iterator(); 
+        
         // for each match
 		for (sregex_iterator iter = begin; iter != end; ++iter)
 		{
             smatch match = *iter;
-            cout << match.str() << endl;
-            //cout << match.size() << endl;
+            std::ssub_match sub = match[1];
+            cout << match.str() <<  " --> " << sub.str() << endl;
         }
     }
 }
