@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Feb  3 13:25:13 2022
+# Make data base, printed on Thu Feb  3 18:54:47 2022
 
 # Variables
 
@@ -67,7 +67,7 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-064b2375-54c9-4a46-a438-e16afbe41c26.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-190c7434-531b-4e2e-be48-756c35886715.sock
 # environment
 VSCODE_CWD = /home/brian
 # environment
@@ -79,7 +79,7 @@ PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/fire.net:@/tmp/.ICE-unix/7296,unix/fire.net:/tmp/.ICE-unix/7296
+SESSION_MANAGER = local/fire.net:@/tmp/.ICE-unix/2387,unix/fire.net:/tmp/.ICE-unix/2387
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -111,7 +111,7 @@ QT_QPA_PLATFORMTHEME = gtk2
 # environment
 XDG_SEAT = seat0
 # environment
-SSH_AGENT_PID = 7371
+SSH_AGENT_PID = 2461
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = XFCE
 # environment
@@ -203,7 +203,7 @@ CHROME_DESKTOP = code-url-handler.desktop
 # environment
 LANG = C
 # environment
-VSCODE_PID = 105837
+VSCODE_PID = 15548
 # variable set hash-table stats:
 # Load=96/1024=9%, Rehash=0, Collisions=7/118=6%
 
@@ -271,6 +271,6 @@ GNUmakefile:
 # strcache performance: lookups = 34 / hit rate = 8%
 # hash-table stats:
 # Load=31/8192=0%, Rehash=0, Collisions=1/34=3%
-# Finished Make data base on Thu Feb  3 13:25:13 2022
+# Finished Make data base on Thu Feb  3 18:54:47 2022
 
  
