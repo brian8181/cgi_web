@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
 		{
             smatch match = *iter;
             std::ssub_match sub = match[1];
-            cout << match.str() <<  " --> " << match[1].str() << " --> " << match[4].str() << endl;
+            cout << match.str() <<  " --> " << match[1].str() << " --> " << match[5].str() << endl;
             //cout << match.str() << endl;
         }
     }
