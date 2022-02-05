@@ -19,10 +19,9 @@ int main(int argc, char* argv[])
         //cout << src << endl;
 
         string name_exp = "[A-Za-z]+\\w*";
-        string value_exp = "\'(\\w+\\)'";
-        //regex src_epx = regex("\\{\\s*\\$(" + name_exp + ")\\s*\\}");
-        //regex src_exp = regex("^(name_exp)\\s+(value_exp)$");
-        regex src_exp = regex("[\\w_]+\\s+=\\s+[\\w_]+"); 
+        //string value_exp = "((\\w+))|('(\\w+)')";
+        string value_exp = "'(\\w+)'";
+        regex src_exp = regex(name_exp + "\\s+=\\s+" + value_exp); 
         //regex src_exp = regex("^[\\w_]+.*$"); 
               
         auto begin = sregex_iterator(src.begin(), src.end(), src_exp);
