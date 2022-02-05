@@ -16,8 +16,6 @@ int main(int argc, char* argv[])
         string path = argv[1];
         string src = fstream_readlines(path);
 
-        //cout << src << endl;
-
         string name_exp = "([A-Za-z]+\\w*)";
         string value_exp = "(((\\w+))|('(\\w+)')|(\\\"(\\w+)\\\"))";
         regex src_exp = regex(name_exp + "\\s+=\\s+" + value_exp); 
