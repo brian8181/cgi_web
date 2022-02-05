@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 
         //cout << src << endl;
 
-        string name_exp = "[A-Za-z]+\\w*";
+        string name_exp = "([A-Za-z]+\\w*)";
         string value_exp = "(((\\w+))|('(\\w+)'))";
         regex src_exp = regex(name_exp + "\\s+=\\s+" + value_exp); 
         //regex src_exp = regex("^[\\w_]+.*$"); 
@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
 		{
             smatch match = *iter;
             std::ssub_match sub = match[1];
-            cout << match.str() <<  " --> " << match[1].str() << " --> " << match[5].str() << endl;
+            cout << "Match: --> " << match.str() <<  "; Name: --> " << match[1].str() << "; Value: --> " << match[6].str() << endl;
             //cout << match.str() << endl;
         }
     }
