@@ -55,6 +55,4 @@ build/cgi_web_test
 cgi/*.cgi
 cgi/*.o
 
-.vscode/**
-
-
+.vscode/*.log

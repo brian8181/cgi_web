@@ -17,9 +17,8 @@ int main(int argc, char* argv[])
         string src = fstream_readlines(path);
 
         string name_exp = "[A-Za-z]+\\w*";
-        regex src_epx = regex("\\{\\s*\\$(" + name_exp + ")\\s*\\}");
-        //regex src_epx = regex("\\{\\s*\\$([A-Za-z]+\\w*)\\s*\\}");
-        
+        regex src_epx = regex("\\{\\s*\\$(" + name_exp + ")\\s*\\}", regex::ECMAScript);
+              
         auto begin = sregex_iterator(src.begin(), src.end(), src_epx);
         auto end = sregex_iterator(); 
         

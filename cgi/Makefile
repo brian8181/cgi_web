@@ -5,6 +5,7 @@ all: main.o get.o
 	g++ get.o -o get.cgi
 	g++ sed.cpp -o sed.cgi
 	g++ find_tags.cpp utility.cpp -o find_tags.cgi
+	g++ load_conf.cpp utility.cpp -o load_conf.cgi
 
 utility.o:
 	g++ -c utility.cpp -o utility.o
