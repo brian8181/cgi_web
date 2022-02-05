@@ -16,13 +16,14 @@ int main(int argc, char* argv[])
         string path = argv[1];
         string src = fstream_readlines(path);
 
-        cout << src << endl;
+        //cout << src << endl;
 
         string name_exp = "[A-Za-z]+\\w*";
         string value_exp = "\'(\\w+\\)'";
         //regex src_epx = regex("\\{\\s*\\$(" + name_exp + ")\\s*\\}");
         //regex src_exp = regex("^(name_exp)\\s+(value_exp)$");
-        regex src_exp = regex("^[\\w_]+\\s+"); 
+        regex src_exp = regex("[\\w_]+\\s+=\\s+[\\w_]+"); 
+        //regex src_exp = regex("^[\\w_]+.*$"); 
               
         auto begin = sregex_iterator(src.begin(), src.end(), src_exp);
         auto end = sregex_iterator(); 
