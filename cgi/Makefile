@@ -4,7 +4,10 @@ all: main.o get.o
 	g++ main.cpp -o main.cgi
 	g++ get.o -o get.cgi
 	g++ sed.cpp -o sed.cgi
-	g++ find_tags.cpp -o find_tags.cgi
+	g++ find_tags.cpp utility.cpp -o find_tags.cgi
+
+utility.o:
+	g++ -c utility.cpp -o utility.o
 
 main.o:
 	g++ -c main.cpp -o main.o
