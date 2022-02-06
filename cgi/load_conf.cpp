@@ -9,8 +9,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    if(1)
-    //if(argc == 1)
+    if(argc == 2)
     {
         // todo: validate inputs !
         string path = argv[1];
