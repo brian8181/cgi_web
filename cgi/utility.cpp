@@ -2,6 +2,7 @@
 #include <iterator>
 #include <fstream>
 #include <string>
+#include <map>
 #include "utility.hpp"
 
 using namespace std;
@@ -25,3 +26,13 @@ string fstream_readlines(string path)
 
     return src;
 }
+
+map<string, string> create_map(string path)
+{
+    map<string, string> m;
+
+    return m;
+}
+
+
+
