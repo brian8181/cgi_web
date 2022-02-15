@@ -1,12 +1,18 @@
 #include <iostream>
 #include <string>
+#include "cgicc/CgiDefs.h"
+#include "cgicc/Cgicc.h"
+#include "cgicc/HTTPHTMLHeader.h"
+#include "cgicc/HTMLClasses.h"
 #include "../../smartycpp/src/smarty.h"
 
 using namespace std;
+using namespace cgicc;
 
 int main(int argc, char* argv[])
 { 
-    cout << "content-type: text/html" << endl << endl;
+    Cgicc cgi;
+    cout << HTTPHTMLHeader(); // Set up the HTML document
 
     string path = "./templates/index_test.tpl";
     smarty sm("./templates", "./complie", "./config", "./cache"); 

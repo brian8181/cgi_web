@@ -13,7 +13,6 @@ int main(int argc, char* argv[])
         // todo: validate inputs !
         string path = argv[1];
         string src = fstream_readlines(path);
-        //regex src_epx = regex(".*", regex::ECMAScript);
         regex src_exp =  regex("\\{\\s*(((\\*)|(#))?\\s*([\\w\\$]*)\\s*((\\*)|(#))?)\\s*\\}", regex::ECMAScript);
               
         sregex_iterator begin = sregex_iterator(src.begin(), src.end(), src_exp, std::regex_constants::match_not_null);

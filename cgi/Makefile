@@ -10,8 +10,8 @@ CXX = g++
 CXXFLAGS = -std=c++17 -DDEBUG -ggdb
 
 # lib settings
-LDFLAGS = -static -lcppunit -L/usr/local/lib/
-INCLUDES = -I/usr/local/include/cppunit/
+LDFLAGS = -static -lcgicc -L/usr/lib/
+INCLUDES = -I/usr/include/cgicc/
 # add addtional libs here
 
 # Makefile settings - Can be customized.
@@ -47,7 +47,7 @@ index.cgi:
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/index.cgi
 
 index2.cgi:
-	$(CXX) $(CXXFLAGS) $(SRCDIR)/index2.cpp $(BUILDDIR)/smarty.o -o $(BUILDDIR)/index2.cgi
+	$(CXX) $(CXXFLAGS) $(SRCDIR)/index2.cpp $(BUILDDIR)/smarty.o $(LDFLAGS) -o $(BUILDDIR)/index2.cgi
 
 find_tags.cgi: utility.o find_tags.o
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/find_tags.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/find_tags.cgi
