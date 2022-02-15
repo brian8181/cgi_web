@@ -46,13 +46,14 @@ m4/lt~obsolete.m4
 # (meta build system like autotools, 
 # can automatically generate from config.status script
 # (which is called by configure script))
-
-
-build/*.o
-build/bash_color_test
-build/cgi_web
-build/cgi_web_test
-cgi/*.cgi
-cgi/*.o
+Makefile
 
 .vscode/*.log
+cgi/*.cgi
+cgi/*.o
+src/*.o
+build/*.o
+build/*.so
+*.o
+*.cgi
+a.out
