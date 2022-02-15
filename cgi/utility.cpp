@@ -193,6 +193,7 @@ void display(string path, const map<string, string>& tags)
     cout << output << endl;
 }
 
+
 const std::string WHITESPACE = " \n\r\t\f\v";
 
 std::string ltrim(const std::string &s)

@@ -1,23 +1,28 @@
+#include <iostream>
 #include <string>
-#include <map>
-#include "utility.hpp"
+#include "cgicc/CgiDefs.h"
+#include "cgicc/Cgicc.h"
+#include "cgicc/HTTPHTMLHeader.h"
+#include "cgicc/HTMLClasses.h"
+#include "../../smartycpp/src/smarty.h"
 
 using namespace std;
+using namespace cgicc;
 
 int main(int argc, char* argv[])
 { 
-    cout << "content-type: text/html" << endl << endl;
+    Cgicc cgi;
+    cout << HTTPHTMLHeader(); // Set up the HTML document
 
     string path = "./templates/index_test.tpl";
-    map<string, string> tags;
-    assign("headers", "", tags);
-    assign("page_title", "SmartyCPP Test Page", tags);
-    assign("body", "The Body", tags);
-    assign("admin_email", "admin@something.com", tags);
-    assign("version", "0.1", tags);
-    assign("version_date", "Feb, 14 2022", tags);
-    display(path, tags);
+    smarty sm("./templates", "./complie", "./config", "./cache"); 
+    sm.assign("headers", "");
+    sm.assign("page_title", "SmartyCPP Test Page");
+    sm.assign("body", "The Body");
+    sm.assign("admin_email", "admin@something.com");
+    sm.assign("version", "0.1");
+    sm.assign("version_date", "Feb, 14 2022");
+    sm.display(path);
     
-	return 0;
-
+    return 0;
 }

@@ -14,4 +14,6 @@ string var = "\\{\\s*\\$(" + name_exp + ")\\s*\\}";
 
 string command = "(config_load|include|insert)\\sfile='(.*)'";
 
+string cmd = "config_load|include|insert|literal|strip|capture|section|assign|debug|eval|fetch|math";
+
 #endif
