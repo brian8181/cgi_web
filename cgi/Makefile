@@ -1,24 +1,86 @@
 # cgi scripts
+BUILD_VERSION = 0.1.0
 
-all: main.o get.o
-	g++ main.cpp -o main.cgi
-	g++ get.o -o get.cgi
-	g++ sed.cpp -o sed.cgi
-	g++ find_tags.cpp utility.cpp -o find_tags.cgi
-	g++ load_conf.cpp utility.cpp -o load_conf.cgi
+prefix = /usr/local
+mandir = $(prefix)/share/man
+man1dir = $(mandir)/man1
+
+# Compiler settings - Can be customized.
+CXX = g++
+CXXFLAGS = -std=c++17 -DDEBUG -ggdb
+
+# lib settings
+LDFLAGS = -static -lcppunit -L/usr/local/lib/
+INCLUDES = -I/usr/local/include/cppunit/
+# add addtional libs here
+
+# Makefile settings - Can be customized.
+APPNAME = smartycpp
+EXT = cpp
+ROOTDIR  = /home/brian/src/cgi_web
+BUILDDIR = $(ROOTDIR)/build
+SRCDIR = $(ROOTDIR)/cgi
+OBJDIR = $(ROOTDIR)/cgi
+SMARTYDIR = /home/brian/src/smartycpp
+
+# compile & link for debug
+# debug: 
+# 	#$(CXXFLAGS) += -DDEBUG -g
+# debug: all
+
+# # compile & link for debug GDBversion variable
+# debuggdb: 
+# 	#$(CXXFLAGS) += -DDEBUG -ggdb # compile & link
+
+world: all dump_matches.o find_tags.o 
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.cgi
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump_matches.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump_matches.cgi
+	$(CXX) $(CXXFLAGS) $(SRCDIR)/display_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/display_test.cgi
+	$(CXX) $(CXXFLAGS) $(SRCDIR)/replace_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/replace_test.cgi
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/find_tags.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/find_tags.cgi
+	
+all: utility.o load_conf.o dump.o smarty.o smarty_test.cgi index.cgi index2.cgi
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/load_conf.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/load_conf.cgi
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.cgi
+	
+index.cgi:
+	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/index.cgi
+
+index2.cgi:
+	$(CXX) $(CXXFLAGS) $(SRCDIR)/index2.cpp $(BUILDDIR)/smarty.o -o $(BUILDDIR)/index2.cgi
+
+smarty_test.cgi: smarty.o
+	$(CXX) $(CXXFLAGS) $(SRCDIR)/smarty_test.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/smarty_test.cgi
+
+# smarty.so: smarty.o
+# 	$(CXX) $(CXXFLAGS) --shared $(BUILDDIR)/smarty.o -o $(BUILDDIR)/smarty.so
+
+smarty.o:
+	$(CXX) $(CXXFLAGS) -c $(SMARTYDIR)/src/smarty.cpp -o $(BUILDDIR)/smarty.o
+	
+# main.o:
+# 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/src/main.cpp -o $(BUILDDIR)/main.o
+
+load_conf.o:
+	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/load_conf.cpp -o $(BUILDDIR)/load_conf.o
+
+dump.o:
+	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/dump.cpp -o $(BUILDDIR)/dump.o
+
+dump_matches.o:
+	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/dump_matches.cpp -o $(BUILDDIR)/dump_matches.o
+
+find_tags.o:
+	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/find_tags.cpp -o $(BUILDDIR)/find_tags.o
 
 utility.o:
-	g++ -c utility.cpp -o utility.o
+	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/utility.cpp -o $(BUILDDIR)/utility.o
 
-main.o:
-	g++ -c main.cpp -o main.o
-
-get.o:
-	g++ -c get.cpp -o get.o
-
+.PHONY: upload
 upload:
-	cp *.cgi /var/www/html/cgi
-
+	cp -rf $(BUILDDIR)/*.cgi /var/www/html/cgi
+	cp -rf $(SRCDIR)/* /var/www/html/cgi
+	
 .PHONY: clean
 clean:
-	rm *.cgi *.o
+	rm $(BUILDDIR)/*.cgi $(BUILDDIR)/*.o
