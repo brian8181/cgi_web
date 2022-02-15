@@ -8,3 +8,8 @@
 7 {$ABCDEFG7}
 8 { $ABCDEFG8}
 9 {     $ABCDEFG9}
+{#abc#}
+{# abc #}
+{**}
+{*abc*}
+{* abcabc *}

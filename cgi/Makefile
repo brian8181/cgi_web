@@ -15,7 +15,7 @@ INCLUDES = -I/usr/local/include/cppunit/
 # add addtional libs here
 
 # Makefile settings - Can be customized.
-APPNAME = smartycpp
+APPNAME = cgi_web
 EXT = cpp
 ROOTDIR  = /home/brian/src/cgi_web
 BUILDDIR = $(ROOTDIR)/build
@@ -37,9 +37,9 @@ world: all dump_matches.o find_tags.o
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump_matches.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump_matches.cgi
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/display_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/display_test.cgi
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/replace_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/replace_test.cgi
-	$(CXX) $(CXXFLAGS) $(BUILDDIR)/find_tags.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/find_tags.cgi
 	
-all: utility.o load_conf.o dump.o smarty.o smarty_test.cgi index.cgi index2.cgi
+	
+all: utility.o load_conf.o dump.o index.cgi index2.cgi find_tags.cgi
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/load_conf.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/load_conf.cgi
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.cgi
 	
@@ -49,17 +49,21 @@ index.cgi:
 index2.cgi:
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/index2.cpp $(BUILDDIR)/smarty.o -o $(BUILDDIR)/index2.cgi
 
-smarty_test.cgi: smarty.o
-	$(CXX) $(CXXFLAGS) $(SRCDIR)/smarty_test.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/smarty_test.cgi
+find_tags.cgi: utility.o find_tags.o
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/find_tags.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/find_tags.cgi
 
-# smarty.so: smarty.o
-# 	$(CXX) $(CXXFLAGS) --shared $(BUILDDIR)/smarty.o -o $(BUILDDIR)/smarty.so
+# smarty_test.cgi: smarty.o
+# 	$(CXX) $(CXXFLAGS) $(SRCDIR)/smarty_test.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/smarty_test.cgi
 
-smarty.o:
+smarty.o: 
 	$(CXX) $(CXXFLAGS) -c $(SMARTYDIR)/src/smarty.cpp -o $(BUILDDIR)/smarty.o
+
+# # smarty.a:
+# # 	$(CXX) $(CXXFLAGS) -c $(SMARTYDIR)/src/smarty.cpp -o $(BUILDDIR)/smarty.o
+# # 	ar rvs smarty.a smarty.o
 	
-# main.o:
-# 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/src/main.cpp -o $(BUILDDIR)/main.o
+# # main.o:
+# # 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/src/main.cpp -o $(BUILDDIR)/main.o
 
 load_conf.o:
 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/load_conf.cpp -o $(BUILDDIR)/load_conf.o

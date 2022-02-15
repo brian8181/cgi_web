@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/${fileBasenameNoExtension}.cgi",
-            "args": ["${workspaceFolder}/test/file3"],
+            "args": ["${workspaceFolder}/test/file2"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

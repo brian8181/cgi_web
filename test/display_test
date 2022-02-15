@@ -8,3 +8,5 @@
 7 {$ABCDEFG7} 7777
 8 { $ABCDEFG8} 888
 9 {     $ABCDEFG9} 888 ${ABC}
+{#ABC#} {*COMENT*}
+{# abc #}
