@@ -38,10 +38,9 @@ int main(int argc, char* argv[])
         string start = "\\{\\s*(";
         string cmd = "((\\*)|(#))?";
         string ending = ")\\s*\\}";
-        string whole_tag = start + cmd + "\\s*([\\w\\$]*)\\s*" + cmd + ending;
+        string name = "\\s*([\\w\\$]*)\\s*";
 
-        
-
+        string whole_tag = start + cmd + name + cmd + ending;
         //regex src_exp =  regex("\\{\\s*((|(\\*)|(#))?\\s*([\\w\\$]*)\\s*((\\*)|(#))?)\\s*\\}", regex::ECMAScript);
         regex src_exp =  regex(whole_tag, regex::ECMAScript);
               
@@ -57,7 +56,6 @@ int main(int argc, char* argv[])
 
             std::ssub_match sub = match[5];
             cout << match.str() <<  " --> " << trim(sub.str()) << " : " << comment << " : " << config << endl;
-            //process_match(match);
         }
     }
 }
