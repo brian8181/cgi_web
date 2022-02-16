@@ -1,0 +1,24 @@
+$ab
+*ab
+#b
+33
+one=aaa
+{$abc}
+{ $abc }
+{   $abc}
+    {$abc}
+{*test*}
+{ *test* }
+{#abc#}
+{insert}
+{config_load}
+{include}
+{literal}
+{strip}
+{capture}
+{section}
+{assign}
+{debug}
+{eval}
+{fetch}
+{math}

@@ -14,7 +14,7 @@
 <h1>{$page_title}</h1>
 </div>
 
-<h2>{$body}</h2>
+<h2>{include=body.tpl}</h2>
 
 <br />
 <div style="text-align: center">
