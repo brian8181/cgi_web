@@ -18,8 +18,6 @@ string process_match(smatch& match)
         // if(config.find(match.str()));
         //     return config.second();
     }
-
-   
     string cmd = "(config_load|include|insert|literal|strip|capture|section|assign|debug|eval|fetch|math)";
     return "";
 }
@@ -31,8 +29,6 @@ int main(int argc, char* argv[])
         string path = argv[1];
         string src = fstream_readlines(path);
 
-        // string cmds = "(config_load|include|insert|literal|strip|capture|section|assign|debug|eval|fetch|math)?";
-        
         // string start = "\\{\\s*(";
         // string cmd = "((\\*)|(#))?";
         // string ending = ")\\s*\\}";
