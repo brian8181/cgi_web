@@ -24,4 +24,8 @@ string list1 = "capitalize|cat|count_characters|count_paragraphs|count_sentences
 string list2 = "|default|escape|indent|lower|upper|nl2br|regex_replace|replace|regex_replace|regex_replace|strip|strip_tags|truncate|wordwarp";
 string match_var_mod = var_modifier + list1 + list2 + "\\:[\\w\\p]*\b";
 
+string param = "\\{\\s*\\$([A-Za-z]+\\w*)\\b\\s*\\}";
+string config =  "\\{\\s*#([^\\}]+)#\\s*\\}";
+string comment = "\\{\\s*\\*([^\\}]+)\\*\\s*\\}";
+
 #endif
