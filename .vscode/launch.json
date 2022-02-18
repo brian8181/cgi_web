@@ -5,11 +5,74 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "dubug active file",
+            "name": "dubug active; arg=file2",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/${fileBasenameNoExtension}.cgi",
             "args": ["${workspaceFolder}/test/file2"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "MAKE DEBUGGDB",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "dubug active; arg=f1",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/${fileBasenameNoExtension}.cgi",
+            "args": ["${workspaceFolder}/test/f1"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "MAKE DEBUGGDB",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "find_tagsl; arg=f1",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/find_tags.cgi",
+            "args": ["${workspaceFolder}/test/f1"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "MAKE DEBUGGDB",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "regex_find; arg=file2,tag.rgx",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/regex_find.cgi",
+            "args": ["${workspaceFolder}/test/file2", "${workspaceFolder}/test/tag.rgx"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

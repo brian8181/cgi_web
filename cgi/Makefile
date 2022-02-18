@@ -8,6 +8,7 @@ man1dir = $(mandir)/man1
 # Compiler settings - Can be customized.
 CXX = g++
 CXXFLAGS = -std=c++17 -DDEBUG -ggdb
+#CXXFLAGS = -std=c++17 -DDEBUG -ggdb
 
 # lib settings
 LDFLAGS = -static -lcgicc -L/usr/lib/
@@ -39,7 +40,7 @@ world: all dump_matches.o find_tags.o
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/replace_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/replace_test.cgi
 	
 	
-all: utility.o load_conf.o dump.o find_tags.cgi
+all: utility.o load_conf.o dump.o find_tags.cgi regex_find.cgi
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/load_conf.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/load_conf.cgi
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.cgi
 	
@@ -48,6 +49,9 @@ all: utility.o load_conf.o dump.o find_tags.cgi
 
 # index.01.cgi:
 # 	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.01.cpp $(BUILDDIR)/smarty.o $(LDFLAGS) -o $(BUILDDIR)/index.01.cgi
+
+regex_find.cgi: regex_find.o utility.o
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/regex_find.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/regex_find.cgi
 
 find_tags.cgi: utility.o find_tags.o
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/find_tags.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/find_tags.cgi
@@ -76,6 +80,9 @@ dump_matches.o:
 
 find_tags.o:
 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/find_tags.cpp -o $(BUILDDIR)/find_tags.o
+
+regex_find.o:
+	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/regex_find.cpp -o $(BUILDDIR)/regex_find.o
 
 utility.o:
 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/utility.cpp -o $(BUILDDIR)/utility.o

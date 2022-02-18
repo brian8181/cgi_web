@@ -45,6 +45,11 @@ int main(int argc, char* argv[])
         string param = "\\{\\s*\\$([A-Za-z]+\\w*)\\b\\s*\\}";
         string config =  "\\{\\s*#([^\\}]+)#\\s*\\}";
         string comment = "\\{\\s*\\*([^\\}]+)\\*\\s*\\}";
+        string string_literal = "\\\"(.*)\\\"";
+
+        // cmd params
+        string cmd = "(config_load|include|insert|literal|strip|capture|section|assign|debug|eval|fetch|math)";
+        string cmd_params = "\\{(" + cmds + "\\=(" + param + "|" + string_literal + "))\\}";
         
         //regex src_exp =  regex(exprs.str(), regex::ECMAScript);
         //regex src_exp =  regex(param, regex::ECMAScript);
