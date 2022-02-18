@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
         // string name = "\\s*[$*#](.*)[*#]?\\s*";
         // string whole_tag = start + cmd1 + name + cmd2 + ending;
       
-        string cmds = "\\{\\s*(config_load|include|insert|literal|strip|capture|section|assign|debug|eval|fetch|math).*\\}";
+        string cmds = "\\{\\s*(config_load|include|insert|literal|strip|capture|section|assign|debug|eval|fetch|math)\\s*\\}";
         string param = "\\{\\s*\\$([A-Za-z]+\\w*)\\b\\s*\\}";
         string config =  "\\{\\s*#([^\\}]+)#\\s*\\}";
         string comment = "\\{\\s*\\*([^\\}]+)\\*\\s*\\}";
@@ -61,11 +61,7 @@ int main(int argc, char* argv[])
         for (sregex_iterator iter = begin; iter != end; ++iter)
 		{
             smatch match = *iter;
-            
-            bool comment = match[3].matched;
-            bool config = match[4].matched;
-            std::ssub_match sub = match[1];
-            cout << match.str() <<  " --> " << trim(sub.str()) << " : " << comment << " : " << config << endl;
+            cout << match.str() <<  " --> " << match[1] << " : " << match[2] << " : " << match[3] << " : " << match[4] << endl; 
         }
     }
 }
