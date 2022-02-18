@@ -9,13 +9,12 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    if(argc == 2)
+    if(argc == 3)
     {
         string path = argv[1];
         string exp = argv[2];
-        int count = 0;
-        if(argc > 3)
-            int count = atoi(argv[3]);
+        int count = atoi(argv[3]);
+        
         string src = fstream_readlines(path);
         regex src_exp = regex(exp); 
                       

@@ -9,7 +9,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    if(1)
+    if(argc == 2)
     {
         string path = argv[1];
         string src = fstream_readlines(path);
