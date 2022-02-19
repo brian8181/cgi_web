@@ -29,11 +29,6 @@ int main(int argc, char* argv[])
         string path = argv[1];
         string src = fstream_readlines(path);
 
-        // string start = "\\{\\s*(";
-        // string cmd = "((\\*)|(#))?";
-        // string ending = ")\\s*\\}";
-        // string name = "\\s*([\\w\\$]*)\\s*";
-
         // string start = "\\{\\s*";
         // string cmd1 = "\\{\\s*[*#$]\\s*[\\w\\s\\p]*\\}";
         // string cmd2 = "[\\*#]?";
@@ -42,16 +37,15 @@ int main(int argc, char* argv[])
         // string whole_tag = start + cmd1 + name + cmd2 + ending;
       
         string cmds = "\\{\\s*(config_load|include|insert|literal|strip|capture|section|assign|debug|eval|fetch|math)\\s*\\}";
-        string param = "\\{\\s*\\$([A-Za-z]+\\w*)\\b\\s*\\}";
-        string config =  "\\{\\s*#([^\\}]+)#\\s*\\}";
-        string comment = "\\{\\s*\\*([^\\}]+)\\*\\s*\\}";
-        string string_literal = "\\\"(.*)\\\"";
+        string param = "\\{\\s*\\$([A-Za-z]+\\w*)\\b\\s*\\}"; // {$ABC}
+        string config =  "\\{\\s*#([^\\}]+)#\\s*\\}";         // {#ABC#}
+        string comment = "\\{\\s*\\*([^\\}]+)\\*\\s*\\}";     // {*ABC*}
+        string string_literal = "\\\"(.*)\\\""; // "ABC"
 
         // cmd params
         string cmd = "(config_load|include|insert|literal|strip|capture|section|assign|debug|eval|fetch|math)";
-        string cmd_params = "\\{(" + cmds + "\\=(" + param + "|" + string_literal + "))\\}";
+        string cmd_params = "\\{(" + cmds + "\\=(" + param + "|" + string_literal + "))\\}"; // {include=("ABC.cgi")} // {config_load=("ABC.conf")}
         
-        //regex src_exp =  regex(exprs.str(), regex::ECMAScript);
         //regex src_exp =  regex(param, regex::ECMAScript);
         //regex src_exp =  regex(config, regex::ECMAScript);
         //regex src_exp =  regex(comment, regex::ECMAScript);

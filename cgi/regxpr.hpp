@@ -27,8 +27,8 @@ string list2 = "|default|escape|indent|lower|upper|nl2br|regex_replace|replace|r
 string match_var_mod = var_modifier + list1 + list2 + "\\:[\\w\\p]*\b";
 
 // smarty misc
-string param = "\\{\\s*\\$([A-Za-z]+\\w*)\\b\\s*\\}";
-string config =  "\\{\\s*#([^\\}]+)#\\s*\\}";
-string comment = "\\{\\s*\\*([^\\}]+)\\*\\s*\\}";
+string param = "\\{\\s*\\$([A-Za-z]+\\w*)\\b\\s*\\}"; // {$ABC}
+string config =  "\\{\\s*#([^\\}]+)#\\s*\\}";         // {#ABC#}
+string comment = "\\{\\s*\\*([^\\}]+)\\*\\s*\\}";     // {*ABC*}
 
 #endif
