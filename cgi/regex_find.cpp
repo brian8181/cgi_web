@@ -4,11 +4,12 @@
 #include <iostream>
 #include <algorithm>
 #include <string>
+#include "../src/main.hpp"
 #include "utility.hpp"
 
 using namespace std;
 
-int main(int argc, char* argv[])
+int parse_options(int argc, char* argv[])
 {
     // todo check params
     if(argc == 3)
@@ -30,6 +31,7 @@ int main(int argc, char* argv[])
             cout << "\"" << m << "\"" << " @ pos (" << match.position() << ", " << match.length() << ")" << endl; 
         }
     }
+    return 0;
 }
 
 

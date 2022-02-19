@@ -18,6 +18,7 @@ INCLUDES = -I/usr/include/cgicc/
 # Makefile settings - Can be customized.
 APPNAME = cgi_web
 EXT = cpp
+EXE = cgi
 ROOTDIR  = /home/brian/src/cgi_web
 BUILDDIR = $(ROOTDIR)/build
 SRCDIR = $(ROOTDIR)/cgi
@@ -34,30 +35,30 @@ SMARTYDIR = /home/brian/src/smartycpp
 # 	#$(CXXFLAGS) += -DDEBUG -ggdb # compile & link
 
 world: all dump_matches.o find_tags.o 
-	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.cgi
-	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump_matches.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump_matches.cgi
-	$(CXX) $(CXXFLAGS) $(SRCDIR)/display_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/display_test.cgi
-	$(CXX) $(CXXFLAGS) $(SRCDIR)/replace_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/replace_test.cgi
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.$(EXE)
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump_matches.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump_matches.$(EXE)
+	$(CXX) $(CXXFLAGS) $(SRCDIR)/display_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/display_test.$(EXE)
+	$(CXX) $(CXXFLAGS) $(SRCDIR)/replace_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/replace_test.$(EXE)
 	
 	
-all: utility.o load_conf.o dump.o find_tags.cgi regex_find.cgi
-	$(CXX) $(CXXFLAGS) $(BUILDDIR)/load_conf.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/load_conf.cgi
-	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.cgi
+all: utility.o load_conf.o dump.o find_tags.$(EXE) regex_find.$(EXE)
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/load_conf.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/load_conf.$(EXE)
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.$(EXE)
 	
-# index.cgi: smarty.o
-# 	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/index.cgi
+# index.$(EXE): smarty.o
+# 	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/index.$(EXE)
 
-# index.01.cgi:
-# 	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.01.cpp $(BUILDDIR)/smarty.o $(LDFLAGS) -o $(BUILDDIR)/index.01.cgi
+# index.01.$(EXE):
+# 	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.01.cpp $(BUILDDIR)/smarty.o $(LDFLAGS) -o $(BUILDDIR)/index.01.$(EXE)
 
-regex_find.cgi: regex_find.o utility.o
-	$(CXX) $(CXXFLAGS) $(BUILDDIR)/regex_find.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/regex_find.cgi
+regex_find.$(EXE): utility.o main.o regex_find.o 
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(BUILDDIR)/main.o $(BUILDDIR)/regex_find.o -o $(BUILDDIR)/regex_find.$(EXE)
 
-find_tags.cgi: utility.o find_tags.o
-	$(CXX) $(CXXFLAGS) $(BUILDDIR)/find_tags.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/find_tags.cgi
+find_tags.$(EXE): utility.o find_tags.o
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/find_tags.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/find_tags.$(EXE)
 
-# smarty_test.cgi: smarty.o
-# 	$(CXX) $(CXXFLAGS) $(SRCDIR)/smarty_test.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/smarty_test.cgi
+# smarty_test.$(EXE): smarty.o
+# 	$(CXX) $(CXXFLAGS) $(SRCDIR)/smarty_test.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/smarty_test.$(EXE)
 
 smarty.o: 
 	$(CXX) $(CXXFLAGS) -c $(SMARTYDIR)/src/smarty.cpp -o $(BUILDDIR)/smarty.o
@@ -65,9 +66,9 @@ smarty.o:
 # # smarty.a:
 # # 	$(CXX) $(CXXFLAGS) -c $(SMARTYDIR)/src/smarty.cpp -o $(BUILDDIR)/smarty.o
 # # 	ar rvs smarty.a smarty.o
-	
-# # main.o:
-# # 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/src/main.cpp -o $(BUILDDIR)/main.o
+
+main.o:
+	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/src/main.$(EXT) -o $(BUILDDIR)/main.o
 
 load_conf.o:
 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/load_conf.cpp -o $(BUILDDIR)/load_conf.o
@@ -81,7 +82,7 @@ dump_matches.o:
 find_tags.o:
 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/find_tags.cpp -o $(BUILDDIR)/find_tags.o
 
-regex_find.o:
+regex_find.o: 
 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/regex_find.cpp -o $(BUILDDIR)/regex_find.o
 
 utility.o:
@@ -89,9 +90,9 @@ utility.o:
 
 .PHONY: upload
 upload:
-	cp -rf $(BUILDDIR)/*.cgi /var/www/html/cgi
+	cp -rf $(BUILDDIR)/*.$(EXE) /var/www/html/cgi
 	cp -rf $(SRCDIR)/* /var/www/html/cgi
 	
 .PHONY: clean
 clean:
-	rm $(BUILDDIR)/*.cgi $(BUILDDIR)/*.o
+	rm $(BUILDDIR)/*.$(EXE) $(BUILDDIR)/*.o
