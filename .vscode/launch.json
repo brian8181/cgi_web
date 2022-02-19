@@ -68,11 +68,11 @@
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {
-            "name": "regex_find; arg=file2,tag.rgx",
+            "name": "regex_find; arg=tag.rgx,file2",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/regex_find.cgi",
-            "args": ["${workspaceFolder}/test/file2", "${workspaceFolder}/test/tag.rgx"],
+            "args": ["${workspaceFolder}/test/tag.rgx", "${workspaceFolder}/test/file2"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

@@ -14,11 +14,11 @@ int parse_options(int argc, char* argv[])
     // todo check params
     if(argc == 3)
     {
-        string file_path = argv[1];
-        string expr_path = argv[2];
-        string src = fstream_readlines(file_path);
+        string expr_path = argv[1];
+        string file_path = argv[2];
         string expr = fstream_readlines(expr_path);
-                
+        string src = fstream_readlines(file_path);
+                        
         regex src_exp = regex(expr, regex::ECMAScript);
         sregex_iterator begin = sregex_iterator(src.begin(), src.end(), src_exp, std::regex_constants::match_default);
         sregex_iterator end = sregex_iterator(); 
@@ -33,5 +33,3 @@ int parse_options(int argc, char* argv[])
     }
     return 0;
 }
-
-
