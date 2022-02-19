@@ -23,3 +23,7 @@ one=aaa
 {fetch}
 {math}
 {#helo world#}
+include.
+include
+includexincludexinclude include
+

@@ -1,4 +1,5 @@
 {
+    "version": "2.0.0",
     "tasks": [
         {
             "label": "MAKE DEBUGGDB",
@@ -17,6 +18,5 @@
             "type": "shell",
             "command": "echo ${workspaceFolder}"
         }
-    ],
-    "version": "2.0.0"
+    ]
 }

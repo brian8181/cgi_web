@@ -40,18 +40,21 @@ int main(int argc, char* argv[])
         string param = "\\{\\s*\\$([A-Za-z]+\\w*)\\b\\s*\\}"; // {$ABC}
         string config =  "\\{\\s*#([^\\}]+)#\\s*\\}";         // {#ABC#}
         string comment = "\\{\\s*\\*([^\\}]+)\\*\\s*\\}";     // {*ABC*}
-        string string_literal = "\\\"(.*)\\\""; // "ABC"
+        string string_literal1 = "\\\"(.*)\\\""; // "ABC"
+        string string_literal2 = "\\'(.*)\\'";   // 'ABC'
+        string string_literal = string_literal1 + "|" + string_literal2;
 
         // cmd params
         string cmd = "(config_load|include|insert|literal|strip|capture|section|assign|debug|eval|fetch|math)";
         string cmd_params = "\\{(" + cmds + "\\=(" + param + "|" + string_literal + "))\\}"; // {include=("ABC.cgi")} // {config_load=("ABC.conf")}
+        string file = "file=(" + string_literal + ")";
         
         //regex src_exp =  regex(param, regex::ECMAScript);
         //regex src_exp =  regex(config, regex::ECMAScript);
         //regex src_exp =  regex(comment, regex::ECMAScript);
         //regex src_exp =  regex(cmds, regex::ECMAScript);
 
-        std::ostringstream exprs;
+        std::ostringstream exprs; 
         exprs << cmds << "|" << param << "|" << config << "|" << comment;
         regex src_exp = regex(exprs.str(), regex::ECMAScript);
               
