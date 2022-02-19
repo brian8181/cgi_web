@@ -52,7 +52,9 @@ Makefile
 cgi/*.cgi
 cgi/*.o
 src/*.o
+src/*.o
 build/*.o
+build/*.a
 build/*.so
 *.o
 *.cgi
