@@ -1,4 +1,7 @@
 $ab
+include
+{include}
+include include
 *ab
 #b
 33
