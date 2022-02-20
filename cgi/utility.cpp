@@ -7,32 +7,11 @@
 #include <algorithm>
 #include "utility.hpp"
 
-string fstream_readlines(string path)
-{
-    string src;
-    fstream file;
-    file.open(path, ios::in); //open a file to perform read operation using file object
-    if (file.is_open())
-    {   
-        //checking whether the file is open
-        string tp;
-        while(getline(file, tp))
-        { 
-            //read data from file object and put it into string.
-            src += tp += "\n";
-        }
-        file.close(); //close the file object.
-    }
-
-    return src;
-}
-
-string ifstream_readlines(string path)
+string readlines(string path)
 {
     string src;
     ifstream file;
     file.open(path, ios::in); //open a file to perform read operation using file object
-
     if (file.is_open())
     {   
         //checking whether the file is open
@@ -47,29 +26,49 @@ string ifstream_readlines(string path)
     return src;
 }
 
-string fstream_read(string path)
-{
-    string str;
-    fstream file;
-    file.open(path, ios::in); //open a file to perform read operation using file object
-    if (file.is_open())
-    {   
-        //checking whether the file is open
-        char c[256];
-        while(file.read(c, 256))
-        { 
-            //read data from file object and put it into string.
-            str.append(c);
-            //str.append("\n");
-        }
-        file.close(); //close the file object.
-    }
-    return str;
-}
+// string ifstream_readlines(string path)
+// {
+//     string src;
+//     ifstream file;
+//     file.open(path, ios::in); //open a file to perform read operation using file object
+
+//     if (file.is_open())
+//     {   
+//         //checking whether the file is open
+//         string tp;
+//         while(getline(file, tp))
+//         { 
+//             //read data from file object and put it into string.
+//             src += tp += "\n";
+//         }
+//         file.close(); //close the file object.
+//     }
+//     return src;
+// }
+
+// string fstream_read(string path)
+// {
+//     string str;
+//     fstream file;
+//     file.open(path, ios::in); //open a file to perform read operation using file object
+//     if (file.is_open())
+//     {   
+//         //checking whether the file is open
+//         char c[256];
+//         while(file.read(c, 256))
+//         { 
+//             //read data from file object and put it into string.
+//             str.append(c);
+//             //str.append("\n");
+//         }
+//         file.close(); //close the file object.
+//     }
+//     return str;
+// }
 
 bool load_config(string path, map<string, string>& config)
 {
-    string src = fstream_readlines(path);
+    string src = readlines(path);
 
     string name_exp = "([A-Za-z]+\\w*)";
     string value_exp = "((\\w+)|('(\\w+)')|(\\\"(\\w+)\\\"))";
@@ -112,7 +111,7 @@ void assign(string name, string val, map<string, string>& symbols)
 
 void find_tags(string path)
 {
-    string src = fstream_readlines(path);
+    string src = readlines(path);
     regex src_epx = regex("\\{(.*?)\\}", regex::ECMAScript);
             
     sregex_iterator begin = sregex_iterator(src.begin(), src.end(), src_epx, std::regex_constants::match_not_null);
@@ -128,14 +127,14 @@ void find_tags(string path)
 
 void replace_tags(string path)
 {
-    string src = fstream_readlines(path);
+    string src = readlines(path);
     regex pattern = regex("\\{(.*?)\\}", regex::ECMAScript);
     std::regex_replace(std::ostreambuf_iterator<char>(std::cout), src.begin(), src.end(), pattern, "<!-- TEST -->");
 }
 
 string match_replace_tags(string path, const map<string, string>& tags)
 {
-    string src = fstream_readlines(path);
+    string src = readlines(path);
     regex src_epx = regex("\\{\\$(.*?)\\}", regex::ECMAScript);
             
     sregex_iterator begin = sregex_iterator(src.begin(), src.end(), src_epx);
@@ -166,7 +165,7 @@ string match_replace_tags(string path, const map<string, string>& tags)
 
 void display(string path, const map<string, string>& tags)
 {
-    string src = fstream_readlines(path);
+    string src = readlines(path);
     regex exp = regex("\\{\\$(.*?)\\}", regex::ECMAScript);
             
     sregex_iterator begin = sregex_iterator(src.begin(), src.end(), exp);

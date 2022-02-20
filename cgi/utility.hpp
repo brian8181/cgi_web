@@ -9,10 +9,10 @@
 
 using namespace std;
 
-string fstream_readlines(string path);
-string ifstream_readlines(string path);
-string fstream_get(string path);
-string fstream_read(string path);
+string readlines(string path);
+//string ifstream_readlines(string path);
+//string fstream_get(string path);
+//string fstream_read(string path);
 //bool load_config(string path, map<string, string>& config);
 
 void assign(string name, string val, map<string, string>& symbols);

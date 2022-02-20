@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
         string exp = argv[2];
         int count = atoi(argv[3]);
         
-        string src = fstream_readlines(path);
+        string src = readlines(path);
         regex src_exp = regex(exp); 
                       
         auto begin = sregex_iterator(src.begin(), src.end(), src_exp);

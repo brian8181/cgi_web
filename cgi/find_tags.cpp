@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
     if(argc == 2)
     {
         string path = argv[1];
-        string src = fstream_readlines(path);
+        string src = readlines(path);
 
         // string start = "\\{\\s*";
         // string cmd1 = "\\{\\s*[*#$]\\s*[\\w\\s\\p]*\\}";
