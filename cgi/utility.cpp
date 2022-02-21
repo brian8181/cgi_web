@@ -26,45 +26,40 @@ string readlines(string path)
     return src;
 }
 
-// string ifstream_readlines(string path)
-// {
-//     string src;
-//     ifstream file;
-//     file.open(path, ios::in); //open a file to perform read operation using file object
+void assign(string name, string val, map<string, string>& symbols)
+{
+    pair<string, string> p(name, val);
+    symbols.insert(p);
+}
 
-//     if (file.is_open())
-//     {   
-//         //checking whether the file is open
-//         string tp;
-//         while(getline(file, tp))
-//         { 
-//             //read data from file object and put it into string.
-//             src += tp += "\n";
-//         }
-//         file.close(); //close the file object.
-//     }
-//     return src;
-// }
-
-// string fstream_read(string path)
-// {
-//     string str;
-//     fstream file;
-//     file.open(path, ios::in); //open a file to perform read operation using file object
-//     if (file.is_open())
-//     {   
-//         //checking whether the file is open
-//         char c[256];
-//         while(file.read(c, 256))
-//         { 
-//             //read data from file object and put it into string.
-//             str.append(c);
-//             //str.append("\n");
-//         }
-//         file.close(); //close the file object.
-//     }
-//     return str;
-// }
+void display(string path, const map<string, string>& tags)
+{
+    string src = readlines(path);
+    regex exp = regex("\\{\\$(.*?)\\}", regex::ECMAScript);
+            
+    sregex_iterator begin = sregex_iterator(src.begin(), src.end(), exp);
+    auto end = sregex_iterator(); 
+    
+    int beg_pos = 0;
+    string output;
+    for (sregex_iterator iter = begin; iter != end; ++iter)
+    {
+        smatch match = *iter;
+        std::ssub_match sub = match[1];
+        string tag = trim(sub.str());
+        
+        int end_pos = match.position();
+        output += src.substr(beg_pos, end_pos-beg_pos);
+        map<string, string>::const_iterator find_iter = tags.find(tag);
+        if(find_iter != tags.end())
+        {
+            output += find_iter->second;
+        }
+        beg_pos = end_pos + match.length();
+    }
+    output += src.substr(beg_pos);
+    cout << output << endl;
+}
 
 bool load_config(string path, map<string, string>& config)
 {
@@ -87,26 +82,6 @@ bool load_config(string path, map<string, string>& config)
         config.insert(p);
     }
     return true;
-}
-
-void ParseCommand(string command)
-{
-
-    //string command = "(config_load|include|insert)\\sfile='(.*)'";
-    regex exp = regex(command);
-
-    auto begin = sregex_iterator(command.begin(), command.end(), exp, std::regex_constants::match_not_null);
-    auto end = sregex_iterator(); 
-
-    for (sregex_iterator iter = begin; iter != end; ++iter)
-    {
-    }
-}
-
-void assign(string name, string val, map<string, string>& symbols)
-{
-    pair<string, string> p(name, val);
-    symbols.insert(p);
 }
 
 void find_tags(string path)
@@ -163,36 +138,6 @@ string match_replace_tags(string path, const map<string, string>& tags)
     return output;
 }
 
-void display(string path, const map<string, string>& tags)
-{
-    string src = readlines(path);
-    regex exp = regex("\\{\\$(.*?)\\}", regex::ECMAScript);
-            
-    sregex_iterator begin = sregex_iterator(src.begin(), src.end(), exp);
-    auto end = sregex_iterator(); 
-    
-    int beg_pos = 0;
-    string output;
-    for (sregex_iterator iter = begin; iter != end; ++iter)
-    {
-        smatch match = *iter;
-        std::ssub_match sub = match[1];
-        string tag = trim(sub.str());
-        
-        int end_pos = match.position();
-        output += src.substr(beg_pos, end_pos-beg_pos);
-        map<string, string>::const_iterator find_iter = tags.find(tag);
-        if(find_iter != tags.end())
-        {
-            output += find_iter->second;
-        }
-        beg_pos = end_pos + match.length();
-    }
-    output += src.substr(beg_pos);
-    cout << output << endl;
-}
-
-
 const std::string WHITESPACE = " \n\r\t\f\v";
 
 std::string ltrim(const std::string &s)
@@ -211,6 +156,46 @@ std::string trim(const std::string &s)
 {
     return rtrim(ltrim(s));
 }
+
+// string ifstream_readlines(string path)
+// {
+//     string src;
+//     ifstream file;
+//     file.open(path, ios::in); //open a file to perform read operation using file object
+
+//     if (file.is_open())
+//     {   
+//         //checking whether the file is open
+//         string tp;
+//         while(getline(file, tp))
+//         { 
+//             //read data from file object and put it into string.
+//             src += tp += "\n";
+//         }
+//         file.close(); //close the file object.
+//     }
+//     return src;
+// }
+
+// string fstream_read(string path)
+// {
+//     string str;
+//     fstream file;
+//     file.open(path, ios::in); //open a file to perform read operation using file object
+//     if (file.is_open())
+//     {   
+//         //checking whether the file is open
+//         char c[256];
+//         while(file.read(c, 256))
+//         { 
+//             //read data from file object and put it into string.
+//             str.append(c);
+//             //str.append("\n");
+//         }
+//         file.close(); //close the file object.
+//     }
+//     return str;
+// }
 
 // std::string& ltrim(std::string &s)
 // {
