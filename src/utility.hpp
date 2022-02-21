@@ -26,7 +26,6 @@ std::string trim(const std::string &s);
 //string ifstream_readlines(string path);
 //string fstream_get(string path);
 //string fstream_read(string path);
-//bool load_config(string path, map<string, string>& config);
 
 // std::string& ltrim(const std::string &s);
 // std::string& rtrim(const std::string &s);
