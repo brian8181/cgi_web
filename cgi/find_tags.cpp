@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
         string cmd = "(config_load|include|insert|literal|strip|capture|section|assign|debug|eval|fetch|math)";
         string cmd_params = "\\{(" + cmds + "\\=(" + param + "|" + string_literal + "))\\}"; // {include=("ABC.cgi")} // {config_load=("ABC.conf")}
         string file = "file=(" + string_literal + ")";
-        string array = "\\{\\s*\\$([A-Za-z]+\\w*)\\[([0-9]+)\\]\\s*\\}";
+        string array = "\\{\\s*\\$([A-Za-z]+)\\[([0-9]+)\\]\\s*\\}";
         
         //regex src_exp =  regex(param, regex::ECMAScript);
         //regex src_exp =  regex(config, regex::ECMAScript);
@@ -71,5 +71,3 @@ int main(int argc, char* argv[])
         }
     }
 }
-
-

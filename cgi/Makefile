@@ -95,3 +95,4 @@ upload:
 .PHONY: clean
 clean:
 	rm $(BUILDDIR)/*.$(EXE) $(BUILDDIR)/*.[oa]
+	
