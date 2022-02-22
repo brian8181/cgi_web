@@ -37,7 +37,8 @@ int main(int argc, char* argv[])
         // string whole_tag = start + cmd1 + name + cmd2 + ending;
       
         string cmds = "\\{\\s*(config_load|include|insert|literal|strip|capture|section|assign|debug|eval|fetch|math)\\s*\\}";
-        string param = "\\{\\s*\\$([A-Za-z]+\\w*)\\b\\s*\\}"; // {$ABC}
+        //string param = "\\{\\s*\\$([A-Za-z]+\\w*)\\b\\s*\\}"; // {$ABC}
+        string param = "\\{\\s*\\$([A-Za-z]+\\w*)\\s*\\}"; // {$ABC}
         string config =  "\\{\\s*#([^\\}]+)#\\s*\\}";         // {#ABC#}
         string comment = "\\{\\s*\\*([^\\}]+)\\*\\s*\\}";     // {*ABC*}
         string string_literal1 = "\\\"(.*)\\\""; // "ABC"
@@ -48,6 +49,7 @@ int main(int argc, char* argv[])
         string cmd = "(config_load|include|insert|literal|strip|capture|section|assign|debug|eval|fetch|math)";
         string cmd_params = "\\{(" + cmds + "\\=(" + param + "|" + string_literal + "))\\}"; // {include=("ABC.cgi")} // {config_load=("ABC.conf")}
         string file = "file=(" + string_literal + ")";
+        string array = "\\{\\s*\\$([A-Za-z]+\\w*)\\[([0-9]+)\\]\\s*\\}";
         
         //regex src_exp =  regex(param, regex::ECMAScript);
         //regex src_exp =  regex(config, regex::ECMAScript);
@@ -55,7 +57,9 @@ int main(int argc, char* argv[])
         //regex src_exp =  regex(cmds, regex::ECMAScript);
 
         std::ostringstream exprs; 
-        exprs << cmds << "|" << param << "|" << config << "|" << comment;
+        //exprs << cmds << "|" << array << "|" << config << "|" << comment;
+        //exprs << cmds << "|" << param << "|" << config << "|" << comment;
+        exprs << cmds << "|" << param << "|" << array << "|" << config << "|" << comment;
         regex src_exp = regex(exprs.str(), regex::ECMAScript);
               
         sregex_iterator begin = sregex_iterator(src.begin(), src.end(), src_exp);

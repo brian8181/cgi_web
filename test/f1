@@ -29,4 +29,7 @@ one=aaa
 include.
 include
 includexincludexinclude include
+{$xyz[0]}
+{$aaa[2]}
+{$xxx[a]}
 
