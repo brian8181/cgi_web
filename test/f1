@@ -12,6 +12,8 @@ one=aaa
     {$abc}
 {*test*}
 { *test* }
+{*abc*}
+{ *abc* }
 {#abc#}
 {insert}
 {config_load}
