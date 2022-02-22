@@ -17,6 +17,7 @@ void display(string path, const map<string, string>& tags);
 bool load_config(string path, map<string, string>& config);
 void find_tags(string path);
 void replace_tags(string path);
+void replace_tags2(string expr_path, string file_path);
 string match_replace_tags(string path, const map<string, string>& tags);
 
 std::string ltrim(const std::string &s);

@@ -107,6 +107,15 @@ void replace_tags(string path)
     std::regex_replace(std::ostreambuf_iterator<char>(std::cout), src.begin(), src.end(), pattern, "<!-- TEST -->");
 }
 
+void replace_tags2(string expr_path, string file_path)
+{
+    string src = readlines(file_path);
+    string expr = readlines(expr_path);
+
+    regex pattern = regex(expr, regex::ECMAScript);
+    std::regex_replace(std::ostreambuf_iterator<char>(std::cout), src.begin(), src.end(), pattern, "<!-- TEST -->");
+}
+
 string match_replace_tags(string path, const map<string, string>& tags)
 {
     string src = readlines(path);
