@@ -41,8 +41,8 @@ int main(int argc, char* argv[])
         string param = "\\{\\s*\\$([A-Za-z]+\\w*)\\s*\\}";           // {$ABC}
         //string config =  "\\{\\s*#([^\\}]+)#\\s*\\}";              // {#ABC#}
         string config =  "\\{\\s*#([A-Aa-z]\\w*)#\\s*\\}";           // {#ABC#}
-        //string comment = "\\{\\s*\\*([^\\}]+)\\*\\s*\\}";          // {*ABC*}
-        string comment =  "\\{\\s*\\*([\\w\\s\\p]*)\\*\\s*\\}";      // {*ABC*}
+        //string comment = "\\{\\s*\\*[^\\}]+\\*\\s*\\}";            // {*ABC*}
+        string comment =  "\\{\\s*\\*[\\w\\s\\p]*\\*\\s*\\}";        // {*ABC*}
         string string_literal1 = "\\\"(.*)\\\"";                     // "ABC"
         string string_literal2 = "\\'(.*)\\'";                       // 'ABC'
         string string_literal = string_literal1 + "|" + string_literal2;
@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
         std::ostringstream exprs; 
         //exprs << cmds << "|" << array << "|" << config << "|" << comment;
         //exprs << cmds << "|" << param << "|" << config << "|" << comment;
-        exprs << cmds << "|" << param << "|" << array << "|" << config << "|" << comment;
+        exprs << cmds << "|" << param << "|" << array << "|" << config << "|" << file << "|" << string_literal << "|" << comment;
         regex src_exp = regex(exprs.str(), regex::ECMAScript);
               
         sregex_iterator begin = sregex_iterator(src.begin(), src.end(), src_exp);

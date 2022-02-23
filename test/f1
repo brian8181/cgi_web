@@ -34,3 +34,8 @@ includexincludexinclude include
 {$xyz[0]}
 {$aaa[2]}
 {$xxx[a]}
+file=("test")
+"test"
+'abc'
+"abc"
+"abc abc"
