@@ -40,3 +40,4 @@ file="abc.txt"
 'abc'
 "abc"
 "abc abc"
+{$ABC|abc}
