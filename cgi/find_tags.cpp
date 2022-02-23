@@ -6,22 +6,6 @@
 
 using namespace std;
 
-string process_match(smatch& match)
-{
-    bool comment = match[3].matched;
-    bool config = match[4].matched;
-
-    if(comment)
-        return "";
-    if(config)
-    {
-        // if(config.find(match.str()));
-        //     return config.second();
-    }
-    string cmd = "(config_load|include|insert|literal|strip|capture|section|assign|debug|eval|fetch|math)";
-    return "";
-}
-
 int main(int argc, char* argv[])
 {
     if(argc == 2)
@@ -55,14 +39,14 @@ int main(int argc, char* argv[])
         string tag_with_vairable_modifier = "\\{\\$([A-Za-z]+\\w*|\\w+)\\}";               // {$ABC|abc}
         string vairable_modifier = "\\w+(\\|\\w)*";
                 
-        //regex src_exp =  regex(param, regex::ECMAScript);
+        //regex src_exp =  regex(variable, regex::ECMAScript);
         //regex src_exp =  regex(config, regex::ECMAScript);
         //regex src_exp =  regex(comment, regex::ECMAScript); 
         //regex src_exp =  regex(cmds, regex::ECMAScript);
 
         std::ostringstream exprs; 
         //exprs << cmds << "|" << array << "|" << config << "|" << comment;
-        //exprs << cmds << "|" << param << "|" << config << "|" << comment;
+        //exprs << cmds << "|" << variable << "|" << config << "|" << comment;
         exprs << cmds << "|" << variable << "|" << array << "|" << config << "|" << file << "|" << string_literal << "|" << comment;
         regex src_exp = regex(exprs.str(), regex::ECMAScript);
               
