@@ -43,8 +43,8 @@ int main(int argc, char* argv[])
         string config =  "\\{\\s*#([A-Aa-z]\\w*)#\\s*\\}";           // {#ABC#}
         //string comment = "\\{\\s*\\*[^\\}]+\\*\\s*\\}";            // {*ABC*}
         string comment =  "\\{\\s*\\*[\\w\\s\\p]*\\*\\s*\\}";        // {*ABC*}
-        string string_literal1 = "\\\"([\\w\\.]*)\\\"";                     // "ABC"
-        string string_literal2 = "\\'([\\w*\\.]*)\\'";                       // 'ABC'
+        string string_literal1 = "(\\\"[\\w\\.]*\\\")";                     // "ABC"
+        string string_literal2 = "(\\'[\\w*\\.]*\\')";                       // 'ABC'
         string string_literal = string_literal1 + "|" + string_literal2;
 
         // cmd params
@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
         
         //regex src_exp =  regex(param, regex::ECMAScript);
         //regex src_exp =  regex(config, regex::ECMAScript);
-        //regex src_exp =  regex(comment, regex::ECMAScript);
+        //regex src_exp =  regex(comment, regex::ECMAScript); 
         //regex src_exp =  regex(cmds, regex::ECMAScript);
 
         std::ostringstream exprs; 
@@ -69,7 +69,7 @@ int main(int argc, char* argv[])
         for (sregex_iterator iter = begin; iter != end; ++iter)
 		{
             smatch match = *iter;
-            cout << match.str() <<  " --> " << match[1] << " : " << match[2] << " : " << match[3] << " : " << match[4] << " : " << match[5] << endl; 
+            cout << match.str() <<  " --> " << match[1] << match[2] << match[3] << match[4] << match[5] << match[6] << match[7] << match[8] << match[9] << match[10] << endl; 
         }
     }
 }
