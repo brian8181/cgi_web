@@ -7,6 +7,9 @@
 
 using namespace std;
 
+// Usage
+// ./load_conf.cgi ../test/conf_test.txt
+
 int main(int argc, char* argv[])
 {
     if(argc == 2)

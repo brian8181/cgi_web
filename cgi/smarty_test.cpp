@@ -3,7 +3,7 @@
 #include <regex>
 #include <string>
 #include "../src/utility.hpp"
-#include "../../smartycpp/src/smarty.h"
+#include "../../smartycpp/src/smarty.hpp"
 
 using namespace std;
 

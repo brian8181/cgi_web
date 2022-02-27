@@ -19,9 +19,9 @@ CXX = g++
 #CXXFLAGS = -Wall -std=c++11 -DDEBUG -g
 
 # HACK!
-CXXFLAGS = -Wall -std=c++11 -std=gnu++17
+CXXFLAGS = -Wall -std=c++11 -std=gnu++17 -DDEBUG -ggdb
 #CXXFLAGS += -DDEBUG -g
-CXXFLAGS += -DDEBUG -ggdb
+#CXXFLAGS += -DDEBUG -ggdb
 
 
 # lib settings

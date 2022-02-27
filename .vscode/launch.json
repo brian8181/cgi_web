@@ -106,7 +106,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "MAKE DEBUGGDB",
+            "preLaunchTask": "MAKE INDEX",
             "miDebuggerPath": "/usr/bin/gdb"
         }
   ]

@@ -14,9 +14,9 @@
             }
         },
         {
-            "label": "MAKE index",
+            "label": "MAKE INDEX",
             "type": "shell",
-            "command": "make -f ${workspaceFolder}/cgi/Makefile ${workspaceFolder}/cgi/index.cgi",
+            "command": "make -f ${workspaceFolder}/cgi/Makefile index.cgi",
             "problemMatcher": [
                 "$gcc"
             ],
