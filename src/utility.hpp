@@ -1,11 +1,8 @@
 #ifndef _UTILITY_HPP
 #define _UTILITY_HPP
 
-#include <iostream>
-#include <iterator>
-#include <fstream>
 #include <string>
-#include <list>
+#include <map>
 
 using namespace std;
 
@@ -28,8 +25,8 @@ std::string trim(const std::string &s);
 //string fstream_get(string path);
 //string fstream_read(string path);
 
-// std::string& ltrim(const std::string &s);
-// std::string& rtrim(const std::string &s);
-// std::string& trim(const std::string &s);
+std::string& _ltrim(const std::string &s);
+std::string& _rtrim(const std::string &s);
+std::string& _trim(const std::string &s);
 
 #endif

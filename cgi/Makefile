@@ -48,8 +48,8 @@ all: utility.o load_conf.o dump.o find_tags.$(EXE) regex_find.$(EXE)
 index.$(EXE): smarty.o
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/index.$(EXE)
 
-# index.01.$(EXE): smarty.o
-#  	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.01.cpp $(BUILDDIR)/smarty.o $(LDFLAGS) -o $(BUILDDIR)/index.01.$(EXE)
+# index.01.$(EXE): 
+#   	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.01.cpp -o $(BUILDDIR)/index.01.$(EXE)
 
 regex_find.$(EXE): utility.o main.o regex_find.o 
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(BUILDDIR)/main.o $(BUILDDIR)/regex_find.o -o $(BUILDDIR)/regex_find.$(EXE)
