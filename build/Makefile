@@ -43,7 +43,7 @@ debug: all
 
 # compile & link for debug GDBversion variable
 #debuggdb: CXXFLAGS += -DDEBUG -ggdb # compile & link
-all: $(APPNAME) bash_color_test $(APPNAME)_test read_file write_file poc.cgi
+all: $(APPNAME) bash_color_test $(APPNAME)_test 
 
 # link
 $(APPNAME): $(APPNAME).o main.o  #END
@@ -57,20 +57,20 @@ main.o:
 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/main.$(EXT) -o $(BUILDDIR)/main.o
 	# $(CXX) $(CXXFLAGS) $(INCLUDES) $(BUILDDIR)/$(APPNAME).o $(LDFLAGS) -o $(BUILDDIR)/$(APPNAME)_test
 
-read_file:
-	$(CXX) $(CXXFLAGS) $(SRCDIR)/read_file.$(EXT) -o $(BUILDDIR)/read_file
+# dump.cgi:
+#  	$(CXX) $(CXXFLAGS) $(SRCDIR)/dump.$(EXT) -o $(BUILDDIR)/dump.cgi
 
-write_file:
-	$(CXX) $(CXXFLAGS) $(SRCDIR)/write_file.$(EXT) -o $(BUILDDIR)/write_file
+# write_file:
+# 	$(CXX) $(CXXFLAGS) $(SRCDIR)/write_file.$(EXT) -o $(BUILDDIR)/write_file
 
-poc.cgi: poc.o stream_edit.o
-	$(CXX) $(CXXFLAGS) $(BUILDDIR)/poc.o $(BUILDDIR)/stream_edit.o -o $(BUILDDIR)/poc.cgi
+# poc.cgi: poc.o stream_edit.o
+# 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/poc.o $(BUILDDIR)/stream_edit.o -o $(BUILDDIR)/poc.cgi
 
-poc.o:
-	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/poc.$(EXT) -o $(BUILDDIR)/poc.o
+# poc.o:
+# 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/poc.$(EXT) -o $(BUILDDIR)/poc.o
 
-stream_edit.o:
-	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/stream_edit.$(EXT) -o $(BUILDDIR)/stream_edit.o
+# stream_edit.o:
+# 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/stream_edit.$(EXT) -o $(BUILDDIR)/stream_edit.o
 
 ## auto gernerated here ##
 
