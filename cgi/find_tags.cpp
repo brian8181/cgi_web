@@ -13,12 +13,12 @@ int main(int argc, char* argv[])
         string path = argv[1];
         string src = readlines(path);
 
-        // string start = "\\{\\s*";
-        // string cmd1 = "\\{\\s*[*#$]\\s*[\\w\\s\\p]*\\}";
-        // string cmd2 = "[\\*#]?";
-        // string ending = "\\s*\\}";
-        // string name = "\\s*[$*#](.*)[*#]?\\s*";
-        // string whole_tag = start + cmd1 + name + cmd2 + ending;
+        string start = "\\{\\s*";
+        string cmd1 = "\\{\\s*[*#$]\\s*[\\w\\s\\p]*\\}";
+        string cmd2 = "[\\*#]?";
+        string ending = "\\s*\\}";
+        string name = "\\s*[$*#](.*)[*#]?\\s*";
+        string whole_tag = start + cmd1 + name + cmd2 + ending;
       
         string cmds = "\\{\\s*(config_load|include|insert|literal|strip|capture|section|assign|debug|eval|fetch|math)\\s*\\}";
         //string variable = "\\{\\s*\\$([A-Za-z]+\\w*)\\b\\s*\\}";         // {$ABC}
