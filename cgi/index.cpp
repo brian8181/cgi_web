@@ -4,7 +4,7 @@
 #include "cgicc/Cgicc.h"
 #include "cgicc/HTTPHTMLHeader.h"
 #include "cgicc/HTMLClasses.h"
-#include "../../smartycpp/src/smarty.hpp"
+#include "../../smarty-cpp/src/smarty.hpp"
 #include "../src/utility.hpp"
 //#include "../src/conf.hpp"
 
