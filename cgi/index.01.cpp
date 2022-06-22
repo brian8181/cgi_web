@@ -1,5 +1,7 @@
 #include <string>
+#include <iostream>
 #include <map>
+
 #include "../src/utility.hpp"
 
 using namespace std;
