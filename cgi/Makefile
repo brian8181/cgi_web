@@ -22,7 +22,7 @@ ROOTDIR  = /home/brian/src/cgi_web
 BUILDDIR = $(ROOTDIR)/build
 SRCDIR = $(ROOTDIR)/cgi
 OBJDIR = $(ROOTDIR)/cgi
-SMARTYDIR = /home/brian/src/smartycpp
+SMARTYDIR = /home/brian/src/smarty-cpp
 
 # compile & link for debug
 # debug: 
@@ -33,7 +33,7 @@ SMARTYDIR = /home/brian/src/smartycpp
 # debuggdb: 
 # 	#$(CXXFLAGS) += -DDEBUG -ggdb # compile & link
 
-world: all dump_matches.o find_tags.o smarty_test.$(EXE) index.$(EXE) smarty.a
+world: all dump_matches.o find_tags.o smarty_test.$(EXE) index.$(EXE) smarty.a test.cgi
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.$(EXE)
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump_matches.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump_matches.$(EXE)
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/display_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/display_test.$(EXE)
@@ -45,8 +45,8 @@ all: utility.o load_conf.o dump.o find_tags.$(EXE) regex_find.$(EXE)
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/load_conf.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/load_conf.$(EXE)
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.$(EXE)
 	
-index.$(EXE): smarty.o
-	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/index.$(EXE)
+index.$(EXE): smarty.o utility.o
+#	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/index.$(EXE)
 
 # index.01.$(EXE): 
 #   	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.01.cpp -o $(BUILDDIR)/index.01.$(EXE)
@@ -58,7 +58,7 @@ find_tags.$(EXE): utility.o find_tags.o
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/find_tags.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/find_tags.$(EXE)
 
 smarty_test.$(EXE): smarty.o
-	$(CXX) $(CXXFLAGS) $(SRCDIR)/smarty_test.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/smarty_test.$(EXE)
+# 	$(CXX) $(CXXFLAGS) $(SRCDIR)/smarty_test.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/smarty_test.$(EXE)
 
 smarty.a: smarty.o
 	ar rvs $(BUILDDIR)/smarty.a $(BUILDDIR)/smarty.o
@@ -74,6 +74,9 @@ load_conf.o:
 
 dump.o:
 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/dump.cpp -o $(BUILDDIR)/dump.o
+
+test.cgi: 
+	$(CXX) $(CXXFLAGS) $(SRCDIR)/test.cpp $(LDFLAGS) -o $(BUILDDIR)/test.cgi
 
 dump_matches.o:
 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/dump_matches.cpp -o $(BUILDDIR)/dump_matches.o
