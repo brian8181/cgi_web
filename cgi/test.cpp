@@ -1,16 +1,11 @@
+// simple c++ cgi test script
+
 #include <iostream>
-// #include "cgicc/CgiDefs.h"
-// #include "cgicc/Cgicc.h"
-// #include "cgicc/HTTPHTMLHeader.h"
-// #include "cgicc/HTMLClasses.h"
 
 using namespace std;
-//using namespace cgicc;
 
 int main()
 {
-    // Cgicc  cgi;
-    // cout << HTTPHTMLHeader(); // Set up the HTML document
     cout << "Content-type: text/html" << endl << endl; // skip a line
     cout << "<html>" << endl;
     cout << "<body>" << endl;
