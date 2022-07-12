@@ -90,6 +90,7 @@ regex_find.o:
 utility.o:
 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/src/utility.cpp -o $(BUILDDIR)/utility.o
 
+# just copy & change extension to "cgi"
 bash_test.cgi:
 	cp -rf bash_test.sh $(BUILDDIR)/bash_test.cgi
 
@@ -97,6 +98,10 @@ bash_test.cgi:
 upload:
 	cp -rf $(BUILDDIR)/*.$(EXE) /var/www/html/cgi
 	cp -rf $(SRCDIR)/* /var/www/html/cgi
+
+.PHONY: clean_upload
+clean_upload:
+	rm $(BUILDDIR)/*.$(EXE)
 	
 .PHONY: clean
 clean:
