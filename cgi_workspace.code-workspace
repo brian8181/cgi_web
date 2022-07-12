@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "../cgicc-3.2.19"
+		},
+		{
+			"path": "../flex-bison-example"
 		}
 	],
 	"settings": {

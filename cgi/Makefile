@@ -33,7 +33,7 @@ SMARTYDIR = /home/brian/src/smarty-cpp
 # debuggdb: 
 # 	#$(CXXFLAGS) += -DDEBUG -ggdb # compile & link
 
-world: all dump_matches.o find_tags.o smarty_test.$(EXE) index.$(EXE) smarty.a test.cgi
+world: all dump_matches.o find_tags.o smarty_test.$(EXE) index_test.$(EXE) smarty.a test.cgi bash_test.cgi
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.$(EXE)
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump_matches.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump_matches.$(EXE)
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/display_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/display_test.$(EXE)
@@ -45,8 +45,8 @@ all: utility.o load_conf.o dump.o find_tags.$(EXE) regex_find.$(EXE)
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/load_conf.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/load_conf.$(EXE)
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.$(EXE)
 	
-index.$(EXE): smarty.o utility.o
-	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/index.$(EXE)
+index_test.$(EXE): smarty.o utility.o
+	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/index_test.$(EXE)
 
 # index.01.$(EXE): 
 #   	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.01.cpp -o $(BUILDDIR)/index.01.$(EXE)
@@ -89,6 +89,9 @@ regex_find.o:
 
 utility.o:
 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/src/utility.cpp -o $(BUILDDIR)/utility.o
+
+bash_test.cgi:
+	cp -rf bash_test.sh $(BUILDDIR)/bash_test.cgi
 
 .PHONY: upload
 upload:
