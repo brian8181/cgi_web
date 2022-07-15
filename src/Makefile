@@ -20,8 +20,8 @@ EXT = cpp
 EXE = cgi
 ROOTDIR  = /home/brian/src/cgi_web
 BUILDDIR = $(ROOTDIR)/build
-SRCDIR = $(ROOTDIR)/cgi
-OBJDIR = $(ROOTDIR)/cgi
+SRCDIR = $(ROOTDIR)/src
+OBJDIR = $(ROOTDIR)/src
 SMARTYDIR = /home/brian/src/smarty-cpp
 
 # compile & link for debug

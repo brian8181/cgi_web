@@ -1,125 +1,109 @@
-# MAKE TEMPLATE 06-02-2020 1
-# MAKE TEMPLATE 03-11-2021 1.1
-# MAKE TEMPLATE 05-22-2021 1.2
-# MAKE TEMPLATE 07-07-2021 1.3
-
-# RUN BEFORE autoreconf -ivfm
-# RUN BEFORE autoreconf -i
-
-MAKE_TEMPLATE = 1.3;
+# cgi scripts
 BUILD_VERSION = 0.1.0
 
-prefix = /usr/local
 prefix = /usr/local
 mandir = $(prefix)/share/man
 man1dir = $(mandir)/man1
 
 # Compiler settings - Can be customized.
 CXX = g++
-#CXXFLAGS = -Wall -std=c++11 -DDEBUG -g
-
-# HACK!
-CXXFLAGS = -Wall -std=c++11 -std=gnu++17 -DDEBUG -ggdb
-#CXXFLAGS += -DDEBUG -g
-#CXXFLAGS += -DDEBUG -ggdb
-
+CXXFLAGS = -std=c++17 -DDEBUG -ggdb
 
 # lib settings
-LDFLAGS = -static -lcppunit -L/usr/local/lib/
-INCLUDES = -I/usr/local/include/cppunit/
+LDFLAGS = -static -lcgicc -L/usr/lib/
+INCLUDES = -I/usr/include/cgicc/
 # add addtional libs here
 
 # Makefile settings - Can be customized.
 APPNAME = cgi_web
 EXT = cpp
-ROOTDIR  = ..
-BUILDDIR = .
-SRCDIR = $(ROOTDIR)/src
-OBJDIR = .
+EXE = cgi
+ROOTDIR  = /home/brian/src/cgi_web
+BUILDDIR = $(ROOTDIR)/build
+SRCDIR = $(ROOTDIR)/cgi
+OBJDIR = $(ROOTDIR)/cgi
+SMARTYDIR = /home/brian/src/smarty-cpp
 
 # compile & link for debug
-#debug: CXXFLAGS += -DDEBUG -g
-debug: all
+# debug: 
+# 	#$(CXXFLAGS) += -DDEBUG -g
+# debug: all
 
-# compile & link for debug GDBversion variable
-#debuggdb: CXXFLAGS += -DDEBUG -ggdb # compile & link
-all: $(APPNAME) bash_color_test $(APPNAME)_test 
+# # compile & link for debug GDBversion variable
+# debuggdb: 
+# 	#$(CXXFLAGS) += -DDEBUG -ggdb # compile & link
 
-# link
-$(APPNAME): $(APPNAME).o main.o  #END
-	 $(CXX) $(CXXFLAGS) $(BUILDDIR)/$(APPNAME).o $(BUILDDIR)/main.o  -o $(BUILDDIR)/$(APPNAME)
-
-# compile only
-$(APPNAME).o:
-	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/$(APPNAME).$(EXT) -o $(BUILDDIR)/$(APPNAME).o
+world: all dump_matches.o find_tags.o smarty_test.$(EXE) index_test.$(EXE) smarty.a test.cgi bash_test.cgi
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.$(EXE)
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump_matches.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump_matches.$(EXE)
+	$(CXX) $(CXXFLAGS) $(SRCDIR)/display_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/display_test.$(EXE)
+	$(CXX) $(CXXFLAGS) $(SRCDIR)/replace_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/replace_test.$(EXE)
+	$(CXX) $(CXXFLAGS) $(SRCDIR)/replace_test2.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/replace_test2.$(EXE)
 	
+	
+all: utility.o load_conf.o dump.o find_tags.$(EXE) regex_find.$(EXE)
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/load_conf.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/load_conf.$(EXE)
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.$(EXE)
+	
+index_test.$(EXE): smarty.o utility.o
+	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/index_test.$(EXE)
+
+# index.01.$(EXE): 
+#   	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.01.cpp -o $(BUILDDIR)/index.01.$(EXE)
+
+regex_find.$(EXE): utility.o main.o regex_find.o 
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(BUILDDIR)/main.o $(BUILDDIR)/regex_find.o -o $(BUILDDIR)/regex_find.$(EXE)
+
+find_tags.$(EXE): utility.o find_tags.o
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/find_tags.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/find_tags.$(EXE)
+
+smarty_test.$(EXE): smarty.o
+# 	$(CXX) $(CXXFLAGS) $(SRCDIR)/smarty_test.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/smarty_test.$(EXE)
+
+smarty.a: smarty.o
+	ar rvs $(BUILDDIR)/smarty.a $(BUILDDIR)/smarty.o
+
+smarty.o: 
+	$(CXX) $(CXXFLAGS) -c $(SMARTYDIR)/src/smarty.cpp -o $(BUILDDIR)/smarty.o
+
 main.o:
-	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/main.$(EXT) -o $(BUILDDIR)/main.o
-	# $(CXX) $(CXXFLAGS) $(INCLUDES) $(BUILDDIR)/$(APPNAME).o $(LDFLAGS) -o $(BUILDDIR)/$(APPNAME)_test
+	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/src/main.$(EXT) -o $(BUILDDIR)/main.o
 
-# dump.cgi:
-#  	$(CXX) $(CXXFLAGS) $(SRCDIR)/dump.$(EXT) -o $(BUILDDIR)/dump.cgi
+load_conf.o:
+	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/load_conf.cpp -o $(BUILDDIR)/load_conf.o
 
-# write_file:
-# 	$(CXX) $(CXXFLAGS) $(SRCDIR)/write_file.$(EXT) -o $(BUILDDIR)/write_file
+dump.o:
+	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/dump.cpp -o $(BUILDDIR)/dump.o
 
-# poc.cgi: poc.o stream_edit.o
-# 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/poc.o $(BUILDDIR)/stream_edit.o -o $(BUILDDIR)/poc.cgi
+test.cgi: 
+	$(CXX) $(CXXFLAGS) $(SRCDIR)/test.cpp $(LDFLAGS) -o $(BUILDDIR)/test.cgi
 
-# poc.o:
-# 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/poc.$(EXT) -o $(BUILDDIR)/poc.o
+dump_matches.o:
+	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/dump_matches.cpp -o $(BUILDDIR)/dump_matches.o
 
-# stream_edit.o:
-# 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/stream_edit.$(EXT) -o $(BUILDDIR)/stream_edit.o
+find_tags.o:
+	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/find_tags.cpp -o $(BUILDDIR)/find_tags.o
 
-## auto gernerated here ##
+regex_find.o: 
+	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/regex_find.cpp -o $(BUILDDIR)/regex_find.o
 
-# link
-$(APPNAME)_test: $(APPNAME)_test.o
-	$(CXX) $(CXXFLAGS) $(INCLUDES) $(BUILDDIR)/$(APPNAME)_test.o $(BUILDDIR)/$(APPNAME).o $(LDFLAGS) -o $(BUILDDIR)/$(APPNAME)_test
+utility.o:
+	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/src/utility.cpp -o $(BUILDDIR)/utility.o
 
-# compile only
-$(APPNAME)_test.o:
-	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/$(APPNAME)_test.cpp -o $(BUILDDIR)/$(APPNAME)_test.o
+# just copy & change extension to "cgi"
+bash_test.cgi:
+	cp -rf bash_test.sh $(BUILDDIR)/bash_test.cgi
 
-bash_color_test: bash_color_test.o
-	$(CXX) $(CXXFLAGS) $(BUILDDIR)/bash_color_test.o -o $(BUILDDIR)/bash_color_test
+.PHONY: upload
+upload:
+	cp -rf $(BUILDDIR)/*.$(EXE) /var/www/html/cgi
+	cp -rf $(SRCDIR)/* /var/www/html/cgi
 
-bash_color_test.o:
-	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/bash_color_test.cpp -o $(BUILDDIR)/bash_color_test.o
-
-# install man pages
-.PHONY: man
-man:
-	cp ../man/$(APPNAME).1 $(man1dir)
-	# gzip $(man1dir)/$(APPNAME).1
-	mandb
-
-.PHONY: unman
-unman:
-	rm $(man1dir)/$(APPNAME).1.gz
-	mandb
-
-# install 
-.PHONY: install
-install: man
-	cp $(BUILDDIR)/$(APPNAME) $(prefix)/bin/$(APPNAME)
-	rm $(prefix)/bin/$(APPNAME)
-
-# delete object files & app executable
+.PHONY: clean_upload
+clean_upload:
+	rm $(BUILDDIR)/*.$(EXE)
+	
 .PHONY: clean
 clean:
-	rm -f $(BUILDDIR)/$(APPNAME) $(BUILDDIR)/*.o $(BUILDDIR)/$(APPNAME)_test $(BUILDDIR)/bash_color_test
-	rm -f $(BUILDDIR)/*.xml $(BUILDDIR)/$(APPNAME).$(BUILD_VERSION).tar.gz
-
-# delete all auto generated files
-.PHONY: distclean
-distclean: clean
-	rm -f $(SRCDIR)/config.* $(SRCDIR)/Makefile $(SRCDIR)/Makefile.in $(SRCDIR)/INSTALL $(SRCDIR)/configure 
-	# rm ../stamp-h1 ../aclocal.m4 ../compile ../install-sh ../libtool ../ltmain.sh ../stamp-h1 ../missing ../depcomp
-	# rm ../src/Makefile ../src/Makefile.in
-	# rm -rf ../autom4te.cache ../src/.deps ../src/.libs
-	# rm ../src/.o
-
-dist: 
-	git archive HEAD | gzip > $(BUILDDIR)/$(APPNAME).$(BUILD_VERSION).tar.gz
+	rm $(BUILDDIR)/*.$(EXE) $(BUILDDIR)/*.[oa]
+	
