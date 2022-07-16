@@ -230,4 +230,3 @@ std::string& _trim(std::string &s)
 {
     return _ltrim(_rtrim(s));
 }
-
