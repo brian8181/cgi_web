@@ -92,7 +92,7 @@
             "name": "INDEX",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/index.cgi",
+            "program": "${workspaceFolder}/build/index_test.cgi",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

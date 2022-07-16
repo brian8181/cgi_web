@@ -44,7 +44,8 @@ world: all dump_matches.o find_tags.o smarty_test.$(EXE) index_test.$(EXE) smart
 all: utility.o load_conf.o dump.o find_tags.$(EXE) regex_find.$(EXE)
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/load_conf.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/load_conf.$(EXE)
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.$(EXE)
-	
+
+
 index_test.$(EXE): smarty.o utility.o
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/index_test.$(EXE)
 
