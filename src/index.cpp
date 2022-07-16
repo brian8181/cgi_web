@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 
     smarty sm("./templates", "./complie", "./config", "./cache"); 
     sm.load_config(conf_path);
-    sm.assign("headers", "");
+    sm.assign("headers", "HEADERS");
     sm.assign("page_title", "SmartyCPP Test Page");
     sm.assign("body", "The Body");
     sm.assign("admin_email", "admin@something.com");
