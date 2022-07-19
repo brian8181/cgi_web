@@ -15,5 +15,7 @@
 <br />
 <span style="font-size: smaller;"><em>Version {$version} {$version_date} ~(Copyright &#169; 2008)</em></span>
 </div>
+{not a comment}
+{*test comment*}
 </body>
 </html>
