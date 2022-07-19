@@ -4,7 +4,7 @@
         {
             "label": "MAKE DEBUGGDB",
             "type": "shell",
-            "command": "make -f ${workspaceFolder}/src/Makefile",
+            "command": "make -f ${workspaceFolder}/build/Makefile",
             "problemMatcher": [
                 "$gcc"
             ],
@@ -16,7 +16,7 @@
         {
             "label": "MAKE INDEX",
             "type": "shell",
-            "command": "make -f ${workspaceFolder}/src/Makefile index_test.cgi",
+            "command": "make -f ${workspaceFolder}/build/Makefile index_test.cgi",
             "problemMatcher": [
                 "$gcc"
             ],
