@@ -1,16 +1,16 @@
 {
 	"folders": [
 		{
-			"path": "."
+			"path": ".."
 		},
 		{
-			"path": "../smarty-cpp"
+			"path": "../../smarty-cpp"
 		},
 		{
-			"path": "../cgicc-3.2.19"
+			"path": "../../cgicc-3.2.19"
 		},
 		{
-			"path": "../flex-bison-example"
+			"path": "../../flex-bison-example"
 		}
 	],
 	"settings": {
@@ -63,6 +63,7 @@
 			"tuple": "cpp",
 			"typeinfo": "cpp",
 			"utility": "cpp"
-		}
+		},
+		"makefile.extensionOutputFolder": "./.vscode"
 	}
 }
