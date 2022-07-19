@@ -17,5 +17,7 @@
 </div>
 {not a comment}
 {*test comment*}
+{$.test}
+{$test}
 </body>
 </html>

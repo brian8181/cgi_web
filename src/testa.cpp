@@ -17,6 +17,7 @@ int main(int argc, char* argv[])
     cout << HTTPHTMLHeader(); // Set up the HTML document
 
     string project_folder = "/home/brian/src/cgi_web";
+    //string path = project_folder + "/www/templates/default2.tpl";
     string conf_path = project_folder + "/test/conf_test.txt";
 
     smarty sm(project_folder + "/www/templates", project_folder + "/www/compile", project_folder + "/www/config", project_folder + "/www/cache"); 
@@ -27,7 +28,13 @@ int main(int argc, char* argv[])
     sm.assign("admin_email", "admin@something.com");
     sm.assign("version", "0.1");
     sm.assign("version_date", "Feb, 14 2022");
-    sm.display("default.tpl");
+
+    sm.assign(".test", "TESTING DOT");
+    sm.assign("test", "FUCK");
+    //sm.escape(path);
+    //sm.include(path);
+    sm.display("default2.tpl");
+    //sm.display(path);
 
     return 0;
 }
