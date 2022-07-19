@@ -15,4 +15,7 @@
 <div class="text_area">
 <div class="box" style="text-align: center">
 <h1>{$page_title}</h1>
+{*TESTING*}
+{*TESTING*}
+{*TESTING*}
 </div>
