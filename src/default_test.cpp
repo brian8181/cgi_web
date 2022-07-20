@@ -17,7 +17,6 @@ int main(int argc, char* argv[])
     cout << HTTPHTMLHeader(); // Set up the HTML document
 
     string project_folder = "/home/brian/src/cgi_web";
-    //string path = project_folder + "/www/templates/default2.tpl";
     string conf_path = project_folder + "/test/conf_test.txt";
 
     smarty sm(project_folder + "/www/templates", project_folder + "/www/compile", project_folder + "/www/config", project_folder + "/www/cache"); 

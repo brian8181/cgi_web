@@ -14,7 +14,7 @@ using namespace cgicc;
 int main(int argc, char* argv[])
 { 
     Cgicc  cgi;
-    cout << HTTPHTMLHeader(); // Set up the HTML document
+    cout << HTTPHTMLHeader(); // set up the HTML document
 
     string project_folder = "/home/brian/src/cgi_web";
     string conf_path = project_folder + "/test/conf_test.txt";
