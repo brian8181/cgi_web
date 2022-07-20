@@ -30,10 +30,11 @@ int main(int argc, char* argv[])
     sm.assign("version_date", "Feb, 14 2022");
 
     sm.assign(".test", "TESTING DOT");
-    sm.assign("test", "FUCK");
+    sm.assign("_test", "TESTING UNDERSCORE");
+    sm.assign("~test", "TESTING TILDE");
     //sm.escape(path);
     //sm.include(path);
-    sm.display("default2.tpl");
+    sm.display("default_test.tpl");
     //sm.display(path);
 
     return 0;

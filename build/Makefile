@@ -33,7 +33,7 @@ SMARTYDIR = /home/brian/src/smarty-cpp
 # debuggdb: 
 # 	#$(CXXFLAGS) += -DDEBUG -ggdb # compile & link
 
-world: all dump_matches.o find_tags.o smarty_test.$(EXE) index_test.$(EXE) smarty.a test.cgi bash_test.cgi testa.cgi
+world: all dump_matches.o find_tags.o smarty_test.$(EXE) default.$(EXE) smarty.a test.cgi bash_test.cgi default_test.cgi
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.$(EXE)
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump_matches.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump_matches.$(EXE)
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/display_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/display_test.$(EXE)
@@ -45,11 +45,11 @@ all: utility.o load_conf.o dump.o find_tags.$(EXE) regex_find.$(EXE)
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/load_conf.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/load_conf.$(EXE)
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.$(EXE)
 	
-index_test.$(EXE): smarty.o utility.o
-	$(CXX) $(CXXFLAGS) $(SRCDIR)/index_test.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/index_test.$(EXE)
+default.$(EXE): smarty.o utility.o
+	$(CXX) $(CXXFLAGS) $(SRCDIR)/default.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/default.$(EXE)
 
-testa.$(EXE): smarty.o utility.o
-	$(CXX) $(CXXFLAGS) $(SRCDIR)/testa.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/testa.$(EXE)
+default_test.$(EXE): smarty.o utility.o
+	$(CXX) $(CXXFLAGS) $(SRCDIR)/default_test.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/default_test.$(EXE)
 
 # index_.01.$(EXE): 
 #   	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.01.cpp -o $(BUILDDIR)/index.01.$(EXE)

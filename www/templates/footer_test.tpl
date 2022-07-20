@@ -18,6 +18,7 @@
 {not a comment}
 {*test comment*}
 {$.test}
-{$test}
+{$_test}
+{$~test}
 </body>
 </html>
