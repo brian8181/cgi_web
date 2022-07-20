@@ -6,7 +6,6 @@
 #include "cgicc/HTMLClasses.h"
 #include "../../smarty-cpp/src/smarty.hpp"
 #include "../src/utility.hpp"
-//#include "../src/conf.hpp"
 
 using namespace std;
 using namespace cgicc;
@@ -14,10 +13,11 @@ using namespace cgicc;
 int main(int argc, char* argv[])
 { 
     Cgicc  cgi;
-    cout << HTTPHTMLHeader(); // set up the HTML document
+    cout << HTTPHTMLHeader();
 
-    string project_folder = "/home/brian/src/cgi_web";
-    string conf_path = project_folder + "/test/conf_test.txt";
+    const string template_name = "default.tpl";
+    const string project_folder = "/home/brian/src/cgi_web";
+    const string conf_path = project_folder + "/test/conf_test.txt";
 
     smarty sm(project_folder + "/www/templates", project_folder + "/www/compile", project_folder + "/www/config", project_folder + "/www/cache"); 
     sm.load_config(conf_path);
