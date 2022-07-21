@@ -14,7 +14,7 @@ using namespace cgicc;
 int main(int argc, char* argv[])
 { 
     Cgicc  cgi;
-    cout << HTTPHTMLHeader(); // Set up the HTML document
+    cout << HTTPHTMLHeader();
 
     const string template_name = "default_test.tpl";
     const string project_folder = "/home/brian/src/cgi_web";
