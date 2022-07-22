@@ -1,6 +1,6 @@
 {* COMMENT TEST *}
-{if $ABC}{/if}
-hello
+{if $ABC}
+XYZ
 {/if}
 {config_load file="music.conf"}{include file="header_test.tpl"}
 <br />

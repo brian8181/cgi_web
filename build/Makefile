@@ -48,6 +48,8 @@ all: utility.o load_conf.o dump.o find_tags.$(EXE) regex_find.$(EXE)
 default.$(EXE): smarty.o utility.o
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/default.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/default.$(EXE)
 
+fast: default_test.$(EXE)
+
 default_test.$(EXE): smarty.o utility.o
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/default_test.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/default_test.$(EXE)
 
