@@ -22,20 +22,25 @@ int main(int argc, char* argv[])
 
     smarty sm(project_folder + "/www/templates", project_folder + "/www/compile", project_folder + "/www/config", project_folder + "/www/cache"); 
     sm.load_config(conf_path);
+
+    // configure testing ...
+    string a = sm.get_conf("AAA");
+    string b = sm.get_conf("BBB");
+    string c = sm.get_conf("CCC");
+    cout << "AAA=" << a << endl;
+    cout << "BBB=" << b << endl;
+    cout << "CCC=" << c << endl;
+
     sm.assign("headers", "HEADERS");
     sm.assign("page_title", "SmartyCPP Test Page");
     sm.assign("body", "The Body");
     sm.assign("admin_email", "admin@something.com");
     sm.assign("version", "0.1");
     sm.assign("version_date", "Feb, 14 2022");
-
     sm.assign(".test", "TESTING DOT");
     sm.assign("_test", "TESTING UNDERSCORE");
     sm.assign("~test", "TESTING TILDE");
-    //sm.escape(path);
-    //sm.include(path);
     sm.display(template_name);
-    //sm.display(path);
 
     return 0;
 }
