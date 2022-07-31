@@ -16,7 +16,8 @@ int main(int argc, char* argv[])
     Cgicc  cgi;
     cout << HTTPHTMLHeader();
 
-    const string template_name = "default_test.tpl";
+    //const string template_name = "default_test.tpl";
+    const string template_name = "test1.tpl";
     const string project_folder = "/home/brian/src/cgi_web";
     const string conf_path = project_folder + "/test/conf_test.txt";
 
@@ -24,12 +25,12 @@ int main(int argc, char* argv[])
     sm.load_config(conf_path);
 
     // configure testing ...
-    string a = sm.get_conf("AAA");
-    string b = sm.get_conf("BBB");
-    string c = sm.get_conf("CCC");
-    cout << "AAA=" << a << endl;
-    cout << "BBB=" << b << endl;
-    cout << "CCC=" << c << endl;
+    // string a = sm.get_conf("AAA");
+    // string b = sm.get_conf("BBB");
+    // string c = sm.get_conf("CCC");
+    // cout << "AAA=" << a << endl;
+    // cout << "BBB=" << b << endl;
+    // cout << "CCC=" << c << endl;
 
     sm.assign("headers", "HEADERS");
     sm.assign("page_title", "SmartyCPP Test Page");
