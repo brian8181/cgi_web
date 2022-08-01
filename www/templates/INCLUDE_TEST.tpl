@@ -1,3 +1,1 @@
-{include file="HEADER.tpl"}
-BODY BODY BODY
-{include file="FOOTER.tpl"}
+{include file="TEST_TEST_TEST.tpl"}
