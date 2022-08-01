@@ -15,8 +15,8 @@ int main(int argc, char* argv[])
 
     string path = project_folder + "/www/templates" + "/test1.tpl";
     string src = readlines(path);
-    cout << src << endl;
+    //cout << src << endl;
 
-    // string html = sm.include(path);
-    // cout << html << endl;
+    string html = sm.include("test1.tpl");
+    cout << html << endl;
 }
