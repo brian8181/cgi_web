@@ -1,0 +1,4 @@
+Hello
+{*comment*}
+World!
+{*comment*}

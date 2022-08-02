@@ -17,6 +17,6 @@ int main(int argc, char* argv[])
     string src = readlines(path);
     //cout << src << endl;
 
-    string html = sm.include("INCLUDE_TEST.tpl");
+    string html = sm.include(template_name);
     cout << html << endl;
 }

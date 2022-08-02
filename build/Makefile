@@ -33,7 +33,7 @@ SMARTYDIR = /home/brian/src/smarty-cpp
 # debuggdb: 
 # 	#$(CXXFLAGS) += -DDEBUG -ggdb # compile & link
 
-world: all dump_matches.o find_tags.o smarty_test.$(EXE) default.$(EXE) smarty.a test.cgi bash_test.cgi default_test.cgi lex.cgi include_test.cgi variable_test.cgi
+world: all dump_matches.o find_tags.o smarty_test.$(EXE) default.$(EXE) smarty.a test.cgi bash_test.cgi default_test.cgi lex.cgi 
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.$(EXE)
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump_matches.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump_matches.$(EXE)
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/display_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/display_test.$(EXE)
@@ -41,7 +41,7 @@ world: all dump_matches.o find_tags.o smarty_test.$(EXE) default.$(EXE) smarty.a
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/replace_test2.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/replace_test2.$(EXE)
 	
 	
-all: utility.o load_conf.o dump.o find_tags.$(EXE) regex_find.$(EXE)
+all: utility.o load_conf.o dump.o find_tags.$(EXE) regex_find.$(EXE) test_include.cgi test_variable.cgi
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/load_conf.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/load_conf.$(EXE)
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.$(EXE)
 	
@@ -68,11 +68,11 @@ smarty_test.$(EXE): smarty.o
 lex.cgi: smarty.o
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/smarty.o $(SRCDIR)/lex.cpp -o $(BUILDDIR)/lex.cgi
 
-include_test.cgi: smarty.o
-	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(BUILDDIR)/smarty.o $(SRCDIR)/include_test.cpp -o $(BUILDDIR)/include_test.cgi
+test_include.cgi: smarty.o
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(BUILDDIR)/smarty.o $(SRCDIR)/test_include.cpp -o $(BUILDDIR)/test_include.cgi
 
-variable_test.cgi: smarty.o
-	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(BUILDDIR)/smarty.o $(SRCDIR)/variable_test.cpp -o $(BUILDDIR)/variable_test.cgi
+test_variable.cgi: smarty.o
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(BUILDDIR)/smarty.o $(SRCDIR)/test_variable.cpp -o $(BUILDDIR)/test_variable.cgi
 
 smarty.a: smarty.o
 	ar rvs $(BUILDDIR)/smarty.a $(BUILDDIR)/smarty.o
