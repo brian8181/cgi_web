@@ -186,25 +186,32 @@ std::string trim(const std::string &s)
 //     return src;
 // }
 
-// string fstream_read(string path)
-// {
-//     string str;
-//     fstream file;
-//     file.open(path, ios::in); //open a file to perform read operation using file object
-//     if (file.is_open())
-//     {   
-//         //checking whether the file is open
-//         char c[256];
-//         while(file.read(c, 256))
-//         { 
-//             //read data from file object and put it into string.
-//             str.append(c);
-//             //str.append("\n");
-//         }
-//         file.close(); //close the file object.
-//     }
-//     return str;
-// }
+string fstream_read(string path)
+{
+    string str;
+    fstream file;
+    file.open(path, ios::in); //open a file to perform read operation using file object
+    if (file.is_open())
+    {   
+        //checking whether the file is open
+        char c[256];
+        while(file.read(c, 256))
+        { 
+            //read data from file object and put it into string.
+            str.append(c);
+            //str.append("\n");
+        }
+        file.close(); //close the file object.
+    }
+    return str;
+}
+
+string fread_test(string path)
+{
+    std::ifstream in(path);
+    std::string contents((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+    return contents;
+}
 
 std::string& _ltrim(std::string &s)
 {
