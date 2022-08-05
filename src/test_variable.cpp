@@ -8,12 +8,19 @@ using namespace std;
 
 int main(int argc, char* argv[])
 { 
-    const string template_name = "variable_test.tpl";
+    const string default_template =  "variable_test.tpl";
     const string project_folder = "/home/brian/src/cgi_web";
     const string conf_path = project_folder + "/test/conf_test.txt";
-
-    string path = project_folder + "/www/templates/" + template_name;
     
+    // check for input or use default
+    string template_name = default_template;
+    if(argc == 2)
+    {
+        string template_name = argv[1];
+    }
+    const string path = project_folder + "/www/templates/" + template_name;
+   
+
     // read file
     std::ifstream in(path);
     std::string src((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
