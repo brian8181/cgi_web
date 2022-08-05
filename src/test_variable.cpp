@@ -48,7 +48,8 @@ int main(int argc, char* argv[])
     
     assign("foo", "Big Foo", tags);
     assign("bar", "Bar", tags);
-    assign("boo", "Little Boo!", tags);
+    // test default
+    //assign("boo", "Little Boo!", tags);
 
     // call variable --
     //string html = sm.variable(src);

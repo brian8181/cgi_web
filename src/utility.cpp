@@ -124,7 +124,12 @@ string variable(const string& src, map<string, string>& vars)
         map<string, string>::const_iterator find_iter = vars.find(tag);
         if(find_iter != vars.end())
         {
+           
             output += find_iter->second;
+        }
+        else if(match[3].matched) // default sub match!
+        {
+            output += match[3].str(); 
         }
         beg_pos = end_pos + match.length();
     }
@@ -211,7 +216,7 @@ string match_replace_tags(string path, const map<string, string>& tags)
         map<string, string>::const_iterator it = tags.find(tag);
         if(it != tags.end())
         {
-            output += it->second;
+           output += it->second;
         }
         sbeg = send + match.length();
     }
