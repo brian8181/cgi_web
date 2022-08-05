@@ -104,7 +104,8 @@ std::string include(const string& tmpl)
 string variable(const string& src, map<string, string>& vars)
 {
     const string SYMBOL_NAME = "\\b[_.~]*[A-Za-z][A-Za-z0-9_.-~]*\\b";
-    const string VARIABLE = "\\{\\s*\\$(" + SYMBOL_NAME + ")\\s*\\}";
+    const string DEFAULT_FUNCTION = "\\|default:'(.*)'";
+    const string VARIABLE = "\\{\\s*\\$(" + SYMBOL_NAME + ")\\s*(" + DEFAULT_FUNCTION + ")?\\s*\\}";
 
     regex exp = regex(VARIABLE, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
@@ -236,26 +237,6 @@ std::string trim(const std::string &s)
 {
     return rtrim(ltrim(s));
 }
-
-// string ifstream_readlines(string path)
-// {
-//     string src;
-//     ifstream file;
-//     file.open(path, ios::in); //open a file to perform read operation using file object
-//
-//     if (file.is_open())
-//     {   
-//         //checking whether the file is open
-//         string tp;
-//         while(getline(file, tp))
-//         { 
-//             //read data from file object and put it into string.
-//             src += tp += "\n";
-//         }
-//         file.close(); //close the file object.
-//     }
-//     return src;
-// }
 
 string fstream_read(string path)
 {
