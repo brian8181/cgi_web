@@ -5,7 +5,9 @@
 #include <map>
 #include <regex>
 #include <algorithm>
+//#include "regexpr.hpp"
 #include "utility.hpp"
+
 
 string readlines(string path)
 {
@@ -19,7 +21,7 @@ string readlines(string path)
         while(getline(file, tp))
         { 
             //read data from file object and put it into string.
-            src += tp += "\n";
+            src += tp;
         }
         file.close(); //close the file object.
     }
@@ -60,6 +62,46 @@ void display(string path, const map<string, string>& tags)
     output += src.substr(beg_pos);
     cout << output << endl;
 }
+
+void display(string tmpl)
+{
+    cout << include(tmpl);
+}
+
+std::string include(const string& tmpl)
+{
+    const string INCLUDE = "\\{\\s*\\include file\\s*=\\s*\"(.*?)\"\\s*\\}";
+    
+    string template_dir = "";
+    string path = template_dir + "/" + tmpl;
+    //string src = readfile(path);
+    std::ifstream in(path);
+    std::string src((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+    
+    //string src = fread(path);
+    regex exp = regex(INCLUDE, regex::ECMAScript);
+
+    auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
+    auto end = sregex_iterator(); 
+    string output;
+    int beg_pos = 0;
+    for (sregex_iterator iter = begin; iter != end; ++iter)
+    {
+        smatch match = *iter;
+        std::ssub_match sub = match[1];
+        std::string s(sub.str());
+        string tag = trim(s);
+        
+        int end_pos = match.position();
+        output += src.substr(beg_pos, end_pos-beg_pos);
+        // call include recursively
+        output += include(tag);
+        beg_pos = end_pos + match.length();
+    }
+    output += src.substr(beg_pos);
+    return output;
+}
+
 
 bool load_config(string path, map<string, string>& config)
 {
@@ -199,7 +241,6 @@ string fstream_read(string path)
         { 
             //read data from file object and put it into string.
             str.append(c);
-            //str.append("\n");
         }
         file.close(); //close the file object.
     }
