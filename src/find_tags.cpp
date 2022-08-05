@@ -2,7 +2,7 @@
 #include <iterator>
 #include <regex>
 #include <string>
-#include "../src/utility.hpp"
+#include "utility.hpp"
 
 using namespace std;
 

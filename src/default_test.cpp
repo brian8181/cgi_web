@@ -5,7 +5,7 @@
 #include "cgicc/HTTPHTMLHeader.h"
 #include "cgicc/HTMLClasses.h"
 #include "../../smarty-cpp/src/smarty.hpp"
-#include "../src/utility.hpp"
+#include "utility.hpp"
 //#include "../src/conf.hpp"
 
 using namespace std;
