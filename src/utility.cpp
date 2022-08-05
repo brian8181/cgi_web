@@ -101,7 +101,7 @@ std::string include(const string& tmpl)
     return output;
 }
 
-string variable(const string& src)
+string variable(const string& src, map<string, string>& vars)
 {
     const string SYMBOL_NAME = "\\b[_.~]*[A-Za-z][A-Za-z0-9_.-~]*\\b";
     const string VARIABLE = "\\{\\s*\\$(" + SYMBOL_NAME + ")\\s*\\}";
@@ -120,11 +120,11 @@ string variable(const string& src)
         
         int end_pos = match.position();
         output += src.substr(beg_pos, end_pos-beg_pos);
-        // map<string, string>::const_iterator find_iter = vars.find(tag);
-        // if(find_iter != vars.end())
-        // {
-        //     output += find_iter->second;
-        // }
+        map<string, string>::const_iterator find_iter = vars.find(tag);
+        if(find_iter != vars.end())
+        {
+            output += find_iter->second;
+        }
         beg_pos = end_pos + match.length();
     }
     output += src.substr(beg_pos);

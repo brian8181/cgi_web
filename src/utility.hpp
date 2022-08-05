@@ -12,7 +12,7 @@ void assign(string name, string val, map<string, string>& symbols);
 void display(string path, const map<string, string>& tags);
 void display(string tmpl);
 string include(const string& tmpl);
-string variable(const string& src);
+string variable(const string& src, map<string, string>& vars);
 
 bool load_config(string path, map<string, string>& config);
 void find_tags(string path);

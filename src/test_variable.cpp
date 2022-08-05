@@ -8,7 +8,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 { 
-    const string default_template =  "variable_test.tpl";
+    const string default_template =  "test_variable.tpl";
     const string project_folder = "/home/brian/src/cgi_web";
     const string conf_path = project_folder + "/test/conf_test.txt";
     
@@ -16,7 +16,8 @@ int main(int argc, char* argv[])
     string template_name = default_template;
     if(argc == 2)
     {
-        string template_name = argv[1];
+        template_name.clear();
+        template_name = argv[1];
     }
     const string path = project_folder + "/www/templates/" + template_name;
    
@@ -43,11 +44,14 @@ int main(int argc, char* argv[])
     assign("admin_email", "admin@something.com", tags);
     assign("version", "0.1", tags);
     assign("version_date", "Feb, 14 2022", tags);
-    display(path, tags);
+    //display(path, tags);
     
+    assign("foo", "Big Foo", tags);
+    assign("bar", "Bar", tags);
+    assign("boo", "Little Boo!", tags);
 
     // call variable --
     //string html = sm.variable(src);
-    string html = variable(src);
+    string html = variable(src, tags);
     cout << html << endl;
 }
