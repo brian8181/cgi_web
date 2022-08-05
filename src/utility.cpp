@@ -76,8 +76,8 @@ std::string include(const string& tmpl)
 {
     const string INCLUDE = "\\{\\s*\\include file\\s*=\\s*\"(.*?)\"\\s*\\}";
 
-    //string path = template_dir + "/" + tmpl;
-    string path;
+    string path = template_dir + "/" + tmpl;
+    //string path = project_folder + "/www/templates" 
     //string src = readfile(path);
     std::ifstream in(path);
     std::string src((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());

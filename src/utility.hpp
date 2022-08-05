@@ -34,4 +34,7 @@ std::string& _trim(const std::string &s);
 
 string get_template_dir();
 
+const string project_folder = "/home/brian/src/cgi_web";
+const string template_dir = project_folder + "/www/templates";
+
 #endif
