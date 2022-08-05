@@ -67,13 +67,17 @@ void display(string tmpl)
 {
     cout << include(tmpl);
 }
+string get_template_dir()
+{
+    return "";
+}
 
 std::string include(const string& tmpl)
 {
     const string INCLUDE = "\\{\\s*\\include file\\s*=\\s*\"(.*?)\"\\s*\\}";
-    
-    string template_dir = "";
-    string path = template_dir + "/" + tmpl;
+
+    //string path = template_dir + "/" + tmpl;
+    string path;
     //string src = readfile(path);
     std::ifstream in(path);
     std::string src((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());

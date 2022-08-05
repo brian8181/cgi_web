@@ -32,4 +32,6 @@ std::string& _ltrim(const std::string &s);
 std::string& _rtrim(const std::string &s);
 std::string& _trim(const std::string &s);
 
+string get_template_dir();
+
 #endif
