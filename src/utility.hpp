@@ -12,6 +12,7 @@ void assign(string name, string val, map<string, string>& symbols);
 void display(string path, const map<string, string>& tags);
 void display(string tmpl);
 string include(const string& tmpl);
+string variable(const string& src);
 
 bool load_config(string path, map<string, string>& config);
 void find_tags(string path);
@@ -31,8 +32,6 @@ std::string trim(const std::string &s);
 std::string& _ltrim(const std::string &s);
 std::string& _rtrim(const std::string &s);
 std::string& _trim(const std::string &s);
-
-string get_template_dir();
 
 const string project_folder = "/home/brian/src/cgi_web";
 const string template_dir = project_folder + "/www/templates";

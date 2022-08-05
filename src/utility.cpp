@@ -67,24 +67,19 @@ void display(string tmpl)
 {
     cout << include(tmpl);
 }
-string get_template_dir()
-{
-    return "";
-}
 
 std::string include(const string& tmpl)
 {
+    // set up constants
     const string INCLUDE = "\\{\\s*\\include file\\s*=\\s*\"(.*?)\"\\s*\\}";
-
-    string path = template_dir + "/" + tmpl;
-    //string path = project_folder + "/www/templates" 
-    //string src = readfile(path);
+    const string path = template_dir + "/" + tmpl;
+    
+    // read file
     std::ifstream in(path);
     std::string src((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
     
-    //string src = fread(path);
+    // iter all includes
     regex exp = regex(INCLUDE, regex::ECMAScript);
-
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
     auto end = sregex_iterator(); 
     string output;
@@ -106,6 +101,36 @@ std::string include(const string& tmpl)
     return output;
 }
 
+string variable(const string& src)
+{
+    const string SYMBOL_NAME = "\\b[_.~]*[A-Za-z][A-Za-z0-9_.-~]*\\b";
+    const string VARIABLE = "\\{\\s*\\$(" + SYMBOL_NAME + ")\\s*\\}";
+
+    regex exp = regex(VARIABLE, regex::ECMAScript); // match
+    auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
+    auto end = sregex_iterator(); 
+    string output;
+    int beg_pos = 0;
+    for (sregex_iterator iter = begin; iter != end; ++iter)
+    {
+        smatch match = *iter;
+        std::ssub_match sub = match[1];
+        std::string s(sub.str());
+        string tag = trim(s);
+        
+        int end_pos = match.position();
+        output += src.substr(beg_pos, end_pos-beg_pos);
+        // map<string, string>::const_iterator find_iter = vars.find(tag);
+        // if(find_iter != vars.end())
+        // {
+        //     output += find_iter->second;
+        // }
+        beg_pos = end_pos + match.length();
+    }
+    output += src.substr(beg_pos);
+
+    return output;
+}
 
 bool load_config(string path, map<string, string>& config)
 {

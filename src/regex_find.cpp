@@ -4,8 +4,8 @@
 #include <iostream>
 #include <algorithm>
 #include <string>
-#include "../src/main.hpp"
-#include "../src/utility.hpp"
+#include "main.hpp"
+#include "utility.hpp"
 
 using namespace std;
 

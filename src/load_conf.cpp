@@ -3,7 +3,7 @@
 #include <regex>
 #include <fstream>
 #include <string>
-#include "../src/utility.hpp"
+#include "utility.hpp"
 
 using namespace std;
 
