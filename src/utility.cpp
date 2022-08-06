@@ -140,7 +140,7 @@ string variable(const string& src, map<string, string>& vars)
 
 string if_sequence(const string& src)
 {
-    const string SYMB_NAME = "\\b[-._~]*[A-Za-z][-.~A-Za-z0-9]*\\b";
+    const string SYMB_NAME = "\\b[-._~]*[A-Za-z][-._~A-Za-z0-9]*\\b";
     //BAD const string HTML = IF_KEYWORD + "([\\w<=>]*)" + ENDIF_KEYWORD;
 
     const string IF_KEYWORD = "\\{if\\s+\\$" + SYMB_NAME + "\\s*\\}";

@@ -59,4 +59,10 @@ const string IF_SEQUENCE = IF_KEYWORD + HTML + ENDIF_KEYWORD;
 const string ELSE_KEYWORD = "\\{if\\s+\\(.*?)\\}";
 const string ARRAY_KEYWORD = "array\\(" + string_literal1 + "|" + string_literal1 + "\\)";
 
+const string DEFAULT_FUNCTION = "\\|default:'(.*)'";
+const string CAT_FUNCTION = "\\|cat:'(.*)'";
+const string CAPITALIZE_FUNCTION = "\\|capitalize(:true)?";
+const string LOWER_FUNCTION = "\\|lower(:true)?";
+const string UPPER_FUNCTION = "\\|upper(:true)?";
+
 #endif
