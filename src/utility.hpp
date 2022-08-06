@@ -13,6 +13,7 @@ void display(string path, const map<string, string>& tags);
 void display(string tmpl);
 string include(const string& tmpl);
 string variable(const string& src, map<string, string>& vars);
+string if_sequence(const string& src);
 
 bool load_config(string path, map<string, string>& config);
 void find_tags(string path);

@@ -138,6 +138,42 @@ string variable(const string& src, map<string, string>& vars)
     return output;
 }
 
+string if_sequence(const string& src)
+{
+    const string SYMB_NAME = "\\b[-._~]*[A-Za-z][-.~A-Za-z0-9]*\\b";
+    //BAD const string HTML = IF_KEYWORD + "([\\w<=>]*)" + ENDIF_KEYWORD;
+
+    const string IF_KEYWORD = "\\{if\\s+\\$" + SYMB_NAME + "\\s*\\}";
+    const string ENDIF_KEYWORD = "\\{/if\\}";
+    const string HTML = "([\\s\\r\\n\\w]*)";
+    //BAD const string HTML = "(.*)";
+    const string IF_SEQUENCE = IF_KEYWORD + HTML + ENDIF_KEYWORD;
+
+    regex exp = regex(IF_SEQUENCE, regex::ECMAScript); // match
+    auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
+    auto end = sregex_iterator(); 
+
+    string output;
+    int beg_pos = 0;
+    for (sregex_iterator iter = begin; iter != end; ++iter)
+    {
+        smatch match = *iter;
+        int end_pos = match.position();
+        std::ssub_match sub = match[1];
+        std::string s(sub.str());
+        string tag = trim(s);
+        //HTML
+        output += "@IF SEQUENCE@\n";
+        output += "@HTML@ " + tag + " @HTML@\n";
+        output += "@/IF_SEQUENCE@\n";
+        output += src.substr(beg_pos, end_pos-beg_pos);
+        beg_pos = end_pos + match.length();
+    }
+    output += src.substr(beg_pos);
+
+    return output;
+}
+
 bool load_config(string path, map<string, string>& config)
 {
     string src = readlines(path);
