@@ -1,8 +1,6 @@
-Hello
-{*comment*}
-World!
-{*comment*}
-{if $logged_in}
+{if $test}
 Hello Its ME!
 {/if}
-more testing ...
+{if $test}
+Hello Its You!
+{/if}

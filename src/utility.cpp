@@ -145,9 +145,11 @@ string if_sequence(const string& src)
 
     const string IF_KEYWORD = "\\{if\\s+\\$" + SYMB_NAME + "\\s*\\}";
     const string ENDIF_KEYWORD = "\\{/if\\}";
-    const string HTML = "([\\s\\r\\n\\w]*)";
+    const string HTML = "([-._~!\\s\\r\\n\\w]*)";
     //BAD const string HTML = "(.*)";
     const string IF_SEQUENCE = IF_KEYWORD + HTML + ENDIF_KEYWORD;
+    //const string IF_SEQUENCE = IF_KEYWORD + HTML;
+    //const string IF_SEQUENCE = ENDIF_KEYWORD;
 
     regex exp = regex(IF_SEQUENCE, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
@@ -163,9 +165,9 @@ string if_sequence(const string& src)
         std::string s(sub.str());
         string tag = trim(s);
         //HTML
-        output += "@IF SEQUENCE@\n";
+        //output += "@IF SEQUENCE@\n";
         output += "@HTML@ " + tag + " @HTML@\n";
-        output += "@/IF_SEQUENCE@\n";
+        //output += "@/IF_SEQUENCE@\n";
         output += src.substr(beg_pos, end_pos-beg_pos);
         beg_pos = end_pos + match.length();
     }
