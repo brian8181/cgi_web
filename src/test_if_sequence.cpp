@@ -19,7 +19,6 @@ int main(int argc, char* argv[])
         template_name = argv[1];
     }
     const string path = project_folder + "/www/templates/" + template_name;
-   
 
     // read file
     std::ifstream in(path);
@@ -27,5 +26,4 @@ int main(int argc, char* argv[])
         
     string html = if_sequence(src);
     cout << html << endl;
-
 }

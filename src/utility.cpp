@@ -165,11 +165,9 @@ string if_sequence(const string& src)
         std::string s(sub.str());
         string tag = trim(s);
         //HTML
-        //output += "@IF SEQUENCE@\n";
-        output += "@HTML@ " + tag + " @HTML@\n";
-        //output += "@/IF_SEQUENCE@\n";
-        output += src.substr(beg_pos, end_pos-beg_pos);
-        beg_pos = end_pos + match.length();
+        output += "@HTML@ " + tag + " @HTML@";
+        //output += src.substr(beg_pos, end_pos-beg_pos);
+        //beg_pos = end_pos + match.length();
     }
     output += src.substr(beg_pos);
 
