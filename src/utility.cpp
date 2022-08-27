@@ -147,7 +147,7 @@ string if_sequence(const string& src)
     const string ENDIF_KEYWORD = "\\{/if\\}";
     const string HTML = "([-._~!\\s\\r\\n\\w]*)";
     //BAD const string HTML = "(.*)";
-    const string IF_SEQUENCE = HTML + IF_KEYWORD + HTML + ENDIF_KEYWORD + HTML;
+    const string IF_SEQUENCE = IF_KEYWORD + HTML + ENDIF_KEYWORD;
     //const string IF_SEQUENCE = IF_KEYWORD + HTML;
     //const string IF_SEQUENCE = ENDIF_KEYWORD;
 
@@ -162,12 +162,11 @@ string if_sequence(const string& src)
         smatch match = *iter;
         int end_pos = match.position();
         std::ssub_match sub = match[1];
-        std::string s(sub.str());
-        string tag = trim(s);
+        string tag(sub.str());
         //HTML
         output += "@HTML@ " + tag + " @HTML@";
-        //output += src.substr(beg_pos, end_pos-beg_pos);
-        //beg_pos = end_pos + match.length();
+        output += src.substr(beg_pos, end_pos-beg_pos);
+        beg_pos = end_pos + match.length();
     }
     output += src.substr(beg_pos);
 

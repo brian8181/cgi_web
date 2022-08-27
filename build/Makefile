@@ -71,7 +71,7 @@ lex.cgi: smarty.o
 fread.cgi: utility.o
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/fread.cpp -o $(BUILDDIR)/fread.cgi
 
-test_if_sequence.cgi: 
+test_if_sequence.cgi: utility.o
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/test_if_sequence.cpp -o $(BUILDDIR)/test_if_sequence.cgi
 
 # test_comment.cgi:

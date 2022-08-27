@@ -24,6 +24,7 @@ int main(int argc, char* argv[])
     std::ifstream in(path);
     std::string src((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
         
-    string html = if_sequence(src);
-    cout << html << endl;
+    string s = if_sequence(src);
+    //string s = lex_all(src);
+    cout << s << endl;
 }
