@@ -148,9 +148,30 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "MAKE DEBUGGDB",
+            "preLaunchTask": "MAKE IF SEQ",
             "miDebuggerPath": "/usr/bin/gdb"
         },
+        {
+            "name": "LEXING",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/lex.cgi",
+            "args": ["test_if_sequence.tpl"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "MAKE IF SEQ",
+            "miDebuggerPath": "/usr/bin/gdb"
+        }
 
   ]
 }

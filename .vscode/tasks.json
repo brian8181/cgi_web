@@ -26,6 +26,30 @@
             }
         },
         {
+            "label": "MAKE IF SEQ",
+            "type": "shell",
+            "command": "make -f ${workspaceFolder}/build/Makefile test_if_sequence.cgi",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "LEXING",
+            "type": "shell",
+            "command": "make -f ${workspaceFolder}/build/Makefile lexing.cgi",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
             "label": "echo",
             "type": "shell",
             "command": "echo ${workspaceFolder}"

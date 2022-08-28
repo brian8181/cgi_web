@@ -141,15 +141,10 @@ string variable(const string& src, map<string, string>& vars)
 string if_sequence(const string& src)
 {
     const string SYMB_NAME = "\\b[-._~]*[A-Za-z][-._~A-Za-z0-9]*\\b";
-    //BAD const string HTML = IF_KEYWORD + "([\\w<=>]*)" + ENDIF_KEYWORD;
-
     const string IF_KEYWORD = "\\{if\\s+\\$" + SYMB_NAME + "\\s*\\}";
     const string ENDIF_KEYWORD = "\\{/if\\}";
     const string HTML = "([-._~!\\s\\r\\n\\w]*)";
-    //BAD const string HTML = "(.*)";
     const string IF_SEQUENCE = IF_KEYWORD + HTML + ENDIF_KEYWORD;
-    //const string IF_SEQUENCE = IF_KEYWORD + HTML;
-    //const string IF_SEQUENCE = ENDIF_KEYWORD;
 
     regex exp = regex(IF_SEQUENCE, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
@@ -164,71 +159,40 @@ string if_sequence(const string& src)
         std::ssub_match sub = match[1];
         string tag(sub.str());
         //HTML
-        output += "@HTML@ " + tag + " @HTML@";
-        output += src.substr(beg_pos, end_pos-beg_pos);
-        beg_pos = end_pos + match.length();
+        size_t len = tag.size();
+        string t = tag.substr(1, tag.size()-1);
+        output += t;
+        output += src.substr(end_pos+1, end_pos+t.size());
     }
-    output += src.substr(beg_pos);
-
-    return output;
-}
-
-
-string HTML(const string& src)
-{
-    const string HTML = "([\\s\\r\\n\\w]*)";
-
-    regex exp = regex(HTML, regex::ECMAScript); // match
-    auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
-    auto end = sregex_iterator(); 
-
-    string output;
-    int beg_pos = 0;
-    for (sregex_iterator iter = begin; iter != end; ++iter)
-    {
-        smatch match = *iter;
-        int end_pos = match.position();
-        std::ssub_match sub = match[1];
-        std::string s(sub.str());
-        string tag = trim(s);
-        //HTML
-        output += "@HTML@ " + tag + " @HTML@";
-        //output += src.substr(beg_pos, end_pos-beg_pos);
-        //beg_pos = end_pos + match.length();
-    }
-    output += src.substr(beg_pos);
-
     return output;
 }
 
 string lex_all(const string& src)
 {
-    const string SYMB_NAME = "\\b([-._~]*[A-Za-z][-._~A-Za-z0-9]*)\\b";
-    const string IF_KEYWORD = "\\{if\\s+\\$" + SYMB_NAME + "\\s*\\}";
-    const string ENDIF_KEYWORD = "\\{/if\\}";
-    const string HTML = "([-._~!\\s\\r\\n\\w]*)";
-    const string IF_SEQUENCE = IF_KEYWORD + HTML + ENDIF_KEYWORD;
-    const string ANY = HTML + "|" + IF_SEQUENCE;
+    // const string SYMB_NAME = "\\b[-._~]*[A-Za-z][-._~A-Za-z0-9]*\\b";
+    // const string IF_KEYWORD = "\\{if\\s+\\$" + SYMB_NAME + "\\s*\\}";
+    // const string ENDIF_KEYWORD = "\\{/if\\}";
+    // const string HTML = "([-._~!\\s\\r\\n\\w]*)";
+    // const string IF_SEQUENCE = IF_KEYWORD + HTML + ENDIF_KEYWORD;
 
-    regex exp = regex(HTML, regex::ECMAScript); // match
-    auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
-    auto end = sregex_iterator(); 
+    // regex exp = regex(IF_SEQUENCE, regex::ECMAScript); // match
+    // auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
+    // auto end = sregex_iterator(); 
 
     string output;
-    int beg_pos = 0;
-    for (sregex_iterator iter = begin; iter != end; ++iter)
-    {
-        smatch match = *iter;
-        int end_pos = match.position();
-        std::ssub_match sub = match[1];
-        std::string s(sub.str());
-        string tag = trim(s);
-        //HTML
-        output += "@HTML@ " + tag + " @HTML@";
-        //output += src.substr(beg_pos, end_pos-beg_pos);
-        //beg_pos = end_pos + match.length();
-    }
-    output += src.substr(beg_pos);
+    // int beg_pos = 0;
+    // for (sregex_iterator iter = begin; iter != end; ++iter)
+    // {
+    //     smatch match = *iter;
+    //     int end_pos = match.position();
+    //     std::ssub_match sub = match[1];
+    //     string tag(sub.str());
+    //     //HTML
+    //     output += "@HTML@ " + tag + " @HTML@";
+    //     output += src.substr(beg_pos, end_pos-beg_pos);
+    //     beg_pos = end_pos + match.length();
+    // }
+    // output += src.substr(beg_pos);
 
     return output;
 }
