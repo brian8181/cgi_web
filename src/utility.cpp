@@ -2,13 +2,41 @@
 #include <iterator>
 #include <fstream>
 #include <string>
-#include <map>
 #include <regex>
 #include <algorithm>
 //#include "regexpr.hpp"
 #include "utility.hpp"
 
 
+ifstream open(string path)
+{
+    string src;
+    ifstream file;
+    file.open(path, ios::in); //open a file to perform read operation using file object
+    return file;
+}
+
+vector<string> getlines(string path)
+{
+    
+    ifstream file;
+    file.open(path, ios::in); //open a file to perform read operation using file object
+
+    vector<string> lines;
+    if (file.is_open())
+    {   
+        //checking whether the file is open
+        string line;
+        while(getline(file, line))
+        { 
+            lines.push_back(line);
+        }
+        file.close(); //close the file object.
+    }
+    return lines;
+}
+
+//string get_all_lines(string path)
 string readlines(string path)
 {
     string src;
@@ -155,13 +183,15 @@ string if_sequence(const string& src)
     for (sregex_iterator iter = begin; iter != end; ++iter)
     {
         smatch match = *iter;
-        int end_pos = match.position();
+        //int m_pos = match.position();
+        //
+        //int end_pos = beg_pos + match.length();
         std::ssub_match sub = match[1];
         string tag(sub.str());
         //HTML
         size_t len = tag.size();
-        string t = tag.substr(1, tag.size()-1);
-        output += t;
+        string tmp = tag.substr(1, tag.size()-1);
+        output += tmp;
         //output += src.substr(?, ?);
         //beg_pos = end_pos + match.length();
     }
