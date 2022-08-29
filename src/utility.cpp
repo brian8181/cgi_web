@@ -162,7 +162,8 @@ string if_sequence(const string& src)
         size_t len = tag.size();
         string t = tag.substr(1, tag.size()-1);
         output += t;
-        output += src.substr(end_pos+1, end_pos+t.size());
+        //output += src.substr(?, ?);
+        //beg_pos = end_pos + match.length();
     }
     return output;
 }

@@ -1,7 +1,7 @@
 {if $test}
-Hello Its ME!
+1234
 {/if}
 {if $test}
-Hello Its You!
+5678
 {/if}
 123

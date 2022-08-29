@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
         template_name.clear();
         template_name = argv[1];
     }
-    const string path = project_folder + "/www/templates/" + template_name;
+    const string path = project_folder + "/test/templates/" + template_name;
 
     // read file
     std::ifstream in(path);
@@ -26,5 +26,5 @@ int main(int argc, char* argv[])
         
     string s = if_sequence(src);
     //string s = lex_all(src);
-    cout << s << endl;
+    cout << s;
 }
