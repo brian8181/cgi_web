@@ -11,6 +11,17 @@ int main(int argc, char* argv[])
     cout << FMT_FG_GREEN << "Hello World!"  << FMT_RESET << endl;
     cout << FMT_FG_YELLOW << "Hello World!"  << FMT_RESET << endl;
     cout << FMT_FG_MAGENTA << "Hello World!"  << FMT_RESET << endl;
+    cout << FMT_FG_CYAN << "Hello World!"  << FMT_RESET << endl;
+    cout << FMT_FG_LIGHT_GREY << "Hello World!"  << FMT_RESET << endl;
+    cout << FMT_FG_DARK_GREY << "Hello World!"  << FMT_RESET << endl;
+    cout << FMT_FG_LIGHT_RED << "Hello World!"  << FMT_RESET << endl;
+    cout << FMT_FG_LIGHT_GREEN << "Hello World!"  << FMT_RESET << endl;
+    cout << FMT_FG_LIGHT_YELLOW << "Hello World!"  << FMT_RESET << endl;
+    cout << FMT_FG_LIGHT_BLUE << "Hello World!"  << FMT_RESET << endl;
+    cout << FMT_FG_LIGHT_MAGENTA << "Hello World!"  << FMT_RESET << endl;
+    cout << FMT_FG_LIGHT_CYAN << "Hello World!"  << FMT_RESET << endl;
+    cout << FMT_FG_WHITE << "Hello World!"  << FMT_RESET << endl;
+    cout << FMT_FG_LIGHT_YELLOW << "Hello World!"  << FMT_RESET << endl;
 
     return 0;
 }

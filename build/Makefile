@@ -41,7 +41,7 @@ world: all dump_matches.o find_tags.o smarty_test.$(EXE) default.$(EXE) smarty.a
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/replace_test2.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/replace_test2.$(EXE)
 	
 	
-all: utility.o load_conf.o dump.o find_tags.$(EXE) regex_find.$(EXE) test_include.$(EXE) test_variable.$(EXE) test_if_sequence.$(EXE) fread.$(EXE)
+all: utility.o load_conf.o dump.o find_tags.$(EXE) regex_find.$(EXE) test_include.$(EXE) test_variable.$(EXE) test_if_sequence.$(EXE) test_get_conf.cgi fread.$(EXE)
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/load_conf.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/load_conf.$(EXE)
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.$(EXE)
 	
@@ -79,6 +79,9 @@ test_if_sequence.cgi: utility.o
 
 test_include.cgi: 
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/test_include.cpp -o $(BUILDDIR)/test_include.cgi
+
+test_get_conf.cgi: utility.o
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/test_get_conf.cpp -o $(BUILDDIR)/test_get_conf.cgi
 
 test_variable.cgi: 
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/test_variable.cpp -o $(BUILDDIR)/test_variable.cgi
