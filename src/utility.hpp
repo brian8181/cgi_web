@@ -25,6 +25,7 @@ string match_replace_tags(string path, const map<string, string>& tags);
 string fread_test(string path);
 ifstream open(string path);
 vector<string> getlines(string path);
+map<string, string> get_config(string path);
 
 std::string ltrim(const std::string &s);
 std::string rtrim(const std::string &s);

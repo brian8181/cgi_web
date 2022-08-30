@@ -18,7 +18,6 @@ ifstream open(string path)
 
 vector<string> getlines(string path)
 {
-    
     ifstream file;
     file.open(path, ios::in); //open a file to perform read operation using file object
 
@@ -34,6 +33,28 @@ vector<string> getlines(string path)
         file.close(); //close the file object.
     }
     return lines;
+}
+
+map<string, string> get_config(string path)
+{
+    ifstream file;
+    file.open(path, ios::in); //open a file to perform read operation using file object
+
+    map<string, string> config;
+    pair<string, string> config_pair;
+
+    if (file.is_open())
+    {   
+        //checking whether the file is open
+        string line;
+        while(getline(file, line))
+        { 
+            pair<string, string> p(line, line);
+            config.insert(p);
+        }
+        file.close(); //close the file object.
+    }
+    return config;
 }
 
 //string get_all_lines(string path)

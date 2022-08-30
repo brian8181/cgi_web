@@ -10,21 +10,13 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {  
-    string conf = readlines("../src/test_if_sequence.conf");
-    cout << conf  << endl << endl;
-
-    // vector<string> lines;
-    // ifstream file = open("../src/test_if_sequence.conf");
-    // if (file.is_open())
-    // {   
-    //     //checking whether the file is open
-    //     string line;
-    //     while(getline(file, line))
-    //     { 
-    //         lines.push_back(line);
-    //     }
-    //     file.close(); //close the file object.
-    // }
+    vector<string> lines = getlines("../src/test_if_sequence.conf");
+    vector<string>::iterator end = lines.end();
+    for(vector<string>::iterator iter = lines.begin(); iter != end; ++iter)
+    {
+        cout << *iter << endl;
+    }
+    cout << endl;
 
     const string default_template =  "test_if_sequence.tpl";
     const string project_folder = "/home/brian/src/cgi_web";
