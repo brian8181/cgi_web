@@ -10,13 +10,16 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {  
-    vector<string> lines = getlines("../src/test_if_sequence.conf");
-    vector<string>::iterator end = lines.end();
-    for(vector<string>::iterator iter = lines.begin(); iter != end; ++iter)
+    // get pairs / configuration
+    string root_path = "../src/test_if_sequence.conf";
+    map<string, string> pairs = get_config(root_path);
+
+    // print pairs / configuration
+    map<string, string>::iterator end = pairs.end();
+    for(map<string, string>::iterator iter = pairs.begin(); iter != end; ++iter)
     {
-        cout << *iter << endl;
+        cout << iter->first << " = " << iter->second << endl;
     }
-    cout << endl;
 
     const string default_template =  "test_if_sequence.tpl";
     const string project_folder = "/home/brian/src/cgi_web";
