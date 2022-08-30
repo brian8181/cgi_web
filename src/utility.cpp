@@ -12,24 +12,24 @@ ifstream open(string path)
 {
     string src;
     ifstream file;
-    file.open(path, ios::in); //open a file to perform read operation using file object
+    file.open(path, ios::in); //open a file
     return file;
 }
 
 vector<string> getlines(string path)
 {
     ifstream file;
-    file.open(path, ios::in); //open a file to perform read operation using file object
+    file.open(path, ios::in); //open a file
 
     vector<string> lines;
-    if (file.is_open()) //checking whether the file is open
+    if (file.is_open()) 
     {   
         string line;
         while(getline(file, line))
         { 
             lines.push_back(line);
         }
-        file.close(); //close the file object.
+        file.close(); //close the file
     }
     return lines;
 }
@@ -37,12 +37,12 @@ vector<string> getlines(string path)
 map<string, string> get_config(string path)
 {
     ifstream file;
-    file.open(path, ios::in); //open a file to perform read operation using file object
+    file.open(path, ios::in); //open a file
 
     map<string, string> config;
     pair<string, string> config_pair;
 
-    if (file.is_open()) //checking whether the file is open
+    if (file.is_open()) 
     {   
         string line;
         while(getline(file, line))
@@ -53,7 +53,7 @@ map<string, string> get_config(string path)
             pair<string, string> p(name, value);
             config.insert(p);
         }
-        file.close(); //close the file object.
+        file.close(); //close the file
     }
     return config;
 }
@@ -63,8 +63,8 @@ string readlines(string path)
 {
     string src;
     ifstream file;
-    file.open(path, ios::in); //open a file to perform read operation using file object
-    if (file.is_open()) //checking whether the file is open
+    file.open(path, ios::in); //open a file
+    if (file.is_open()) 
     {   
         string tp;
         while(getline(file, tp))
@@ -72,9 +72,34 @@ string readlines(string path)
             //read data from file object and put it into string.
             src += tp;
         }
-        file.close(); //close the file object.
+        file.close(); //close the file
     }
     return src;
+}
+
+string fstream_read(string path)
+{
+    string str;
+    fstream file;
+    file.open(path, ios::in); //open a file
+    if (file.is_open()) 
+    {   
+        char c[256];
+        while(file.read(c, 256))
+        { 
+            //read data from file object and put it into string.
+            str.append(c);
+        }
+        file.close(); //close the file
+    }
+    return str;
+}
+
+string fread_test(string path)
+{
+    std::ifstream in(path);
+    std::string contents((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+    return contents;
 }
 
 void assign(string name, string val, map<string, string>& symbols)
@@ -352,31 +377,6 @@ std::string rtrim(const std::string &s)
 std::string trim(const std::string &s)
 {
     return rtrim(ltrim(s));
-}
-
-string fstream_read(string path)
-{
-    string str;
-    fstream file;
-    file.open(path, ios::in); //open a file to perform read operation using file object
-    if (file.is_open()) //checking whether the file is open
-    {   
-        char c[256];
-        while(file.read(c, 256))
-        { 
-            //read data from file object and put it into string.
-            str.append(c);
-        }
-        file.close(); //close the file object.
-    }
-    return str;
-}
-
-string fread_test(string path)
-{
-    std::ifstream in(path);
-    std::string contents((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
-    return contents;
 }
 
 std::string& _ltrim(std::string &s)
