@@ -10,6 +10,8 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {  
+    //Begin get conf testing 
+
     // get pairs / configuration
     string root_path = "../src/test_if_sequence.conf";
     map<string, string> pairs = get_config(root_path);
@@ -20,6 +22,9 @@ int main(int argc, char* argv[])
     {
         cout << iter->first << " = " << iter->second << endl;
     }
+    cout << endl;
+
+    //End get conf testing 
 
     const string default_template =  "test_if_sequence.tpl";
     const string project_folder = "/home/brian/src/cgi_web";
