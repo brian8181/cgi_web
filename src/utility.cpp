@@ -22,9 +22,8 @@ vector<string> getlines(string path)
     file.open(path, ios::in); //open a file to perform read operation using file object
 
     vector<string> lines;
-    if (file.is_open())
+    if (file.is_open()) //checking whether the file is open
     {   
-        //checking whether the file is open
         string line;
         while(getline(file, line))
         { 
@@ -43,13 +42,15 @@ map<string, string> get_config(string path)
     map<string, string> config;
     pair<string, string> config_pair;
 
-    if (file.is_open())
+    if (file.is_open()) //checking whether the file is open
     {   
-        //checking whether the file is open
         string line;
         while(getline(file, line))
         { 
-            pair<string, string> p(line, line);
+            size_t pos = line.find('=');
+            string name = trim(line.substr(0, pos-1));
+            string value = trim(line.substr(pos+1));
+            pair<string, string> p(name, value);
             config.insert(p);
         }
         file.close(); //close the file object.
@@ -63,9 +64,8 @@ string readlines(string path)
     string src;
     ifstream file;
     file.open(path, ios::in); //open a file to perform read operation using file object
-    if (file.is_open())
+    if (file.is_open()) //checking whether the file is open
     {   
-        //checking whether the file is open
         string tp;
         while(getline(file, tp))
         { 
@@ -359,9 +359,8 @@ string fstream_read(string path)
     string str;
     fstream file;
     file.open(path, ios::in); //open a file to perform read operation using file object
-    if (file.is_open())
+    if (file.is_open()) //checking whether the file is open
     {   
-        //checking whether the file is open
         char c[256];
         while(file.read(c, 256))
         { 
