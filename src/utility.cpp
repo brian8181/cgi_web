@@ -4,7 +4,6 @@
 #include <string>
 #include <regex>
 #include <algorithm>
-//#include "regexpr.hpp"
 #include "utility.hpp"
 
 
@@ -69,7 +68,7 @@ string readlines(string path)
         string tp;
         while(getline(file, tp))
         { 
-            //read data from file object and put it into string.
+            //read data from file
             src += tp;
         }
         file.close(); //close the file
@@ -87,7 +86,7 @@ string fstream_read(string path)
         char c[256];
         while(file.read(c, 256))
         { 
-            //read data from file object and put it into string.
+            //read data from file
             str.append(c);
         }
         file.close(); //close the file
@@ -225,13 +224,16 @@ string if_sequence(const string& src)
     auto end = sregex_iterator(); 
 
     string output;
-    int beg_pos = 0;
+    int src_beg_pos = 0;
     for (sregex_iterator iter = begin; iter != end; ++iter)
     {
         smatch match = *iter;
-        //int m_pos = match.position();
-        //
-        //int end_pos = beg_pos + match.length();
+        int match_beg_pos = match.position();
+        
+        //test
+        string pre_match_src = src.substr(src_beg_pos, match_beg_pos-src_beg_pos);
+        output += pre_match_src;
+
         std::ssub_match sub = match[1];
         string tag(sub.str());
         //HTML
@@ -239,7 +241,7 @@ string if_sequence(const string& src)
         string tmp = tag.substr(1, tag.size()-1);
         output += tmp;
         //output += src.substr(?, ?);
-        //beg_pos = end_pos + match.length();
+        src_beg_pos = match_beg_pos + match.length();
     }
     return output;
 }
