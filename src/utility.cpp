@@ -230,9 +230,9 @@ string if_sequence(const string& src)
         smatch match = *iter;
         int match_beg_pos = match.position();
         
-        //test
+        // outout begin -> match
         string pre_match_src = src.substr(src_beg_pos, match_beg_pos-src_beg_pos);
-        output += pre_match_src;
+        output += trim(pre_match_src);
 
         std::ssub_match sub = match[1];
         string tag(sub.str());

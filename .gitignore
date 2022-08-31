@@ -62,3 +62,4 @@ build/cgi_web_test
 *.o
 *.cgi
 a.out
+root.conf
