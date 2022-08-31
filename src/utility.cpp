@@ -240,7 +240,7 @@ string if_sequence(const string& src)
         size_t len = tag.size();
         string tmp = tag.substr(1, tag.size()-1);
         output += tmp;
-        //output += src.substr(?, ?);
+        
         src_beg_pos = match_beg_pos + match.length();
     }
     return output;
