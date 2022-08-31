@@ -32,6 +32,5 @@ int main(int argc, char* argv[])
     std::string src((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
         
     string s = if_sequence(src);
-    //string s = lex_all(src);
     cout << s;
 }
