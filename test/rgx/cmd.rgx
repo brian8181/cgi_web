@@ -1,1 +1,0 @@
-(config_load|include|insert|literal|strip|capture|section|assign|debug|eval|fetch|math)
