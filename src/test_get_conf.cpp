@@ -6,7 +6,7 @@ using namespace std;
 int main(int argc, char* argv[])
 {
     // get pairs / configuration
-    string path = "../test/test_get_conf.txt";
+    string path = "./test/test_get_conf.txt";
     map<string, string> pairs = get_config(path);
 
     // print pairs / configuration

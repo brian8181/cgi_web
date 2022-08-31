@@ -11,8 +11,6 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {  
-    //int d  = chdir("/home/brian/src");
-    // get pairs / configuration
     string root_path = "../src/test_if_sequence.conf";
     map<string, string> pairs = get_config(root_path);
 
