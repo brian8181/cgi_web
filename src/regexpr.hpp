@@ -50,10 +50,23 @@ const string ABC2 = "\\$\\w+";
 const string SYMB_NAME = "\\b[-._~]*[A-Za-z][-.~A-Za-z0-9]*\\b";
 //BAD const string HTML = IF_KEYWORD + "([\\w<=>]*)" + ENDIF_KEYWORD;
 
-const string IF_KEYWORD = "\\{if\\s+\\$" + SYMB_NAME + "\\s*\\}";
-const string ENDIF_KEYWORD = "\\{/if\\}";
-const string HTML = "([\\s\\r\\n\\w]*)";
-//BAD const string HTML = "(.*)";
+// version 0.2
+const string IF_KEYWORD = "\\{if\\s+\\$" + SYMB_NAME + "\\s*\\}[\\n]?";
+// version 0.2
+const string ENDIF_KEYWORD = "\\{/if\\}[\\n]?";
+// version 0.2
+const string HTML = "([-._~!\\s\\r\\n\\w]*)";
+// version 0.1
+//const string IF_SEQUENCE = IF_KEYWORD + HTML + ENDIF_KEYWORD;
+
+// version 0.1
+// const string IF_KEYWORD = "\\{if\\s+\\$" + SYMB_NAME + "\\s*\\}";
+// version 0.1
+// const string ENDIF_KEYWORD = "\\{/if\\}";
+// version 0.1
+// const string HTML = "([\\s\\r\\n\\w]*)";
+// //BAD const string HTML = "(.*)";
+//version 0.1
 const string IF_SEQUENCE = IF_KEYWORD + HTML + ENDIF_KEYWORD;
 
 const string ELSE_KEYWORD = "\\{if\\s+\\(.*?)\\}";
