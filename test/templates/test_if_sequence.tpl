@@ -9,3 +9,8 @@ EDF
 {if $test}
 01234567
 {/if}
+FFF
+{if $test}
+666666
+{/if}
+EEE

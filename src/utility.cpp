@@ -214,8 +214,8 @@ string variable(const string& src, map<string, string>& vars)
 string if_sequence(const string& src)
 {
     const string SYMB_NAME = "\\b[-._~]*[A-Za-z][-._~A-Za-z0-9]*\\b";
-    const string IF_KEYWORD = "\\{if\\s+\\$" + SYMB_NAME + "\\s*\\}";
-    const string ENDIF_KEYWORD = "\\{/if\\}";
+    const string IF_KEYWORD = "\\{if\\s+\\$" + SYMB_NAME + "\\s*\\}[\\n]?";
+    const string ENDIF_KEYWORD = "\\{/if\\}[\\n]?";
     const string HTML = "([-._~!\\s\\r\\n\\w]*)";
     const string IF_SEQUENCE = IF_KEYWORD + HTML + ENDIF_KEYWORD;
 
@@ -237,9 +237,7 @@ string if_sequence(const string& src)
         std::ssub_match sub = match[1];
         string tmp_str = sub.str();
         string tag(tmp_str.substr(1, tmp_str.size()-1));
-        //HTML
-        // size_t len = tag.size();
-        // string tmp = tag.substr(1, len-1);
+        // output text
         output += tag;
         
         src_beg_pos = match_beg_pos + match.length();
