@@ -235,11 +235,12 @@ string if_sequence(const string& src)
         output += pre_match_src;
 
         std::ssub_match sub = match[1];
-        string tag(sub.str());
+        string tmp_str = sub.str();
+        string tag(tmp_str.substr(1, tmp_str.size()-1));
         //HTML
-        size_t len = tag.size();
-        string tmp = tag.substr(1, tag.size()-1);
-        output += tmp;
+        // size_t len = tag.size();
+        // string tmp = tag.substr(1, len-1);
+        output += tag;
         
         src_beg_pos = match_beg_pos + match.length();
     }
