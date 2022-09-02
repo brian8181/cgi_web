@@ -3,8 +3,8 @@
 #include <fstream>
 #include "utility.hpp"
 
-const unsigned int DEFAULT_TEMPLATE = 1;
-const unsigned int PROJECT_FOLDER = 2;
+// const unsigned int DEFAULT_TEMPLATE = 1;
+// const unsigned int PROJECT_FOLDER = 2;
 
 using namespace std;
 
@@ -26,17 +26,25 @@ int main(int argc, char* argv[])
     }
     const string path = project_folder + "/test/templates/" + template_name;
 
+    string output;
     // read file
-    std::ifstream ifile_strm(path);
-    std::string src((std::istreambuf_iterator<char>(ifile_strm)), std::istreambuf_iterator<char>());
-    
-    if(src == "")
-    { 
-        cout << "Error reading template, path (" + path + ") ..." << endl;
-        return 0;
-    }
+    try
+    {
+        std::ifstream ifile_strm(path);
+        std::string src((std::istreambuf_iterator<char>(ifile_strm)), std::istreambuf_iterator<char>());
+        if(src == "")
+        { 
+            cout << "Error reading template, path (" + path + ") ..." << endl;
+            return 0;
+        }
 
-    // lex_all    
-    string s = lex_all(src);
-    cout << s;
+         // lex_all    
+        output = lex_all(src);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+      
+    cout << output;
 }
