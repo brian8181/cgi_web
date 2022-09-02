@@ -255,23 +255,16 @@ string lex_all(const string& src)
     auto end = sregex_iterator(); 
 
     string output;
-    //int src_beg_pos = 0;
+    int src_beg_pos = 0;
     for (sregex_iterator iter = begin; iter != end; ++iter)
     {
         smatch match = *iter;
-        // int match_beg_pos = match.position();
+        int match_beg_pos = match.position();
         // outout begin -> match
-        // string pre_match_src = src.substr(src_beg_pos, match_beg_pos-src_beg_pos);
-        // output += pre_match_src;
-
-        //std::ssub_match sub = match[1];
-        //string tmp_str = sub.str();
-        //string tag(tmp_str.substr(1, tmp_str.size()-1));
-        // output text
-        output += match.str() + "\n";
-        //output += sub.str() + "\n";
-        
-        //src_beg_pos = match_beg_pos + match.length();
+        string pre_match_src = src.substr(src_beg_pos, match_beg_pos-src_beg_pos);
+        output += "TEXT -> " + pre_match_src + "\n";
+        output += "ESCAPE -> " + match.str() + "\n";
+        src_beg_pos = match_beg_pos + match.length();
     }
     return output;
 }
