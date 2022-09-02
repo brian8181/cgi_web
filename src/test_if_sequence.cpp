@@ -27,8 +27,14 @@ int main(int argc, char* argv[])
     const string path = project_folder + "/test/templates/" + template_name;
 
     // read file
-    std::ifstream in(path);
-    std::string src((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+    std::ifstream ifile_strm(path);
+    std::string src((std::istreambuf_iterator<char>(ifile_strm)), std::istreambuf_iterator<char>());
+    
+    if(src == "")
+    { 
+        cout << "Error reading template ..." << endl;
+        return 0;
+    }
         
     string s = if_sequence(src);
     cout << s;
