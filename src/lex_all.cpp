@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
         std::string src((std::istreambuf_iterator<char>(ifile_strm)), std::istreambuf_iterator<char>());
         if(src == "")
         { 
-            cout << "Error reading template, path (" + path + ") ..." << endl;
+            cout << "Error reading file, path (" + path + ") ..." << endl;
             return 0;
         }
 
@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << "Error reading file ... " << e.what() << endl;
     }
       
     cout << output;
