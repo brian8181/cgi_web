@@ -41,7 +41,7 @@ world: all dump_matches.o find_tags.o smarty_test.$(EXE) default.$(EXE) smarty.a
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/replace_test2.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/replace_test2.$(EXE)
 	
 	
-all: utility.o load_conf.o dump.o find_tags.$(EXE) regex_find.$(EXE) test_include.$(EXE) test_variable.$(EXE) test_if_sequence.$(EXE) test_get_conf.cgi fread.$(EXE)
+all: utility.o load_conf.o dump.o find_tags.$(EXE) regex_find.$(EXE) test_include.$(EXE) test_variable.$(EXE) test_if_sequence.$(EXE) test_get_conf.cgi fread.$(EXE) lex_all.$(EXE)
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/load_conf.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/load_conf.$(EXE)
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.$(EXE)
 	
@@ -73,6 +73,9 @@ fread.cgi: utility.o
 
 test_if_sequence.cgi: utility.o
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/test_if_sequence.cpp -o $(BUILDDIR)/test_if_sequence.cgi
+
+lex_all.cgi: utility.o
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/lex_all.cpp -o $(BUILDDIR)/lex_all.cgi
 
 # test_comment.cgi:
 # 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/test_comment.cpp -o $(BUILDDIR)/test_comment.cgi

@@ -35,7 +35,8 @@ int main(int argc, char* argv[])
         cout << "Error reading template, path (" + path + ") ..." << endl;
         return 0;
     }
-        
-    string s = if_sequence(src);
+
+    // lex_all    
+    string s = lex_all(src);
     cout << s;
 }
