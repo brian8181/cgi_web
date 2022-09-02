@@ -248,13 +248,15 @@ string if_sequence(const string& src)
 string lex_all(const string& src)
 {
     // string if_sequence(const string& src)
-    const string SYMB_NAME = "\\b[-._~]*[A-Za-z][-._~A-Za-z0-9]*\\b";
-    const string IF_KEYWORD = "\\{if\\s+\\$" + SYMB_NAME + "\\s*\\}[\\n]?";
-    const string ENDIF_KEYWORD = "\\{/if\\}[\\n]?";
-    const string HTML = "([-._~!\\s\\r\\n\\w]*)";
-    const string IF_SEQUENCE = IF_KEYWORD + HTML + ENDIF_KEYWORD;
+    // const string SYMB_NAME = "\\b[-._~]*[A-Za-z][-._~A-Za-z0-9]*\\b";
+    // const string IF_KEYWORD = "\\{if\\s+\\$" + SYMB_NAME + "\\s*\\}[\\n]?";
+    // const string ENDIF_KEYWORD = "\\{/if\\}[\\n]?";
+    // const string HTML = "([-._~!\\s\\r\\n\\w]*)";
+    // const string IF_SEQUENCE = IF_KEYWORD + HTML + ENDIF_KEYWORD;
 
-    regex exp = regex(IF_SEQUENCE, regex::ECMAScript); // match
+    const string TEXT = "[\\}][A-Za-z0-9\\$]+[\\{]";
+
+    regex exp = regex(TEXT, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
     auto end = sregex_iterator(); 
 
@@ -263,19 +265,19 @@ string lex_all(const string& src)
     for (sregex_iterator iter = begin; iter != end; ++iter)
     {
         smatch match = *iter;
-        int match_beg_pos = match.position();
+        // int match_beg_pos = match.position();
         
         // outout begin -> match
-        string pre_match_src = src.substr(src_beg_pos, match_beg_pos-src_beg_pos);
-        output += pre_match_src;
+        // string pre_match_src = src.substr(src_beg_pos, match_beg_pos-src_beg_pos);
+        // output += pre_match_src;
 
-        std::ssub_match sub = match[1];
-        string tmp_str = sub.str();
-        string tag(tmp_str.substr(1, tmp_str.size()-1));
+        // std::ssub_match sub = match[1];
+        // string tmp_str = sub.str();
+        // string tag(tmp_str.substr(1, tmp_str.size()-1));
         // output text
-        output += tag;
+        output += match.str() + "\n";
         
-        src_beg_pos = match_beg_pos + match.length();
+        //src_beg_pos = match_beg_pos + match.length();
     }
     return output;
 }

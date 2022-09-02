@@ -10,7 +10,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {  
-    string root_path = "./src/test_if_sequence.conf";
+    string root_path = "./src/lex_all.conf";
     map<string, string> pairs = get_config(root_path);
 
     const string project_folder = pairs["project_folder"];
