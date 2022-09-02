@@ -2,6 +2,7 @@
 #include <iterator>
 #include <fstream>
 #include <string>
+#include <list>
 #include <regex>
 #include <algorithm>
 #include "utility.hpp"
@@ -245,6 +246,7 @@ string if_sequence(const string& src)
     return output;
 }
 
+// find text & tags
 string lex_all(const string& src)
 {
     const string ESCAPE = "[\\{](.*?)[\\}]";
@@ -268,6 +270,33 @@ string lex_all(const string& src)
     }
     return output;
 }
+
+list<string> lex_all_list(const string& src)
+{
+    const string ESCAPE = "[\\{](.*?)[\\}]";
+    //const string TEXT = "[\\}]([.]+)[\\{]";
+
+    regex exp = regex(ESCAPE, regex::ECMAScript); // match
+    auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
+    auto end = sregex_iterator(); 
+
+    list<string> output;
+    int src_beg_pos = 0;
+    for (sregex_iterator iter = begin; iter != end; ++iter)
+    {
+        smatch match = *iter;
+        int match_beg_pos = match.position();
+        // outout begin -> match
+        string pre_match_src = src.substr(src_beg_pos, match_beg_pos-src_beg_pos);
+        
+        output.push_back("TEXT -> " + pre_match_src + "\n");
+        output.push_back("ESCAPE -> " + match.str() + "\n");
+           
+        src_beg_pos = match_beg_pos + match.length();
+    }
+    return output;
+}
+
 
 bool load_config(string path, map<string, string>& config)
 {
