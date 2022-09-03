@@ -264,9 +264,31 @@ string lex_all(const string& src)
         int match_beg_pos = match.position();
         // outout begin -> match
         string pre_match_src = src.substr(src_beg_pos, match_beg_pos-src_beg_pos);
-        output += "TEXT -> " + pre_match_src + "\n";
-        output += "ESCAPE -> " + match.str() + "\n";
+        output += trim(pre_match_src) + "\n";
+
+        string tokens = lex_tag(match.str()) + "\n";
+        output += tokens;
+        //output += "ESCAPE -> " + match.str() + "\n";
         src_beg_pos = match_beg_pos + match.length();
+    }
+    return output;
+}
+
+string lex_tag(const string& src)
+{
+    const string TOKENS = "(if)|(else)|(include)";
+
+    regex exp = regex(TOKENS, regex::ECMAScript); // match
+    auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
+    auto end = sregex_iterator(); 
+
+    string output;
+    int src_beg_pos = 0;
+    for (sregex_iterator iter = begin; iter != end; ++iter)
+    {
+        smatch match = *iter;
+        output += trim(match.str()) + "\n";
+        //src_beg_pos = match_beg_pos + match.length();
     }
     return output;
 }

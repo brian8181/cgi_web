@@ -16,6 +16,7 @@ string include(const string& tmpl);
 string variable(const string& src, map<string, string>& vars);
 string if_sequence(const string& src);
 string lex_all(const string& src);
+string lex_tag(const string& src);
 
 bool load_config(string path, map<string, string>& config);
 void find_tags(string path);

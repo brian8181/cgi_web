@@ -1,1 +1,8 @@
-AA{A}ABC{AAA}EDF{BBB}XYZ{}
+AA
+{if}
+ABC
+{include}
+EDF
+{else}
+XYZ
+{if}
