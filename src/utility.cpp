@@ -276,7 +276,7 @@ string lex_all(const string& src)
 // lex the tag (inside curly braces), "{(.*)}"
 string lex_tag(const string& src)
 {
-    const string TOKENS = "(\\bif\\b)|(else)|(include)|(/\\bif\\b)|(config_load)|(file)|(test)|";
+    const string TOKENS = "(\\bif\\b)|(else)|(include)|(/\\bif\\b)|(config_load)|(file)|(test)|(\\=)";
 
     regex exp = regex(TOKENS, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
