@@ -5,4 +5,7 @@ ABC
 EDF
 {else}
 XYZ
-{if}
+{config_load = file}
+AAAA
+{test}
+CCCC

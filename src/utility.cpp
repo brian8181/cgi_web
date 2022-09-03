@@ -268,15 +268,15 @@ string lex_all(const string& src)
 
         string tokens = lex_tag(match.str()) + "\n";
         output += trim(tokens) + "\n";
-        //output += "ESCAPE -> " + match.str() + "\n";
         src_beg_pos = match_beg_pos + match.length();
     }
     return output;
 }
 
+// lex the tag (inside curly braces), "{(.*)}"
 string lex_tag(const string& src)
 {
-    const string TOKENS = "(if)|(else)|(include)";
+    const string TOKENS = "(\\bif\\b)|(else)|(include)|(/\\bif\\b)|(config_load)|(file)|(test)|";
 
     regex exp = regex(TOKENS, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
