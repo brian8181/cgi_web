@@ -267,7 +267,7 @@ string lex_all(const string& src)
         output += trim(pre_match_src) + "\n";
 
         string tokens = lex_tag(match.str()) + "\n";
-        output += tokens;
+        output += trim(tokens) + "\n";
         //output += "ESCAPE -> " + match.str() + "\n";
         src_beg_pos = match_beg_pos + match.length();
     }
