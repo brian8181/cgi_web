@@ -270,6 +270,13 @@ string lex_all(const string& src)
         output += trim(tokens) + "\n";
         src_beg_pos = match_beg_pos + match.length();
     }
+
+    // get TEXT after last match
+    if(src_beg_pos < src.size())
+    {
+        output += trim(src.substr(src_beg_pos, src.size() - src_beg_pos)) + "\n";  // trim white space / newline
+    }
+
     return output;
 }
 
