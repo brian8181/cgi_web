@@ -9,3 +9,5 @@ XYZ
 AAAA
 {test}
 CCCC
+{foreach from}
+{/foreach}

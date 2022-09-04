@@ -95,11 +95,11 @@ string fstream_read(string path)
     return str;
 }
 
-string fread_test(string path)
+string ifs_read_all(string path)
 {
-    std::ifstream in(path);
-    std::string contents((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
-    return contents;
+    std::ifstream ifstrm(path);
+    std::string output((std::istreambuf_iterator<char>(ifstrm)), std::istreambuf_iterator<char>());
+    return output;
 }
 
 void assign(string name, string val, map<string, string>& symbols)
@@ -108,9 +108,41 @@ void assign(string name, string val, map<string, string>& symbols)
     symbols.insert(p);
 }
 
+void display2(string path, const map<string, string>& tags)
+{
+    const string TOKENS = "(\\bif\\b)|(else)|(include)|(/\\bif\\b)|(config_load)|(file)|(test)|(\\=)|(\\bforeach\\b)|(/\\bforeach\\b)|(from)";
+    
+    string src = ifs_read_all(path);
+    regex exp = regex("\\{\\$(.*?)\\}", regex::ECMAScript);
+            
+    sregex_iterator begin = sregex_iterator(src.begin(), src.end(), exp);
+    auto end = sregex_iterator(); 
+
+    int beg_pos = 0;
+    string output;
+    for (sregex_iterator iter = begin; iter != end; ++iter)
+    {
+        smatch match = *iter;
+        std::ssub_match sub = match[1];
+        string tag = trim(sub.str());
+        
+        int end_pos = match.position();
+        output += src.substr(beg_pos, end_pos-beg_pos);
+        map<string, string>::const_iterator find_iter = tags.find(tag);
+        if(find_iter != tags.end())
+        {
+            output += find_iter->second;
+        }
+        beg_pos = end_pos + match.length();
+    }
+    output += src.substr(beg_pos);
+    cout << output << endl;
+}
+
 void display(string path, const map<string, string>& tags)
 {
-    string src = readlines(path);
+    //string src = readlines(path);
+    string src = ifs_read_all(path);
     regex exp = regex("\\{\\$(.*?)\\}", regex::ECMAScript);
             
     sregex_iterator begin = sregex_iterator(src.begin(), src.end(), exp);
@@ -266,36 +298,34 @@ string lex_all(const string& src)
         string pre_match_src = src.substr(src_beg_pos, match_beg_pos-src_beg_pos);
         output += trim(pre_match_src) + "\n";
 
-        string tokens = lex_tag(match.str()) + "\n";
-        output += trim(tokens) + "\n";
+        string tokens = lex_tag(match.str());
+        output += tokens;
         src_beg_pos = match_beg_pos + match.length();
     }
 
     // get TEXT after last match
     if(src_beg_pos < src.size())
     {
-        output += trim(src.substr(src_beg_pos, src.size() - src_beg_pos)) + "\n";  // trim white space / newline
+        // trim white space / newline
+        output += trim(src.substr(src_beg_pos, src.size() - src_beg_pos)) + "\n";
     }
-
     return output;
 }
 
 // lex the tag (inside curly braces), "{(.*)}"
 string lex_tag(const string& src)
 {
-    const string TOKENS = "(\\bif\\b)|(else)|(include)|(/\\bif\\b)|(config_load)|(file)|(test)|(\\=)";
+    const string TOKENS = "(\\bif\\b)|(else)|(include)|(/\\bif\\b)|(config_load)|(file)|(test)|(\\=)|(\\bforeach\\b)|(/\\bforeach\\b)|(from)";
 
     regex exp = regex(TOKENS, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
     auto end = sregex_iterator(); 
 
     string output;
-    int src_beg_pos = 0;
     for (sregex_iterator iter = begin; iter != end; ++iter)
     {
         smatch match = *iter;
         output += trim(match.str()) + "\n";
-        //src_beg_pos = match_beg_pos + match.length();
     }
     return output;
 }

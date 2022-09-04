@@ -11,6 +11,7 @@ string readlines(string path);
 
 void assign(string name, string val, map<string, string>& symbols);
 void display(string path, const map<string, string>& tags);
+void display2(string path, const map<string, string>& tags);
 void display(string tmpl);
 string include(const string& tmpl);
 string variable(const string& src, map<string, string>& vars);
@@ -23,7 +24,7 @@ void find_tags(string path);
 void replace_tags(string path);
 void replace_tags2(string expr_path, string file_path);
 string match_replace_tags(string path, const map<string, string>& tags);
-string fread_test(string path);
+string ifs_read_all(string path);
 ifstream open(string path);
 vector<string> getlines(string path);
 map<string, string> get_config(string path);
