@@ -108,6 +108,17 @@ void assign(string name, string val, map<string, string>& symbols)
     symbols.insert(p);
 }
 
+const unsigned short INCLUDE = 1;
+const unsigned short CONFIG_LOAD = 2;
+const unsigned short IF = 3;
+const unsigned short ELSE = 4;
+const unsigned short END_IF = 5;
+const unsigned short file = 6;
+const unsigned short EQUAL = 7;
+const unsigned short FOREACH = 6;
+const unsigned short END_FOREACH = 5;
+const unsigned short FROM = 5;
+
 void display2(string path, const map<string, string>& tags)
 {
     const string TOKENS = "(\\bif\\b)|(else)|(include)|(/\\bif\\b)|(config_load)|(file)|(test)|(\\=)|(\\bforeach\\b)|(/\\bforeach\\b)|(from)";
@@ -123,20 +134,61 @@ void display2(string path, const map<string, string>& tags)
     for (sregex_iterator iter = begin; iter != end; ++iter)
     {
         smatch match = *iter;
-        std::ssub_match sub = match[1];
-        string tag = trim(sub.str());
-        
-        int end_pos = match.position();
-        output += src.substr(beg_pos, end_pos-beg_pos);
-        map<string, string>::const_iterator find_iter = tags.find(tag);
-        if(find_iter != tags.end())
+
+        for(short i = 0; i < 10; ++i)
         {
-            output += find_iter->second;
+            std::ssub_match sub_match = match[i];
+            if(sub_match.matched)
+            {
+                switch(i)
+                {
+                    case INCLUDE:
+                    {
+                        // set up constants
+                        const string INCLUDE = "\\{\\s*\\include file\\s*=\\s*\"(.*?)\"\\s*\\}";
+                        const string path = template_dir + "/" + path;
+                        
+                        // read file
+                        std::ifstream in(path);
+                        std::string src((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+                        
+                        // iter all includes
+                        regex exp = regex(INCLUDE, regex::ECMAScript);
+                        auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
+                        auto end = sregex_iterator(); 
+                        string output;
+                        int beg_pos = 0;
+                        for (sregex_iterator iter = begin; iter != end; ++iter)
+                        {
+                            smatch match = *iter;
+                            std::ssub_match sub = match[1];
+                            std::string s(sub.str());
+                            string tag = trim(s);
+                            
+                            int end_pos = match.position();
+                            output += src.substr(beg_pos, end_pos-beg_pos);
+                            // call include recursively
+                            output += include(tag);
+                            beg_pos = end_pos + match.length();
+                        }
+                        output += src.substr(beg_pos);
+                        break;
+                    }
+                    case CONFIG_LOAD:
+                        break;
+                    case IF:
+                        break;
+                    case END_IF:
+                        break;
+                    // ... ans so on
+                } 
+
+            }
+            // don't really need to try them all ? stop on first match
+            continue; 
         }
-        beg_pos = end_pos + match.length();
     }
-    output += src.substr(beg_pos);
-    cout << output << endl;
+    //cout << output << endl;
 }
 
 void display(string path, const map<string, string>& tags)

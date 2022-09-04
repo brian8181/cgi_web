@@ -50,5 +50,6 @@
         "typeinfo": "cpp",
         "utility": "cpp",
         "ranges": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }
