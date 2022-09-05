@@ -113,11 +113,11 @@ const unsigned short CONFIG_LOAD = 2;
 const unsigned short IF = 3;
 const unsigned short ELSE = 4;
 const unsigned short END_IF = 5;
-const unsigned short file = 6;
+const unsigned short FROM_FILE = 6;
 const unsigned short EQUAL = 7;
-const unsigned short FOREACH = 6;
-const unsigned short END_FOREACH = 5;
-const unsigned short FROM = 5;
+const unsigned short FOREACH = 8;
+const unsigned short END_FOREACH = 9;
+const unsigned short FROM = 10;
 
 void display2(string path, const map<string, string>& tags)
 {
@@ -140,48 +140,27 @@ void display2(string path, const map<string, string>& tags)
             std::ssub_match sub_match = match[i];
             if(sub_match.matched)
             {
-//             switch(i)
-//             {
-//                 case INCLUDE:
-//                 {
-//                     // set up constants
-//                     const string INCLUDE = "\\{\\s*\\include file\\s*=\\s*\"(.*?)\"\\s*\\}";
-//                     const string path = template_dir + "/" + path;
-                    
-//                     // read file
-//                     std::ifstream in(path);
-//                     std::string src((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
-                    
-//                     // iter all includes
-//                     regex exp = regex(INCLUDE, regex::ECMAScript);
-//                     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
-//                     auto end = sregex_iterator(); 
-//                     string output;
-//                     int beg_pos = 0;
-//                     for (sregex_iterator iter = begin; iter != end; ++iter)
-//                     {
-//                         smatch match = *iter;
-//                         std::ssub_match sub = match[1];
-//                         std::string s(sub.str());
-//                         string tag = trim(s);
-                        
-//                         int end_pos = match.position();
-//                         output += src.substr(beg_pos, end_pos-beg_pos);
-//                         // call include recursively
-//                         output += include(tag);
-//                         beg_pos = end_pos + match.length();
-//                     }
-//                     output += src.substr(beg_pos);
-//                     break;
-//                 }
-//                 case CONFIG_LOAD:
-//                     break;
-//                 case IF:
-//                     break;
-//                 case END_IF:
-//                     break;
-//                 // ... ans so on
-//             } 
+                switch(i)
+                {
+                    case INCLUDE:
+                        break;
+                    case CONFIG_LOAD:
+                        break;
+                    case IF:
+                        break;
+                    case END_IF:
+                        break;
+                    case FOREACH:
+                        break;
+                    case END_FOREACH:
+                        break;
+                    case FROM:
+                        break;
+                    case FROM_FILE:
+                        break;
+                    default:
+                        break;
+                } 
             }
             // don't really need to try them all ? stop on first match
             //continue; 
