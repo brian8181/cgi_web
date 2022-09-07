@@ -343,11 +343,43 @@ string lex_all(const string& src)
     return output;
 }
 
+string lex(const string& src)
+{
+    const string ESCAPE = "[\\{](.*?)[\\}]";
+   
+    regex exp = regex(ESCAPE, regex::ECMAScript); // match
+    auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
+    auto end = sregex_iterator(); 
+
+    string output;
+    int src_beg_pos = 0;
+    for (sregex_iterator iter = begin; iter != end; ++iter)
+    {
+        smatch match = *iter;
+        int match_beg_pos = match.position();
+        // outout begin -> match
+        string pre_match_src = src.substr(src_beg_pos, match_beg_pos-src_beg_pos);
+        output += trim(pre_match_src) + "\n";
+
+        string tokens = lex_tag(match.str());
+        output += tokens;
+        src_beg_pos = match_beg_pos + match.length();
+    }
+
+    // get TEXT after last match
+    if(src_beg_pos < src.size())
+    {
+        // trim white space / newline
+        output += trim(src.substr(src_beg_pos, src.size() - src_beg_pos)) + "\n";
+    }
+    return output;
+}
+
 // lex the tag (inside curly braces), "{(.*)}"
 string lex_tag(const string& src)
 {
     const string SYMBOL_NAME = "\\b[_.~]*[A-Za-z][A-Za-z0-9_.-~]*\\b";
-    const string TOKENS = "(\\bif\\b)|(else)|(elseif)|(include)|(/\\bif\\b)|(config_load)|(file)|(test)|(\\=)|(\\bforeach\\b)|(/\\bforeach\\b)|(from)|(literal)|(/literal)|(default)|(\\$[a-z0-9]+)";
+    const string TOKENS = "(\\bif\\b)|(else)|(elseif)|(include)|(/\\bif\\b)|(config_load)|(file)|(test)|(\\=)|(\\bforeach\\b)|(/\\bforeach\\b)|(from)|(literal)|(/literal)|(\\$[a-z0-9]+)";
 
     regex exp = regex(TOKENS, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);

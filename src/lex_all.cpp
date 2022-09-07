@@ -38,8 +38,8 @@ int main(int argc, char* argv[])
             return 0;
         }
 
-         // lex_all    
-        output = lex_all(src);
+        // lex   
+        output = lex(src);
     }
     catch(const std::exception& e)
     {
