@@ -65,14 +65,14 @@ find_tags.$(EXE): utility.o find_tags.o
 smarty_test.$(EXE): smarty.o
 # 	$(CXX) $(CXXFLAGS) $(SRCDIR)/smarty_test.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/smarty_test.$(EXE)
 
-lex.cgi: smarty.o
-	$(CXX) $(CXXFLAGS) $(BUILDDIR)/smarty.o $(SRCDIR)/lex.cpp -o $(BUILDDIR)/lex.cgi
-
 # fread.cgi: utility.o
 # 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/fread.cpp -o $(BUILDDIR)/fread.cgi
 
 test_if_sequence.cgi: utility.o
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/test_if_sequence.cpp -o $(BUILDDIR)/test_if_sequence.cgi
+
+lex.cgi: utility.o
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/lex.cpp -o $(BUILDDIR)/lex.cgi
 
 lex_all.cgi: utility.o
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/lex_all.cpp -o $(BUILDDIR)/lex_all.cgi
