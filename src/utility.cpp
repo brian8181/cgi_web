@@ -312,7 +312,7 @@ string if_sequence(const string& src)
 // find text & tags
 string lex_all(const string& src)
 {
-    const string ESCAPE = "[\\{](.*?)[\\}]";
+    const string ESCAPE = "\\{.*?\\}";
     //const string TEXT = "[\\}]([.]+)[\\{]";
 
     regex exp = regex(ESCAPE, regex::ECMAScript); // match
@@ -345,7 +345,7 @@ string lex_all(const string& src)
 
 string lex(const string& src)
 {
-    const string ESCAPE = "[\\{](.*?)[\\}]";
+    const string ESCAPE = "\\{.*?\\}";
    
     regex exp = regex(ESCAPE, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
@@ -356,22 +356,10 @@ string lex(const string& src)
     for (sregex_iterator iter = begin; iter != end; ++iter)
     {
         smatch match = *iter;
-        int match_beg_pos = match.position();
-        // outout begin -> match
-        string pre_match_src = src.substr(src_beg_pos, match_beg_pos-src_beg_pos);
-        output += trim(pre_match_src) + "\n";
-
         string tokens = lex_tag(match.str());
         output += tokens;
-        src_beg_pos = match_beg_pos + match.length();
     }
 
-    // get TEXT after last match
-    if(src_beg_pos < src.size())
-    {
-        // trim white space / newline
-        output += trim(src.substr(src_beg_pos, src.size() - src_beg_pos)) + "\n";
-    }
     return output;
 }
 
