@@ -50,6 +50,18 @@
             }
         },
         {
+            "label": "LEX_ALL",
+            "type": "shell",
+            "command": "make -f ${workspaceFolder}/build/Makefile lex_all.cgi",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
             "label": "echo",
             "type": "shell",
             "command": "echo ${workspaceFolder}"

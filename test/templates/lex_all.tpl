@@ -11,3 +11,7 @@ AAAA
 CCCC
 {foreach from}
 {/foreach}
+{$test}
+{$two|default}
+{default}
+

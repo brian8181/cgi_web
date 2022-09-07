@@ -346,7 +346,8 @@ string lex_all(const string& src)
 // lex the tag (inside curly braces), "{(.*)}"
 string lex_tag(const string& src)
 {
-    const string TOKENS = "(\\bif\\b)|(else)|(include)|(/\\bif\\b)|(config_load)|(file)|(test)|(\\=)|(\\bforeach\\b)|(/\\bforeach\\b)|(from)";
+    const string SYMBOL_NAME = "\\b[_.~]*[A-Za-z][A-Za-z0-9_.-~]*\\b";
+    const string TOKENS = "(\\bif\\b)|(else)|(elseif)|(include)|(/\\bif\\b)|(config_load)|(file)|(test)|(\\=)|(\\bforeach\\b)|(/\\bforeach\\b)|(from)|(literal)|(/literal)|(default)|(\\$[a-z0-9]+)";
 
     regex exp = regex(TOKENS, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
