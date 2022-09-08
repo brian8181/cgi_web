@@ -319,6 +319,41 @@ string if_sequence(const string& src)
     return output;
 }
 
+// find foreach sequence
+string foreach_sequence(const string& src)
+{
+    const string SYMB_NAME = "\\b[-._~]*[A-Za-z][-._~A-Za-z0-9]*\\b";
+    const string FOREACH_KEYWORD = "\\{foreach\\s+\\$" + SYMB_NAME + "\\s*\\}[\\n]?";
+    const string ENDFOREACH_KEYWORD = "\\{/foreach\\}[\\n]?";
+    const string HTML = "([-._~!\\s\\r\\n\\w]*)";
+    const string FOREACH_SEQUENCE = FOREACH_KEYWORD + HTML + ENDFOREACH_KEYWORD;
+
+    regex exp = regex(FOREACH_SEQUENCE, regex::ECMAScript); // match
+    auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
+    auto end = sregex_iterator(); 
+
+    string output;
+    int src_beg_pos = 0;
+    for (sregex_iterator iter = begin; iter != end; ++iter)
+    {
+        smatch match = *iter;
+        int match_beg_pos = match.position();
+        
+        // outout begin -> match
+        string pre_match_src = src.substr(src_beg_pos, match_beg_pos-src_beg_pos);
+        output += pre_match_src;
+
+        std::ssub_match sub = match[1];
+        string tmp_str = sub.str();
+        string tag(tmp_str.substr(1, tmp_str.size()-1));
+        // output text
+        output += tag;
+        
+        src_beg_pos = match_beg_pos + match.length();
+    }
+    return output;
+}
+
 // find text & tags
 string lex_all(const string& src)
 {
