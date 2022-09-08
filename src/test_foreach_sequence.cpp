@@ -36,6 +36,6 @@ int main(int argc, char* argv[])
         return 0;
     }
         
-    string s = if_sequence(src);
+    string s = foreach_sequence(src);
     cout << s;
 }
