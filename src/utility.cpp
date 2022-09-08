@@ -377,7 +377,7 @@ string lex(const string& src)
 string lex_tag(const string& src)
 {
     //const string SYMBOL_NAME = "\\b[_.~]*[A-Za-z][A-Za-z0-9_.-~]*\\b";
-    const string TOKENS = "(\\bif\\b)|(else)|(elseif)|(include)|(/\\bif\\b)|(config_load)|(file)|(test)|(\\=)|(\\bforeach\\b)|(/\\bforeach\\b)|(from)|(literal)|(/literal)|(\\$[a-z0-9]+)";
+    const string TOKENS = "(\\bif\\b)|(else)|(elseif)|(include)|(/\\bif\\b)|(config_load)|(file)|(test)|(\\=)|(\\bforeach\\b)|(/\\bforeach\\b)|(\\bfrom\\b)|(literal)|(/literal)|(\\$\\b[a-z0-9]+\\b)";
     regex exp = regex(TOKENS, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
     auto end = sregex_iterator(); 
