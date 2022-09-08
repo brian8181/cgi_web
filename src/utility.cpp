@@ -8,6 +8,7 @@
 #include "utility.hpp"
 
 
+// open file
 ifstream open(string path)
 {
     string src;
@@ -16,6 +17,7 @@ ifstream open(string path)
     return file;
 }
 
+// get file lines as vector
 vector<string> getlines(string path)
 {
     ifstream file;
@@ -34,6 +36,7 @@ vector<string> getlines(string path)
     return lines;
 }
 
+// get test configuration map
 map<string, string> get_config(string path)
 {
     ifstream file;
@@ -77,6 +80,7 @@ string readlines(string path)
     return src;
 }
 
+// read all
 string fstream_read(string path)
 {
     string str;
@@ -95,6 +99,7 @@ string fstream_read(string path)
     return str;
 }
 
+// read all, (default read function) 
 string ifs_read_all(string path)
 {
     std::ifstream ifstrm(path);
@@ -200,11 +205,14 @@ void display(string path, const map<string, string>& tags)
     cout << output << endl;
 }
 
+// display template
 void display(string tmpl)
 {
     cout << include(tmpl);
 }
 
+
+// find & process includes
 std::string include(const string& tmpl)
 {
     // set up constants
@@ -238,6 +246,7 @@ std::string include(const string& tmpl)
     return output;
 }
 
+// find & process variables
 string variable(const string& src, map<string, string>& vars)
 {
     const string SYMBOL_NAME = "\\b[_.~]*[A-Za-z][A-Za-z0-9_.-~]*\\b";
@@ -275,6 +284,7 @@ string variable(const string& src, map<string, string>& vars)
     return output;
 }
 
+// find if sequence
 string if_sequence(const string& src)
 {
     const string SYMB_NAME = "\\b[-._~]*[A-Za-z][-._~A-Za-z0-9]*\\b";
@@ -343,10 +353,11 @@ string lex_all(const string& src)
     return output;
 }
 
+
+// find tag (no text)
 string lex(const string& src)
 {
     const string ESCAPE = "\\{.*?\\}";
-   
     regex exp = regex(ESCAPE, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
     auto end = sregex_iterator(); 
@@ -359,16 +370,14 @@ string lex(const string& src)
         string tokens = lex_tag(match.str());
         output += tokens;
     }
-
     return output;
 }
 
 // lex the tag (inside curly braces), "{(.*)}"
 string lex_tag(const string& src)
 {
-    const string SYMBOL_NAME = "\\b[_.~]*[A-Za-z][A-Za-z0-9_.-~]*\\b";
+    //const string SYMBOL_NAME = "\\b[_.~]*[A-Za-z][A-Za-z0-9_.-~]*\\b";
     const string TOKENS = "(\\bif\\b)|(else)|(elseif)|(include)|(/\\bif\\b)|(config_load)|(file)|(test)|(\\=)|(\\bforeach\\b)|(/\\bforeach\\b)|(from)|(literal)|(/literal)|(\\$[a-z0-9]+)";
-
     regex exp = regex(TOKENS, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
     auto end = sregex_iterator(); 
@@ -382,6 +391,7 @@ string lex_tag(const string& src)
     return output;
 }
 
+// lex into list
 list<string> lex_all_list(const string& src)
 {
     const string ESCAPE = "[\\{](.*?)[\\}]";
@@ -408,7 +418,7 @@ list<string> lex_all_list(const string& src)
     return output;
 }
 
-
+// load / create smarty style config
 bool load_config(string path, map<string, string>& config)
 {
     string src = readlines(path);
@@ -448,6 +458,7 @@ void find_tags(string path)
     }
 }
 
+// test function replace all tags with "<!-- TEST -->"
 void replace_tags(string path)
 {
     string src = readlines(path);
@@ -455,6 +466,7 @@ void replace_tags(string path)
     std::regex_replace(std::ostreambuf_iterator<char>(std::cout), src.begin(), src.end(), pattern, "<!-- TEST -->");
 }
 
+// test function replace all tags with "<!-- TEST -->"
 void replace_tags2(string expr_path, string file_path)
 {
     string src = readlines(file_path);
@@ -495,6 +507,8 @@ string match_replace_tags(string path, const map<string, string>& tags)
     return output;
 }
 
+
+// trim functions
 const std::string WHITESPACE = " \n\r\t\f\v";
 
 std::string ltrim(const std::string &s)

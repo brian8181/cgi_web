@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
         }
 
         // lex   
-        output = lex(src);
+        output = lex_all(src);
     }
     catch(const std::exception& e)
     {
