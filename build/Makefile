@@ -22,7 +22,7 @@ ROOTDIR  = /home/brian/src/cgi_web
 BUILDDIR = $(ROOTDIR)/build
 SRCDIR = $(ROOTDIR)/src
 OBJDIR = $(ROOTDIR)/build
-SMARTYDIR = /home/brian/src/smarty-cpp
+streamyDIR = /home/brian/src/streamy-cpp
 
 # compile & link for debug
 # debug: 
@@ -33,7 +33,7 @@ SMARTYDIR = /home/brian/src/smarty-cpp
 # debuggdb: 
 # 	#$(CXXFLAGS) += -DDEBUG -ggdb # compile & link
 
-world: all dump_matches.o find_tags.o smarty_test.$(EXE) default.$(EXE) smarty.a test.cgi bash_test.cgi default_test.cgi lex.cgi 
+world: all dump_matches.o find_tags.o streamy_test.$(EXE) default.$(EXE) streamy.a test.cgi bash_test.cgi default_test.cgi lex.cgi 
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.$(EXE)
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump_matches.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump_matches.$(EXE)
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/display_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/display_test.$(EXE)
@@ -47,13 +47,13 @@ all: utility.o load_conf.o dump.o find_tags.$(EXE) regex_find.$(EXE) test_includ
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/load_conf.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/load_conf.$(EXE)
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.$(EXE)
 	
-default.$(EXE): smarty.o utility.o
-	$(CXX) $(CXXFLAGS) $(SRCDIR)/default.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/default.$(EXE)
+default.$(EXE): streamy.o utility.o
+	$(CXX) $(CXXFLAGS) $(SRCDIR)/default.cpp $(BUILDDIR)/streamy.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/default.$(EXE)
 
 fast: default_test.$(EXE)
 
-default_test.$(EXE): smarty.o utility.o
-	$(CXX) $(CXXFLAGS) $(SRCDIR)/default_test.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/default_test.$(EXE)
+default_test.$(EXE): streamy.o utility.o
+	$(CXX) $(CXXFLAGS) $(SRCDIR)/default_test.cpp $(BUILDDIR)/streamy.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/default_test.$(EXE)
 
 # index_.01.$(EXE): 
 #   	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.01.cpp -o $(BUILDDIR)/index.01.$(EXE)
@@ -64,8 +64,8 @@ regex_find.$(EXE): utility.o main.o regex_find.o
 find_tags.$(EXE): utility.o find_tags.o
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/find_tags.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/find_tags.$(EXE)
 
-smarty_test.$(EXE): smarty.o
-# 	$(CXX) $(CXXFLAGS) $(SRCDIR)/smarty_test.cpp $(BUILDDIR)/smarty.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/smarty_test.$(EXE)
+streamy_test.$(EXE): streamy.o
+# 	$(CXX) $(CXXFLAGS) $(SRCDIR)/streamy_test.cpp $(BUILDDIR)/streamy.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/streamy_test.$(EXE)
 
 # fread.cgi: utility.o
 # 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/fread.cpp -o $(BUILDDIR)/fread.cgi
@@ -94,11 +94,11 @@ test_get_conf.cgi: utility.o
 test_variable.cgi: 
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/test_variable.cpp -o $(BUILDDIR)/test_variable.cgi
 
-smarty.a: smarty.o
-	ar rvs $(BUILDDIR)/smarty.a $(BUILDDIR)/smarty.o
+streamy.a: streamy.o
+	ar rvs $(BUILDDIR)/streamy.a $(BUILDDIR)/streamy.o
 
-smarty.o: 
-	$(CXX) $(CXXFLAGS) -c $(SMARTYDIR)/src/smarty.cpp -o $(BUILDDIR)/smarty.o
+streamy.o: 
+	$(CXX) $(CXXFLAGS) -c $(streamyDIR)/src/streamy.cpp -o $(BUILDDIR)/streamy.o
 
 main.o:
 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/src/main.$(EXT) -o $(BUILDDIR)/main.o

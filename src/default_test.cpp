@@ -4,7 +4,7 @@
 #include "cgicc/Cgicc.h"
 #include "cgicc/HTTPHTMLHeader.h"
 #include "cgicc/HTMLClasses.h"
-#include "../../smarty-cpp/src/smarty.hpp"
+#include "../../streamy-cpp/src/streamy.hpp"
 #include "utility.hpp"
 //#include "../src/conf.hpp"
 
@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
     const string project_folder = "/home/brian/src/cgi_web";
     const string conf_path = project_folder + "/test/conf_test.txt";
 
-    smarty sm(project_folder + "/www/templates", project_folder + "/www/compile", project_folder + "/www/config", project_folder + "/www/cache"); 
+    streamy sm(project_folder + "/www/templates", project_folder + "/www/compile", project_folder + "/www/config", project_folder + "/www/cache"); 
     sm.load_config(conf_path);
 
     // configure testing ...
@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
     // cout << "CCC=" << c << endl;
 
     sm.assign("headers", "HEADERS");
-    sm.assign("page_title", "SmartyCPP Test Page");
+    sm.assign("page_title", "streamyCPP Test Page");
     sm.assign("body", "The Body");
     sm.assign("admin_email", "admin@something.com");
     sm.assign("version", "0.1");

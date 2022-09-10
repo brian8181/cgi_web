@@ -503,7 +503,7 @@ list<string> lex_all_list(const string& src)
     return output;
 }
 
-// load / create smarty style config
+// load / create streamy style config
 bool load_config(string path, map<string, string>& config)
 {
     string src = readlines(path);
