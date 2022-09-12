@@ -8,9 +8,17 @@
 #include "utility.hpp"
 
 
+
+template<typename T1, typename T2>  class  pairz
+{
+    T1 t1;
+    T2 t2;
+};
+
 // open file
 ifstream open(string path)
 {
+    pairz<string, string> pz;
     string src;
     ifstream file;
     file.open(path, ios::in); //open a file
