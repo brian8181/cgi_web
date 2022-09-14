@@ -7,8 +7,6 @@
 
 using namespace std;
 
-string readlines(string path);
-
 void assign(string name, string val, map<string, string>& symbols);
 void display(string path, const map<string, string>& tags);
 void display2(string path, const map<string, string>& tags);
@@ -36,10 +34,6 @@ map<string, string> get_config(string path);
 std::string ltrim(const std::string &s);
 std::string rtrim(const std::string &s);
 std::string trim(const std::string &s);
-
-//string ifstream_readlines(string path);
-//string fstream_get(string path);
-//string fstream_read(string path);
 
 std::string& _ltrim(const std::string &s);
 std::string& _rtrim(const std::string &s);

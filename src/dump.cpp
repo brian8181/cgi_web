@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
     if(argc == 2)
     {
         string path = argv[1];
-        string src = readlines(path);
+        string src = ifs_read_all(path);
         cout << src << endl;
     }
 }

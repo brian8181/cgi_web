@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
     const string conf_path = project_folder + "/test/conf_test.txt";
 
     string path = project_folder + "/www/templates/" + template_name;
-    string src = readlines(path);
+    string src = ifs_read_all(path);
     cout << src << endl;
 
     streamy sm(project_folder + "/www/templates", project_folder + "/www/compile", project_folder + "/www/config", project_folder + "/www/cache");

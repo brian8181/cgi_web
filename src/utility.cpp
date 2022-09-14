@@ -5,8 +5,8 @@
 #include <list>
 #include <regex>
 #include <algorithm>
+#include <exception>
 #include "utility.hpp"
-
 
 
 template<typename T1, typename T2>  class  pairz
@@ -44,6 +44,45 @@ vector<string> getlines(string path)
     return lines;
 }
 
+class myexception: public exception
+{
+  virtual const char* what() const throw()
+  {
+    return "My exception happened";
+  }
+} myex;
+
+// read all
+string fstream_read(string path)
+{
+    string str;
+    fstream file;
+    file.open(path, ios::in); //open a file
+    if (file.is_open()) 
+    {   
+        char c[256];
+        while(file.read(c, 256))
+        { 
+            if(file.eof())
+            {
+                throw myex;
+            }
+            //read data from file
+            str.append(c);
+        }
+        file.close(); //close the file
+    }
+    return str;
+}
+
+// read all, (default read function) 
+string ifs_read_all(string path)
+{
+    std::ifstream ifstrm(path);
+    std::string output((std::istreambuf_iterator<char>(ifstrm)), std::istreambuf_iterator<char>());
+    return output;
+}
+
 // get test configuration map
 map<string, string> get_config(string path)
 {
@@ -67,52 +106,6 @@ map<string, string> get_config(string path)
         file.close(); //close the file
     }
     return config;
-}
-
-//string get_all_lines(string path)
-string readlines(string path)
-{
-    string src;
-    ifstream file;
-    file.open(path, ios::in); //open a file
-    if (file.is_open()) 
-    {   
-        string tp;
-        while(getline(file, tp))
-        { 
-            //read data from file
-            src += tp;
-        }
-        file.close(); //close the file
-    }
-    return src;
-}
-
-// read all
-string fstream_read(string path)
-{
-    string str;
-    fstream file;
-    file.open(path, ios::in); //open a file
-    if (file.is_open()) 
-    {   
-        char c[256];
-        while(file.read(c, 256))
-        { 
-            //read data from file
-            str.append(c);
-        }
-        file.close(); //close the file
-    }
-    return str;
-}
-
-// read all, (default read function) 
-string ifs_read_all(string path)
-{
-    std::ifstream ifstrm(path);
-    std::string output((std::istreambuf_iterator<char>(ifstrm)), std::istreambuf_iterator<char>());
-    return output;
 }
 
 void assign(string name, string val, map<string, string>& symbols)
@@ -185,7 +178,6 @@ void display2(string path, const map<string, string>& tags)
 
 void display(string path, const map<string, string>& tags)
 {
-    //string src = readlines(path);
     string src = ifs_read_all(path);
     regex exp = regex("\\{\\$(.*?)\\}", regex::ECMAScript);
             
@@ -514,7 +506,7 @@ list<string> lex_all_list(const string& src)
 // load / create streamy style config
 bool load_config(string path, map<string, string>& config)
 {
-    string src = readlines(path);
+    string src = ifs_read_all(path);
 
     string name_exp = "([A-Za-z]+\\w*)";
     string value_exp = "((\\w+)|('(\\w+)')|(\\\"(\\w+)\\\"))";
@@ -537,7 +529,7 @@ bool load_config(string path, map<string, string>& config)
 
 void find_tags(string path)
 {
-    string src = readlines(path);
+    string src = ifs_read_all(path);
     regex src_epx = regex("\\{(.*?)\\}", regex::ECMAScript);
             
     sregex_iterator begin = sregex_iterator(src.begin(), src.end(), src_epx, std::regex_constants::match_not_null);
@@ -554,7 +546,7 @@ void find_tags(string path)
 // test function replace all tags with "<!-- TEST -->"
 void replace_tags(string path)
 {
-    string src = readlines(path);
+    string src = ifs_read_all(path);
     regex pattern = regex("\\{(.*?)\\}", regex::ECMAScript);
     std::regex_replace(std::ostreambuf_iterator<char>(std::cout), src.begin(), src.end(), pattern, "<!-- TEST -->");
 }
@@ -562,8 +554,8 @@ void replace_tags(string path)
 // test function replace all tags with "<!-- TEST -->"
 void replace_tags2(string expr_path, string file_path)
 {
-    string src = readlines(file_path);
-    string expr = readlines(expr_path);
+    string src = ifs_read_all(file_path);
+    string expr = ifs_read_all(expr_path);
 
     regex pattern = regex(expr, regex::ECMAScript);
     std::regex_replace(std::ostreambuf_iterator<char>(std::cout), src.begin(), src.end(), pattern, "<!-- TEST -->");
@@ -571,7 +563,7 @@ void replace_tags2(string expr_path, string file_path)
 
 string match_replace_tags(string path, const map<string, string>& tags)
 {
-    string src = readlines(path);
+    string src = ifs_read_all(path);
     regex src_epx = regex("\\{\\$(.*?)\\}", regex::ECMAScript);
             
     sregex_iterator begin = sregex_iterator(src.begin(), src.end(), src_epx);

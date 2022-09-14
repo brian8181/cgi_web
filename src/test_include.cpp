@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
     //streamy sm(project_folder + "/www/templates", project_folder + "/www/compile", project_folder + "/www/config", project_folder + "/www/cache");
 
     string path = project_folder + "/www/templates" + "/INCLUDE_TEST.tpl";
-    //string src = readlines(path);
+    //string src = ifs_read_all(path);
     //cout << src << endl;
 
     //string html = sm.include(path);

@@ -16,8 +16,8 @@ int parse_options(int argc, char* argv[])
     {
         string expr_path = argv[1];
         string file_path = argv[2];
-        string expr = readlines(expr_path);
-        string src = readlines(file_path);
+        string expr = ifs_read_all(expr_path);
+        string src = ifs_read_all(file_path);
                         
         regex src_exp = regex(expr, regex::ECMAScript);
         sregex_iterator begin = sregex_iterator(src.begin(), src.end(), src_exp, std::regex_constants::match_default);
