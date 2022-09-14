@@ -33,7 +33,7 @@ streamyDIR = /home/brian/src/streamy-cpp
 # debuggdb: 
 # 	#$(CXXFLAGS) += -DDEBUG -ggdb # compile & link
 
-world: all dump_matches.o find_tags.o streamy_test.$(EXE) default.$(EXE) streamy.a test.cgi bash_test.cgi default_test.cgi lex.cgi
+world: all dump_matches.o find_tags.o streamy_test.$(EXE) default.$(EXE) streamy.a cgi_test_script.cgi bash_test.cgi default_test.cgi lex.cgi
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.$(EXE)
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump_matches.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump_matches.$(EXE)
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/display_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/display_test.$(EXE)
@@ -48,7 +48,7 @@ all: utility.o load_conf.o dump.o find_tags.$(EXE) regex_find.$(EXE) test_includ
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.$(EXE)
 	
 default.$(EXE): streamy.o utility.o
-	$(CXX) $(CXXFLAGS) $(SRCDIR)/default.cpp $(BUILDDIR)/streamy.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/default.$(EXE)
+	$(CXX) $(CXXFLAGS) $(SRCDIR)/index1.cpp $(BUILDDIR)/streamy.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/default.$(EXE)
 
 fast: default_test.$(EXE)
 
@@ -109,8 +109,8 @@ load_conf.o:
 dump.o:
 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/dump.cpp -o $(BUILDDIR)/dump.o
 
-test.cgi: 
-	$(CXX) $(CXXFLAGS) $(SRCDIR)/test.cpp $(LDFLAGS) -o $(BUILDDIR)/test.cgi
+cgi_test_script.cgi: 
+	$(CXX) $(CXXFLAGS) $(SRCDIR)/cgi_test_script.cpp $(LDFLAGS) -o $(BUILDDIR)/cgi_test_script.cgi
 
 dump_matches.o:
 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/dump_matches.cpp -o $(BUILDDIR)/dump_matches.o
@@ -128,7 +128,7 @@ utility.o:
 
 # just copy & change extension to "cgi"
 bash_test.cgi:
-	cp -rf $(SRCDIR)/bash_test.sh $(BUILDDIR)/bash_test.cgi
+	cp -rf $(SRCDIR)/cgi_test_script.sh $(BUILDDIR)/bash_test.cgi
 
 .PHONY: upload
 upload:
