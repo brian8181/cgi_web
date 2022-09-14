@@ -5,32 +5,28 @@
 
 using std::string;
 
-// punctuation
-string punct1 = R"([-!"#$%&'()*+,./:;<=>?@[\\\]^_`{|}~])";
-string punct2 = R"([-!"#%&'()*,./:;?@[\\\]_{}])"; //ascii
-string punct3 = R"([$+<=>^`|~])"; //ascii
-string name_exp = "[A-Za-z]+\\w*";
-string variable = "\\{\\s*\\$(" + name_exp + ")\\s*\\}";
+const string SYMBOL_NAME = "\\b[-._~]*[A-Za-z][-.~A-Za-z0-9]*\\b";
+const string STRING_LITERAL = "(\\'[\\w*\\.]*\\')|(\\\"[\\w\\.]*\\\")";  // 'ABC' or "ABC"
+const string COMMAND = "(config_load|include|insert|literal|strip|capture|section|assign|debug|eval|fetch|math)";
+const string COMMENT = "\\n?\\{\\s*\\*[\\w\\s\\p]*\\*\\s*\\}\\n?";
+const string CONFIG = "\\{\\s*#([A-Aa-z]\\w*)#\\s*\\}";
+const string VARIABLE = "\\{\\s*\\$(" + SYMBOL_NAME + ")\\s*\\}";
+const string INCLUDE = "\\{\\s*\\include file\\s*=\\s*\"(.*?)\"\\s*\\}";
+const string CONFIG_LOAD = "\\{\\config_load file=\"(.*?)\"\\}";
+const string COMMENT_OR_VARIABLE = "((" + COMMENT + ")" +  "|" + "(" + VARIABLE + "))";
+const string LOAD_CONFIG_VALUE = "((\\w+)|('(\\w+)')|(\\\"(\\w+)\\\"))";
+const string LOAD_CONFIG_NAME = "([A-Za-z]+\\w*)";
+const string ARRAY_KEYWORD = "array\\(" + STRING_LITERAL + "\\)";
+const string IF_KEYWORD = "\\{if\\s+\\$" + SYMBOL_NAME + "\\s*\\}[\\n]?";
+const string ENDIF_KEYWORD = "\\{/if\\}[\\n]?";
+const string HTML = "([-._~!\\s\\r\\n\\w]*)";
+const string IF_SEQUENCE = IF_KEYWORD + HTML + ENDIF_KEYWORD;
+const string ELSE_KEYWORD = "\\{if\\s+\\(.*?)\\}";
 
-// smarty tag
-string start = "\\{\\s*(";
-string cmd1 = "((config_load|include|insert|literal|strip|capture|section|assign|debug|eval|fetch|math)|(\\*)|(#))?";
-string cmd2 = "((\\*)|(#))?";
-string ending = ")\\s*\\}";
-string name = "\\s*([\\w\\$]*)\\s*";
-string whole_tag = start + cmd1 + name + cmd2 + ending;
-
-// smarty modifier
-string var_modifier = "\\b\\$[A-Za-z][\\w]*\\s*\\|[\\w]+\\b";
-string list1 = "capitalize|cat|count_characters|count_paragraphs|count_sentences|count_words|date_format";
-string list2 = "default|escape|indent|lower|upper|nl2br|regex_replace|replace|regex_replace|regex_replace|strip|strip_tags|truncate|wordwarp";
-string match_var_mod = var_modifier + list1 + "|" + list2 + "\\:[\\w\\p]*\b";
-
-// smarty misc
-string param = "\\{\\s*\\$([A-Za-z]+\\w*)\\b\\s*\\}"; // {$ABC}
-string config =  "\\{\\s*#([^\\}]+)#\\s*\\}";         // {#ABC#}
-string comment = "\\{\\s*\\*([^\\}]+)\\*\\s*\\}";     // {*ABC*}
-
-string attib = "file|section|scope|global|once|assign";
+const string DEFAULT_FUNCTION = "\\|default:'(.*)'";
+const string CAT_FUNCTION = "\\|cat:'(.*)'";
+const string CAPITALIZE_FUNCTION = "\\|capitalize(:true)?";
+const string LOWER_FUNCTION = "\\|lower(:true)?";
+const string UPPER_FUNCTION = "\\|upper(:true)?";
 
 #endif
