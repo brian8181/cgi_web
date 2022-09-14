@@ -6,6 +6,7 @@
 #include <regex>
 #include <algorithm>
 #include <exception>
+#include "patterns.hpp"
 #include "utility.hpp"
 
 
@@ -114,16 +115,16 @@ void assign(string name, string val, map<string, string>& symbols)
     symbols.insert(p);
 }
 
-const unsigned short INCLUDE = 1;
-const unsigned short CONFIG_LOAD = 2;
-const unsigned short IF = 3;
-const unsigned short ELSE = 4;
-const unsigned short END_IF = 5;
-const unsigned short FROM_FILE = 6;
-const unsigned short EQUAL = 7;
-const unsigned short FOREACH = 8;
-const unsigned short END_FOREACH = 9;
-const unsigned short FROM = 10;
+// const unsigned short INCLUDE = 1;
+// const unsigned short CONFIG_LOAD = 2;
+// const unsigned short IF = 3;
+// const unsigned short ELSE = 4;
+// const unsigned short END_IF = 5;
+// const unsigned short FROM_FILE = 6;
+// const unsigned short EQUAL = 7;
+// const unsigned short FOREACH = 8;
+// const unsigned short END_FOREACH = 9;
+// const unsigned short FROM = 10;
 
 void display2(string path, const map<string, string>& tags)
 {
@@ -146,27 +147,27 @@ void display2(string path, const map<string, string>& tags)
             std::ssub_match sub_match = match[i];
             if(sub_match.matched)
             {
-                switch(i)
-                {
-                    case INCLUDE:
-                        break;
-                    case CONFIG_LOAD:
-                        break;
-                    case IF:
-                        break;
-                    case END_IF:
-                        break;
-                    case FOREACH:
-                        break;
-                    case END_FOREACH:
-                        break;
-                    case FROM:
-                        break;
-                    case FROM_FILE:
-                        break;
-                    default:
-                        break;
-                } 
+                // switch(i)
+                // {
+                //     case INCLUDE:
+                //         break;
+                //     case CONFIG_LOAD:
+                //         break;
+                //     case IF:
+                //         break;
+                //     case END_IF:
+                //         break;
+                //     case FOREACH:
+                //         break;
+                //     case END_FOREACH:
+                //         break;
+                //     case FROM:
+                //         break;
+                //     case FROM_FILE:
+                //         break;
+                //     default:
+                //         break;
+                // } 
             }
             // don't really need to try them all ? stop on first match
             //continue; 
@@ -216,7 +217,6 @@ void display(string tmpl)
 std::string include(const string& tmpl)
 {
     // set up constants
-    const string INCLUDE = "\\{\\s*\\include file\\s*=\\s*\"(.*?)\"\\s*\\}";
     const string path = template_dir + "/" + tmpl;
     
     // read file
@@ -249,7 +249,6 @@ std::string include(const string& tmpl)
 // find & process variables
 string variable(const string& src, map<string, string>& vars)
 {
-    const string SYMBOL_NAME = "\\b[_.~]*[A-Za-z][A-Za-z0-9_.-~]*\\b";
     const string DEFAULT_FUNCTION = "\\|default:'(.*)'";
     const string VARIABLE = "\\{\\s*\\$(" + SYMBOL_NAME + ")\\s*(" + DEFAULT_FUNCTION + ")?\\s*\\}";
 
@@ -287,12 +286,6 @@ string variable(const string& src, map<string, string>& vars)
 // find if sequence
 string if_sequence(const string& src)
 {
-    const string SYMB_NAME = "\\b[-._~]*[A-Za-z][-._~A-Za-z0-9]*\\b";
-    const string IF_KEYWORD = "\\{if\\s+\\$" + SYMB_NAME + "\\s*\\}[\\n]?";
-    const string ENDIF_KEYWORD = "\\{/if\\}[\\n]?";
-    const string HTML = "([-._~!\\s\\r\\n\\w]*)";
-    const string IF_SEQUENCE = IF_KEYWORD + HTML + ENDIF_KEYWORD;
-
     regex exp = regex(IF_SEQUENCE, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
     auto end = sregex_iterator(); 
@@ -312,11 +305,11 @@ string if_sequence(const string& src)
 // find if_sequence with text!
 string if_sequence_with_text(const string& src)
 {
-    const string SYMB_NAME = "\\b[-._~]*[A-Za-z][-._~A-Za-z0-9]*\\b";
-    const string IF_KEYWORD = "\\{if\\s+\\$" + SYMB_NAME + "\\s*\\}[\\n]?";
-    const string ENDIF_KEYWORD = "\\{/if\\}[\\n]?";
-    const string HTML = "([-._~!\\s\\r\\n\\w]*)";
-    const string IF_SEQUENCE = IF_KEYWORD + HTML + ENDIF_KEYWORD;
+    // const string SYMB_NAME = "\\b[-._~]*[A-Za-z][-._~A-Za-z0-9]*\\b";
+    // const string IF_KEYWORD = "\\{if\\s+\\$" + SYMB_NAME + "\\s*\\}[\\n]?";
+    // const string ENDIF_KEYWORD = "\\{/if\\}[\\n]?";
+    // const string HTML = "([-._~!\\s\\r\\n\\w]*)";
+    // const string IF_SEQUENCE = IF_KEYWORD + HTML + ENDIF_KEYWORD;
 
     regex exp = regex(IF_SEQUENCE, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
@@ -347,12 +340,6 @@ string if_sequence_with_text(const string& src)
 // find foreach sequence
 string foreach_sequence(const string& src)
 {
-    const string SYMB_NAME = "\\b[-._~]*[A-Za-z][-._~A-Za-z0-9]*\\b";
-    const string FOREACH_KEYWORD = "\\{foreach\\s+\\$" + SYMB_NAME + "\\s*\\}[\\n]?";
-    const string ENDFOREACH_KEYWORD = "\\{/foreach\\}[\\n]?";
-    const string HTML = "([-._~!\\s\\r\\n\\w]*)";
-    const string FOREACH_SEQUENCE = FOREACH_KEYWORD + HTML + ENDFOREACH_KEYWORD;
-
     regex exp = regex(FOREACH_SEQUENCE, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
     auto end = sregex_iterator(); 
@@ -372,12 +359,6 @@ string foreach_sequence(const string& src)
 // find foreach_sequence with text!
 string foreach_sequence_with_test(const string& src)
 {
-    const string SYMB_NAME = "\\b[-._~]*[A-Za-z][-._~A-Za-z0-9]*\\b";
-    const string FOREACH_KEYWORD = "\\{foreach\\s+\\$" + SYMB_NAME + "\\s*\\}[\\n]?";
-    const string ENDFOREACH_KEYWORD = "\\{/foreach\\}[\\n]?";
-    const string HTML = "([-._~!\\s\\r\\n\\w]*)";
-    const string FOREACH_SEQUENCE = FOREACH_KEYWORD + HTML + ENDFOREACH_KEYWORD;
-
     regex exp = regex(FOREACH_SEQUENCE, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
     auto end = sregex_iterator(); 
