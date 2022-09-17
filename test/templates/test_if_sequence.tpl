@@ -1,16 +1,9 @@
-ADC
 {if $test}
-12345678
+abc
 {/if}
 {if $test}
-56789012
+{else}
+345
+{/else}
+121
 {/if}
-EDF
-{if $test}
-01234567
-{/if}
-FFF
-{if $test}
-666666
-{/if}
-EEE

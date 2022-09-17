@@ -295,8 +295,13 @@ string if_sequence(const string& src)
     for (sregex_iterator iter = begin; iter != end; ++iter)
     {
         smatch match = *iter;
-        std::ssub_match sub = match[1];
-        output += sub.str();
+        std::ssub_match sub1 = match[2];
+        std::ssub_match sub2 = match[3];
+        // output text
+        if(sub1.matched)
+            output += sub1.str();
+        else if(sub2.matched)
+            output += sub2.str();
     }
     return output;
 }
@@ -349,9 +354,13 @@ string foreach_sequence(const string& src)
     for (sregex_iterator iter = begin; iter != end; ++iter)
     {
         smatch match = *iter;
-        std::ssub_match sub = match[1];
+        std::ssub_match sub1 = match[2];
+        std::ssub_match sub2 = match[3];
         // output text
-        output += sub.str();
+        if(sub1.matched)
+            output += sub1.str();
+        else if(sub2.matched)
+            output += sub2.str();
     }
     return output;
 }
