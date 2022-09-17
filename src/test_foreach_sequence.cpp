@@ -10,9 +10,9 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {  
-    string root_path = "./src/test_foreach_sequence.conf";
+    // run from path ./ !
+    string root_path = "../src/test_foreach_sequence.conf";
     map<string, string> pairs = get_config(root_path);
-
     const string project_folder = pairs["project_folder"];
     const string default_template =  pairs["default_template"];
     const string conf_path = pairs["conf_path"];
@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
         template_name.clear();
         template_name = argv[1];
     }
-    const string path = project_folder + "/test/templates/" + template_name;
+    const string path = project_folder + "./test/templates/" + template_name;
 
     // read file
     std::ifstream ifile_strm(path);

@@ -1,4 +1,3 @@
-ADC
 {foreach $test}
 12345678
 {/foreach}
