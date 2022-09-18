@@ -1,9 +1,5 @@
 {if $test}
-abc
-{/if}
-{if $test}
+123
 {else}
-345
-{/else}
-121
+555
 {/if}

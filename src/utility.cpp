@@ -295,17 +295,19 @@ string if_sequence(const string& src)
     for (sregex_iterator iter = begin; iter != end; ++iter)
     {
         smatch match = *iter;
-        std::ssub_match sub1 = match[2];
-        std::ssub_match sub2 = match[3];
         // output text
-        if(sub1.matched)
-            output += sub1.str();
-        else if(sub2.matched)
-            output += sub2.str();
+        if(match[2].matched)
+            output += match[2];
+            
+        if(match[4].matched)
+        {
+            output += match[4].str();
+            if(match[5].matched)
+                output += match[5].str();
+        }
     }
     return output;
 }
-
 
 // find if_sequence with text!
 string if_sequence_with_text(const string& src)
