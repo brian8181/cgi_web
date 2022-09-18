@@ -297,13 +297,20 @@ string if_sequence(const string& src)
         smatch match = *iter;
         // output text
         if(match[2].matched)
-            output += match[2];
-            
-        if(match[4].matched)
         {
-            output += match[4].str();
-            if(match[5].matched)
-                output += match[5].str();
+            // if text 
+            output += match[2].str() + "\n";
+        }
+        else
+        {
+            // if text
+            if(match[4].matched)
+            {
+                output += match[4].str() + "\n";
+                // else text
+                if(match[5].matched)
+                    output += match[5].str() + "\n";
+            }
         }
     }
     return output;
