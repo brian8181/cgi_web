@@ -3,9 +3,6 @@
 #include <fstream>
 #include "utility.hpp"
 
-const unsigned int DEFAULT_TEMPLATE = 1;
-const unsigned int PROJECT_FOLDER = 2;
-
 using namespace std;
 
 int main(int argc, char* argv[])

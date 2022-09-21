@@ -354,7 +354,7 @@ string if_sequence_with_text(const string& src)
 // find foreach sequence
 string foreach_sequence(const string& src)
 {
-    regex exp = regex(FOREACH_SEQUENCE, regex::ECMAScript); // match
+     regex exp = regex(IF_SEQUENCE, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
     auto end = sregex_iterator(); 
 
@@ -363,13 +363,23 @@ string foreach_sequence(const string& src)
     for (sregex_iterator iter = begin; iter != end; ++iter)
     {
         smatch match = *iter;
-        std::ssub_match sub1 = match[2];
-        std::ssub_match sub2 = match[3];
         // output text
-        if(sub1.matched)
-            output += sub1.str();
-        else if(sub2.matched)
-            output += sub2.str();
+        if(match[2].matched)
+        {
+            // if text 
+            output += match[2].str() + "\n";
+        }
+        else
+        {
+            // if text
+            if(match[4].matched)
+            {
+                output += match[4].str() + "\n";
+                // else text
+                if(match[5].matched)
+                    output += match[5].str() + "\n";
+            }
+        }
     }
     return output;
 }
