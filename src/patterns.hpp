@@ -15,15 +15,14 @@ const string INCLUDE = "\\{\\s*\\include file\\s*=\\s*\"(.*?)\"\\s*\\}";
 const string CONFIG_LOAD = "\\{\\config_load file=\"(.*?)\"\\}";
 const string LOAD_CONFIG_VALUE = "((\\w+)|('(\\w+)')|(\\\"(\\w+)\\\"))";
 const string LOAD_CONFIG_NAME = "([A-Za-z]+\\w*)";
-
 const string COMMENT_OR_VARIABLE = "((" + COMMENT + ")" +  "|" + "(" + VARIABLE + "))";
 const string ARRAY_KEYWORD = "array\\(" + STRING_LITERAL + "\\)";
-const string TEXT = "([,+_~.$\\s\\w\\d]+)\\n";
+const string TEXT = "(([,+_~.$\\s\\w\\d])+\n)|(\\s*\\$(" + SYMBOL_NAME + ")\\s*\n)";
+//const string TEXT = "([,+_~.$\\s\\w\\d]+)\\n"
 const string IF_KEYWORD = "\\{if\\s+\\$" + SYMBOL_NAME + "\\s*\\}\\n";
 const string ELSE_KEYWORD = "\\{else\\}\\n";
 const string ENDIF_KEYWORD = "\\{/if\\}\\n";
 const string IF_SEQUENCE  = "(" + IF_KEYWORD + TEXT + ENDIF_KEYWORD + ")|(" + IF_KEYWORD + TEXT + ELSE_KEYWORD + TEXT + ENDIF_KEYWORD + ")"; 
-
 const string FOREACH_KEYWORD = "\\{foreach\\s+\\$" + SYMBOL_NAME + "\\s*\\}[\\n]";
 const string ENDFOREACH_KEYWORD = "\\{/foreach\\}[\\n]";
 const string FOREACH_SEQUENCE = FOREACH_KEYWORD + TEXT + ENDFOREACH_KEYWORD;
