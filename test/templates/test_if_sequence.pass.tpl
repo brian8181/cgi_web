@@ -9,5 +9,5 @@
 aaa bbb
 {/if}
 {if $test}
-777
+$gggtt
 {/if}

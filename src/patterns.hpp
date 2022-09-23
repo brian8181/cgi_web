@@ -2,6 +2,7 @@
 #define _REGEXPR_HPP
 
 #include <string>
+#include <regex>
 
 using std::string;
 
@@ -12,6 +13,8 @@ const string STRING_LITERAL = "(\\'[\\w*\\.]*\\')|(\\\"[\\w\\.]*\\\")";  // 'ABC
 const string COMMAND = "(config_load|include|insert|literal|strip|capture|section|assign|debug|eval|fetch|math)";
 const string COMMENT = "\\n?\\{\\s*\\*[\\w\\s\\p]*\\*\\s*\\}\\n?";
 const string CONFIG = "\\{\\s*#([A-Aa-z]\\w*)#\\s*\\}";
+
+
 const string VARIABLE = "\\{\\s*\\$(" + SYMBOL_NAME + ")\\s*\\}";
 const string INCLUDE = "\\{\\s*\\include file\\s*=\\s*\"(.*?)\"\\s*\\}";
 const string CONFIG_LOAD = "\\{\\config_load file=\"(.*?)\"\\}";
@@ -21,11 +24,11 @@ const string COMMENT_OR_VARIABLE = "((" + COMMENT + ")" +  "|" + "(" + VARIABLE 
 const string ARRAY_KEYWORD = "array\\(" + STRING_LITERAL + "\\)";
 
 const string LIT_VAL = INT_LITERAL + "|" + BOOL_LITERAL;
-const string TEXT = "([,+_~.$\\w\\d\\s]+)\\n";
+const string TEXT = "([,+_~.$\\w\\d]+)\\n";
 //const string TEXT = "([0-9]+)\\n";
 const string IF_KEYWORD = "\\{if\\s+" + SYMBOL_NAME  + "\\s*\\}\\n";
 const string ELSE_KEYWORD = "\\{else\\}\\n";
-const string ELSEIF_KEYWORD = "\\{else\\}\\n";
+const string ELSEIF_KEYWORD = "\\{else if\\s+" + SYMBOL_NAME  + "\\s*\\}\\n";;
 const string ENDIF_KEYWORD = "\\{/if\\}\\n";
 //const string IF_SEQUENCE  = "(" + IF_KEYWORD + TEXT + ENDIF_KEYWORD + ")|(" + IF_KEYWORD + TEXT + ELSE_KEYWORD + TEXT + ENDIF_KEYWORD + ")"; 
 const string IF_SEQUENCE  = "(" + IF_KEYWORD + TEXT + ENDIF_KEYWORD + ")|(" + IF_KEYWORD + TEXT + ELSE_KEYWORD + TEXT + ENDIF_KEYWORD + ")"; 
