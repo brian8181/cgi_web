@@ -22,11 +22,17 @@ const string LOAD_CONFIG_VALUE = "((\\w+)|('(\\w+)')|(\\\"(\\w+)\\\"))";
 const string LOAD_CONFIG_NAME = "([A-Za-z]+\\w*)";
 const string COMMENT_OR_VARIABLE = "((" + COMMENT + ")" +  "|" + "(" + VARIABLE + "))";
 const string ARRAY_KEYWORD = "array\\(" + STRING_LITERAL + "\\)";
+<<<<<<< HEAD
 
 const string LIT_VAL = INT_LITERAL + "|" + BOOL_LITERAL;
 const string TEXT = "([,+_~.$\\w\\d]+)\\n";
 //const string TEXT = "([0-9]+)\\n";
 const string IF_KEYWORD = "\\{if\\s+" + SYMBOL_NAME  + "\\s*\\}\\n";
+=======
+const string TEXT = "(([,+_~.$\\s\\w\\d])+\n)|(\\s*\\$(" + SYMBOL_NAME + ")\\s*\n)";
+//const string TEXT = "([,+_~.$\\s\\w\\d]+)\\n"
+const string IF_KEYWORD = "\\{if\\s+\\$" + SYMBOL_NAME + "\\s*\\}\\n";
+>>>>>>> eca746c427c5571a657f177bdac167fc8e75d27c
 const string ELSE_KEYWORD = "\\{else\\}\\n";
 const string ELSEIF_KEYWORD = "\\{else if\\s+" + SYMBOL_NAME  + "\\s*\\}\\n";;
 const string ENDIF_KEYWORD = "\\{/if\\}\\n";

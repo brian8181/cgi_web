@@ -1,13 +1,14 @@
 {if $test}
-123 aaa
+123
 {else}
 555
 {/if}
 {if $test}
-777
+abc
 {else}
-aaa bbb
+edf eee
 {/if}
 {if $test}
-777
+999,222
 {/if}
+
