@@ -22,6 +22,7 @@ const string COMMENT_OR_VARIABLE = "((" + COMMENT + ")" +  "|" + "(" + VARIABLE 
 const string ARRAY_KEYWORD = "array\\(" + STRING_LITERAL + "\\)";
 const string LIT_VAL = INT_LITERAL + "|" + BOOL_LITERAL;
 const string TEXT = "([,+_~.$\\w\\d\\s]+)\\n";
+const string VAR_TEXT = "(" + TEXT + ")|(" + VARIABLE + ")"; 
 //const string TEXT = "([0-9]+)\\n";
 const string IF_KEYWORD = "\\{if\\s+" + SYMBOL_NAME  + "\\s*\\}\\n";
 const string ELSE_KEYWORD = "\\{else\\}\\n";
