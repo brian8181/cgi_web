@@ -1,10 +1,10 @@
 {if $test}
 123
 {else}
-555
+5554
 {/if}
 {if $test}
-abc
+abcc
 {else}
 edf eee
 {/if}
