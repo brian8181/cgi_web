@@ -12,5 +12,5 @@ edf eee
 999,222
 {/if}
 {if $abc}
-fff
+{$aaa}
 {/if}
