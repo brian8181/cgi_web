@@ -1,6 +1,3 @@
-{if $test}
+{if $test_one}
 1234
-{/if}
-{if $test}
-5678
 {/if}

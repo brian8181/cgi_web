@@ -12,11 +12,6 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {  
-    //string ESC = "\\{\\s*<a>\\s*\\}";
-    //string str = std::regex_replace(std::back_inserter(ESC), ESC.begin(), ESC.end(), "\\<A\\>", "Foo");
-    //cout << ESC << endl;
-
-    // run from path ./ !
     string root_path = "../src/test_if_sequence.conf";
     map<string, string> pairs = get_config(root_path);
     const string project_folder = pairs["project_folder"];

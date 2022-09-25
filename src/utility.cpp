@@ -283,6 +283,29 @@ string variable(const string& src, map<string, string>& vars)
     return output;
 }
 
+string sequence(const string& src, const string& sequence)
+{
+    regex exp = regex(sequence, regex::ECMAScript); // match
+    auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
+    auto end = sregex_iterator(); 
+
+    string output;
+    int src_beg_pos = 0;
+    for (sregex_iterator iter = begin; iter != end; ++iter)
+    {
+        smatch match = *iter;
+        int len = match.size();
+        // if(int i = 0; i < len; ++i)
+        // {
+        //     if(match[i].matched)
+        //     {
+        //         cout << "match: " << i << " = " << match[i].str();
+        //     }
+        // }
+    }
+    return output;
+}
+
 // find if sequence
 string if_sequence(const string& src)
 {
@@ -296,10 +319,10 @@ string if_sequence(const string& src)
     {
         smatch match = *iter;
         // output text
-        if(match[2].matched)
+        if(match[3].matched)
         {
             // if text 
-            output += match[2].str() + "\n";
+            output += match[3].str() + "\n";
         }
         else
         {

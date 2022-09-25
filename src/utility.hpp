@@ -13,6 +13,7 @@ void display2(string path, const map<string, string>& tags);
 void display(string tmpl);
 string include(const string& tmpl);
 string variable(const string& src, map<string, string>& vars);
+string sequence(const string& src, const string& sequence);
 string if_sequence(const string& src);
 string if_sequence_with_text(const string& src);
 string foreach_sequence(const string& src);
