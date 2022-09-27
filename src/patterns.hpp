@@ -37,10 +37,10 @@ const string FOREACH_KEYWORD = "\\{foreach\\s+\\$" + SYMBOL_NAME + "\\s*\\}\\n";
 const string ENDFOREACH_KEYWORD = "\\{/foreach\\}\\n";
 const string FOREACH_SEQUENCE = FOREACH_KEYWORD + TEXT + ENDFOREACH_KEYWORD;
 
-// const string DEFAULT_FUNCTION = "\\|default:'(.*)'";
-// const string CAT_FUNCTION = "\\|cat:'(.*)'";
-// const string CAPITALIZE_FUNCTION = "\\|capitalize(:true)?";
-// const string LOWER_FUNCTION = "\\|lower(:true)?";
-// const string UPPER_FUNCTION = "\\|upper(:true)?";
+//const string DEFAULT_FUNCTION = "\\|default:'(.*)'";
+//const string CAT_FUNCTION = "\\|cat:'(.*)'";
+//const string CAPITALIZE_FUNCTION = "\\|capitalize(:true)?";
+//const string LOWER_FUNCTION = "\\|lower(:true)?";
+//const string UPPER_FUNCTION = "\\|upper(:true)?";
 
 #endif

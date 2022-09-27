@@ -295,13 +295,14 @@ string sequence(const string& src, const string& sequence)
     {
         smatch match = *iter;
         int len = match.size();
-        // if(int i = 0; i < len; ++i)
-        // {
-        //     if(match[i].matched)
-        //     {
-        //         cout << "match: " << i << " = " << match[i].str();
-        //     }
-        // }
+        
+        for(int i = 0; i < len; ++i)
+        {
+            if(match[i].matched)
+            {
+                cout << "match: " << i << " = " << match[i].str();
+            }
+        }
     }
     return output;
 }

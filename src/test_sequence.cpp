@@ -12,23 +12,16 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {  
-    string root_path = "../src/test_if_sequence.conf";
-    map<string, string> pairs = get_config(root_path);
-    const string project_folder = pairs["project_folder"];
-    // const string default_template =  pairs["default_template"];
-    // const string conf_path = pairs["conf_path"];
-    string seq; // regular expresssion
-
-    // check for input or use default
-    string template_name = default_template;
-    if(argc == 2)
+    string path; // source (text to match)
+    string exp; // regular expresssion
+    if(argc == 3)
     {
-        template_name.clear();
-        template_name = argv[1];
-        seq = argv[2];    
+        path = argv[1];
+        exp = argv[2];    
     }
 
-    const string path = project_folder + "./test/templates/" + template_name;
+    cout << path << endl;
+    cout << exp << endl << endl;
 
     // read file
     std::ifstream ifile_strm(path);
@@ -39,6 +32,10 @@ int main(int argc, char* argv[])
         cout << "Error reading template, path (" + path + ") ..." << endl;
         return 0;
     }
+    else
+    {
+        cout << src;
+    }
         
-    sequence(src, seq);
+    //sequence(src, seq);
 }
