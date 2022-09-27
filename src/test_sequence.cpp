@@ -20,8 +20,8 @@ int main(int argc, char* argv[])
         exp = argv[2];    
     }
 
-    cout << path << endl;
-    cout << exp << endl << endl;
+    // cout << path << endl;
+    // cout << exp << endl << endl;
 
     // read file
     std::ifstream ifile_strm(path);
@@ -32,10 +32,10 @@ int main(int argc, char* argv[])
         cout << "Error reading template, path (" + path + ") ..." << endl;
         return 0;
     }
-    else
-    {
-        cout << src;
-    }
+    // else
+    // {
+    //     cout << src;
+    // }
         
     //sequence(src, seq);
 }
