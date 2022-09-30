@@ -8,3 +8,8 @@
 7 ABCDEFG
 8 ABCDEFG
 9 ABCDEFG
+
+{if $test}
+a{2}
+aa
+a\

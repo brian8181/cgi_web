@@ -300,7 +300,7 @@ string sequence(const string& src, const string& sequence)
         {
             if(match[i].matched)
             {
-                cout << "match: " << i << " = " << match[i].str();
+                cout << "match: " << i << " = " << match[i].str() << endl;
             }
         }
     }

@@ -82,7 +82,7 @@ lex.cgi: utility.o
 lex_all.cgi: utility.o
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/lex_all.cpp -o $(BUILDDIR)/lex_all.cgi
 
-test_sequence.cgi:
+test_sequence.cgi: utility.o
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/test_sequence.cpp -o $(BUILDDIR)/test_sequence.cgi
 
 test_comment.cgi:

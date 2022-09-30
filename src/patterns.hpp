@@ -44,3 +44,4 @@ const string FOREACH_SEQUENCE = FOREACH_KEYWORD + TEXT + ENDFOREACH_KEYWORD;
 //const string UPPER_FUNCTION = "\\|upper(:true)?";
 
 #endif
+ 
