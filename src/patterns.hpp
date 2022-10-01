@@ -6,6 +6,7 @@
 
 using std::string;
 
+const string ESCAPE = "\\{.*?\\}";
 const string SYMBOL_NAME = "\\$[-._~]*[A-Za-z][-.~A-Za-z0-9]*";
 const string INT_LITERAL = "/d*[.]?/d+";
 const string BOOL_LITERAL = "true|false";

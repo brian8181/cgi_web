@@ -22,7 +22,7 @@ ifstream open(string path)
     pairz<string, string> pz;
     string src;
     ifstream file;
-    file.open(path, ios::in); //open a file
+    file.open(path, ios::in);
     return file;
 }
 
@@ -30,7 +30,7 @@ ifstream open(string path)
 vector<string> getlines(string path)
 {
     ifstream file;
-    file.open(path, ios::in); //open a file
+    file.open(path, ios::in);
 
     vector<string> lines;
     if (file.is_open()) 
@@ -40,7 +40,7 @@ vector<string> getlines(string path)
         { 
             lines.push_back(line);
         }
-        file.close(); //close the file
+        file.close();
     }
     return lines;
 }
@@ -58,7 +58,7 @@ string fstream_read(string path)
 {
     string str;
     fstream file;
-    file.open(path, ios::in); //open a file
+    file.open(path, ios::in);
     if (file.is_open()) 
     {   
         char c[256];
@@ -71,7 +71,7 @@ string fstream_read(string path)
             //read data from file
             str.append(c);
         }
-        file.close(); //close the file
+        file.close();
     }
     return str;
 }
@@ -88,7 +88,7 @@ string ifs_read_all(string path)
 map<string, string> get_config(string path)
 {
     ifstream file;
-    file.open(path, ios::in); //open a file
+    file.open(path, ios::in);
 
     map<string, string> config;
     pair<string, string> config_pair;
@@ -104,7 +104,7 @@ map<string, string> get_config(string path)
             pair<string, string> p(name, value);
             config.insert(p);
         }
-        file.close(); //close the file
+        file.close();
     }
     return config;
 }
@@ -484,8 +484,6 @@ string lex(const string& src)
 // lex the tag (inside curly braces), "{(.*)}"
 string lex_tag(const string& src)
 {
-    //const string SYMBOL_NAME = "\\b[_.~]*[A-Za-z][A-Za-z0-9_.-~]*\\b";
-    const string TOKENS = "(\\bif\\b)|(else)|(elseif)|(include)|(/\\bif\\b)|(config_load)|(file)|(test)|(\\=)|(\\bforeach\\b)|(/\\bforeach\\b)|(\\bfrom\\b)|(literal)|(/literal)|(\\$\\b[a-z0-9]+\\b)";
     regex exp = regex(TOKENS, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
     auto end = sregex_iterator(); 
@@ -502,9 +500,6 @@ string lex_tag(const string& src)
 // lex into list
 list<string> lex_all_list(const string& src)
 {
-    const string ESCAPE = "[\\{](.*?)[\\}]";
-    //const string TEXT = "[\\}]([.]+)[\\{]";
-
     regex exp = regex(ESCAPE, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
     auto end = sregex_iterator(); 
@@ -571,16 +566,6 @@ void replace_tags(string path)
 {
     string src = ifs_read_all(path);
     regex pattern = regex("\\{(.*?)\\}", regex::ECMAScript);
-    std::regex_replace(std::ostreambuf_iterator<char>(std::cout), src.begin(), src.end(), pattern, "<!-- TEST -->");
-}
-
-// test function replace all tags with "<!-- TEST -->"
-void replace_tags2(string expr_path, string file_path)
-{
-    string src = ifs_read_all(file_path);
-    string expr = ifs_read_all(expr_path);
-
-    regex pattern = regex(expr, regex::ECMAScript);
     std::regex_replace(std::ostreambuf_iterator<char>(std::cout), src.begin(), src.end(), pattern, "<!-- TEST -->");
 }
 

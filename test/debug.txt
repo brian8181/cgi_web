@@ -9,6 +9,34 @@ SQQ=
 SRC=
 "{if $test}\n123\n{else}\n55546\n{/if}\n{if $test}\nabcc\n{else}\nedf eee\n{/if}\n{if $test}\n999,222\n{/if}\n{if $abc}\nfff\n{/if}\n"
 
+$ ~/src/cgi_web/build$ ./test_sequence.cgi ../test/templates/test_if_sequence.tpl '\{if \$(\w+)\}'
+Source text ...
+{if $test}
+123
+{else}
+55546
+{/if}
+{if $test}
+abcc
+{else}
+edf eee
+{/if}
+{if $test}
+999,222
+{/if}
+{if $abc}
+fff
+{/if}
+
+End text.
+match[0] = {if $test}
+match[1] = test
+match[0] = {if $test}
+match[1] = test
+match[0] = {if $test}
+match[1] = test
+match[0] = {if $abc}
+match[1] = abc
 
 
 

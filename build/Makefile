@@ -38,9 +38,7 @@ world: all dump_matches.o find_tags.o streamy_test.$(EXE) default.$(EXE) streamy
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump_matches.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump_matches.$(EXE)
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/display_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/display_test.$(EXE)
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/replace_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/replace_test.$(EXE)
-	$(CXX) $(CXXFLAGS) $(SRCDIR)/replace_test2.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/replace_test2.$(EXE)
-	
-	
+		
 all: utility.o load_conf.o dump.o find_tags.$(EXE) regex_find.$(EXE) test_include.$(EXE) test_variable.$(EXE) \
 	test_if_sequence.$(EXE) test_foreach_sequence.$(EXE) test_get_conf.$(EXE) lex_all.$(EXE) test_get_conf.$(EXE) streamy_test.$(EXE) test_sequence.cgi
 

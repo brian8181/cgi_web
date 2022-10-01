@@ -23,6 +23,10 @@ int main(int argc, char* argv[])
     // read file
     std::ifstream ifile_strm(path);
     std::string src((std::istreambuf_iterator<char>(ifile_strm)), std::istreambuf_iterator<char>());
+
+    cout << "Source text ..." << endl;
+    cout << src;
+    cout << endl << "End text." << endl;
     
     sequence(src, exp);
 }
