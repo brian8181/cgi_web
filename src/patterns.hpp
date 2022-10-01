@@ -10,6 +10,7 @@ const string SYMBOL_NAME = "\\$[-._~]*[A-Za-z][-.~A-Za-z0-9]*";
 const string INT_LITERAL = "/d*[.]?/d+";
 const string BOOL_LITERAL = "true|false";
 const string STRING_LITERAL = "(\\'[\\w*\\.]*\\')|(\\\"[\\w\\.]*\\\")";  // 'ABC' or "ABC"
+const string TOKENS = "(\\bif\\b)|(else)|(include)|(/\\bif\\b)|(config_load)|(file)|(test)|(\\=)|(\\bforeach\\b)|(/\\bforeach\\b)|(from)";
 const string COMMAND = "(config_load|include|insert|literal|strip|capture|section|assign|debug|eval|fetch|math)";
 const string COMMENT = "\\n?\\{\\s*\\*[\\w\\s\\p]*\\*\\s*\\}\\n?";
 const string CONFIG = "\\{\\s*#([A-Aa-z]\\w*)#\\s*\\}";
