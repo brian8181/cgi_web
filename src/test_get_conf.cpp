@@ -13,9 +13,8 @@ int main(int argc, char* argv[])
         path = argv[1];
     }
 
-    map<string, string> pairs = get_config(path);
-
     // print pairs / configuration
+    map<string, string> pairs = get_config(path);
     map<string, string>::iterator end = pairs.end();
     for(map<string, string>::iterator iter = pairs.begin(); iter != end; ++iter)
     {
