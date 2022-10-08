@@ -13,7 +13,8 @@ using namespace std;
 int main(int argc, char* argv[])
 {  
     string path; // source (text to match)
-    string exp; // regular expresssion
+    string exp;  // regular expresssion
+    
     if(argc == 3)
     {
         path = argv[1];
