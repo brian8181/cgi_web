@@ -37,7 +37,6 @@ int main(int argc, char* argv[])
             cout << "Error reading file, path (" + path + ") ..." << endl;
             return 0;
         }
-
         // lex   
         output = lex_all(src);
     }

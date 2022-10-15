@@ -20,13 +20,13 @@ int main(int argc, char* argv[])
     
     // check for input or use default
     string template_name = default_template;
+    const string path = project_folder + "./test/templates/" + template_name;
     if(argc == 2)
     {
         template_name.clear();
         template_name = argv[1];
     }
-    const string path = project_folder + "./test/templates/" + template_name;
-
+    
     // read file
     std::ifstream ifile_strm(path);
     std::string src((std::istreambuf_iterator<char>(ifile_strm)), std::istreambuf_iterator<char>());
