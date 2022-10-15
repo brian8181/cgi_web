@@ -5,27 +5,26 @@
 
 using namespace std;
 
-int main(int argc, char* argv[])
-{ 
+int main(int argc, char *argv[])
+{
     const string default_template = "INCLUDE_TEST.tpl";
     string template_name = default_template;
-    if(argc == 2)
+    if (argc == 2)
     {
         string template_name = argv[1];
     }
-        
+
     const string project_folder = "/home/brian/src/cgi_web";
     const string conf_path = project_folder + "./test/conf_test.txt";
 
-    //sstreamy sm(project_folder + "/www/templates", project_folder + "/www/compile", project_folder + "/www/config", project_folder + "/www/cache");
+    // sstreamy sm(project_folder + "/www/templates", project_folder + "/www/compile", project_folder + "/www/config", project_folder + "/www/cache");
 
     string path = project_folder + "/www/templates" + "/INCLUDE_TEST.tpl";
     string src = ifs_read_all(path);
     cout << src << endl;
 
-    //string html = sm.include(path);
-    //template_dir = project_folder + "/www/templates";
+    // string html = sm.include(path);
+    // template_dir = project_folder + "/www/templates";
     string html = include(template_name);
     cout << html << endl;
-
 }

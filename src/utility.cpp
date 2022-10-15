@@ -115,68 +115,6 @@ void assign(string name, string val, map<string, string>& symbols)
     symbols.insert(p);
 }
 
-// const unsigned short INCLUDE = 1;
-// const unsigned short CONFIG_LOAD = 2;
-// const unsigned short IF = 3;
-// const unsigned short ELSE = 4;
-// const unsigned short END_IF = 5;
-// const unsigned short FROM_FILE = 6;
-// const unsigned short EQUAL = 7;
-// const unsigned short FOREACH = 8;
-// const unsigned short END_FOREACH = 9;
-// const unsigned short FROM = 10;
-
-void display2(string path, const map<string, string>& tags)
-{
-    const string TOKENS = "(\\bif\\b)|(else)|(include)|(/\\bif\\b)|(config_load)|(file)|(test)|(\\=)|(\\bforeach\\b)|(/\\bforeach\\b)|(from)";
-    
-    string src = ifs_read_all(path);
-    regex exp = regex("\\{\\$(.*?)\\}", regex::ECMAScript);
-            
-    sregex_iterator begin = sregex_iterator(src.begin(), src.end(), exp);
-    auto end = sregex_iterator(); 
-
-    int beg_pos = 0;
-    string output;
-    for (sregex_iterator iter = begin; iter != end; ++iter)
-    {
-        smatch match = *iter;
-
-         for(short i = 0; i < 10; ++i)
-         {
-            std::ssub_match sub_match = match[i];
-            if(sub_match.matched)
-            {
-                // switch(i)
-                // {
-                //     case INCLUDE:
-                //         break;
-                //     case CONFIG_LOAD:
-                //         break;
-                //     case IF:
-                //         break;
-                //     case END_IF:
-                //         break;
-                //     case FOREACH:
-                //         break;
-                //     case END_FOREACH:
-                //         break;
-                //     case FROM:
-                //         break;
-                //     case FROM_FILE:
-                //         break;
-                //     default:
-                //         break;
-                // } 
-            }
-            // don't really need to try them all ? stop on first match
-            //continue; 
-            break;
-        }
-    }
-    //cout << output << endl;
-}
-
 void display(string path, const map<string, string>& tags)
 {
     string src = ifs_read_all(path);
