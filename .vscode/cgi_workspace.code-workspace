@@ -11,6 +11,9 @@
 		},
 		{
 			"path": "../../flex-bison-example"
+		},
+		{
+			"path": "../../restc-cpp"
 		}
 	],
 	"settings": {
