@@ -5,8 +5,8 @@
 
 using namespace std;
 
-int main(int argc, char* argv[])
-{ 
+int main(int argc, char *argv[])
+{
     const string template_name = "test_comment.tpl";
     const string project_folder = "/home/brian/src/cgi_web";
     const string conf_path = project_folder + "/test/conf_test.txt";
@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
     sm.assign("version", "0.1");
     sm.assign("version_date", "Feb, 14 2022");
     // call variable --
-    //string html = sm.variable(src);
+    // string html = sm.variable(src);
     string html = sm.remove_comments(src);
     cout << html << endl;
 }
