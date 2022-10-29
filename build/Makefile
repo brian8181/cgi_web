@@ -141,5 +141,5 @@ clean_upload:
 	
 .PHONY: clean
 clean:
-	rm $(BUILDDIR)/*.$(EXE) $(BUILDDIR)/*.[oa]
+	-rm -f $(BUILDDIR)/*.$(EXE) $(BUILDDIR)/*.[oa]
 	

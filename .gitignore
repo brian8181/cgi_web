@@ -63,3 +63,7 @@ build/cgi_web_test
 *.cgi
 a.out
 root.conf
+
+# build output
+build
+!build/Makefile
