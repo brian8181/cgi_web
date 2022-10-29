@@ -5,9 +5,10 @@
 
 using namespace std;
 
-int main(int argc, char* argv[])
-{ 
-    cout << "content-type: text/html" << endl << endl;
+int main(int argc, char *argv[])
+{
+    cout << "content-type: text/html" << endl
+         << endl;
 
     string path = "./templates/index_test.tpl";
     map<string, string> tags;
@@ -18,6 +19,6 @@ int main(int argc, char* argv[])
     assign("version", "0.1", tags);
     assign("version_date", "Feb, 14 2022", tags);
     display(path, tags);
-    
-	return 0;
+
+    return 0;
 }

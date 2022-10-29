@@ -11,17 +11,17 @@
 using namespace std;
 using namespace cgicc;
 
-int main(int argc, char* argv[])
-{ 
-    Cgicc  cgi;
+int main(int argc, char *argv[])
+{
+    Cgicc cgi;
     cout << HTTPHTMLHeader();
 
-    //const string template_name = "default_test.tpl";
+    // const string template_name = "default_test.tpl";
     const string template_name = "test1.tpl";
     const string project_folder = "/home/brian/src/cgi_web";
     const string conf_path = project_folder + "/test/conf_test.txt";
 
-    streamy sm(project_folder + "/www/templates", project_folder + "/www/compile", project_folder + "/www/config", project_folder + "/www/cache"); 
+    streamy sm(project_folder + "/www/templates", project_folder + "/www/compile", project_folder + "/www/config", project_folder + "/www/cache");
     sm.load_config(conf_path);
 
     // configure testing ...

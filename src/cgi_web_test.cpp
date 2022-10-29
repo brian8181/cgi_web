@@ -27,37 +27,36 @@ void cgi_web_testTest::setUp()
 void cgi_web_testTest::tearDown()
 {
 }
- 
+
 void cgi_web_testTest::execute()
 {
 }
 
-void cgi_web_testTest::execute(int argc, char* argv[])
+void cgi_web_testTest::execute(int argc, char *argv[])
 {
 }
 
-
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
     // informs test-listener about testresults
     CPPUNIT_NS::TestResult testresult;
 
     // register listener for collecting the test-results
     CPPUNIT_NS::TestResultCollector collectedresults;
-    testresult.addListener (&collectedresults);
+    testresult.addListener(&collectedresults);
 
     // register listener for per-test progress output
     CPPUNIT_NS::BriefTestProgressListener progress;
-    testresult.addListener (&progress);
+    testresult.addListener(&progress);
 
     // insert test-suite at test-runner by registry#include <stdio.h>
     CPPUNIT_NS::TestRunner testrunner;
-    testrunner.addTest (CPPUNIT_NS::TestFactoryRegistry::getRegistry().makeTest ());
+    testrunner.addTest(CPPUNIT_NS::TestFactoryRegistry::getRegistry().makeTest());
     testrunner.run(testresult);
 
     // output resint* pn = new int;ults in compiler-format
     CPPUNIT_NS::CompilerOutputter compileroutputter(&collectedresults, std::cerr);
-    compileroutputter.write ();
+    compileroutputter.write();
 
     // Output XML for Jenkins CPPunit plugin
     ofstream xmlFileOut("cppcgi_web_testTestResults.xml");

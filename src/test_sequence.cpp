@@ -10,15 +10,15 @@ const unsigned int PROJECT_FOLDER = 2;
 
 using namespace std;
 
-int main(int argc, char* argv[])
-{  
+int main(int argc, char *argv[])
+{
     string path; // source (text to match)
     string exp;  // regular expresssion
-    
-    if(argc == 3)
+
+    if (argc == 3)
     {
         path = argv[1];
-        exp = argv[2];    
+        exp = argv[2];
     }
 
     // read file
@@ -27,7 +27,8 @@ int main(int argc, char* argv[])
 
     cout << "Source text ..." << endl;
     cout << src;
-    cout << endl << "End text." << endl;
-    
+    cout << endl
+         << "End text." << endl;
+
     sequence(src, exp);
 }

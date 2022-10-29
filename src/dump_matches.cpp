@@ -7,28 +7,28 @@
 
 using namespace std;
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-    if(argc == 3)
+    if (argc == 3)
     {
         string path = argv[1];
         string exp = argv[2];
         int count = atoi(argv[3]);
-        
+
         string src = ifs_read_all(path);
-        regex src_exp = regex(exp); 
-                      
+        regex src_exp = regex(exp);
+
         auto begin = sregex_iterator(src.begin(), src.end(), src_exp);
-        auto end = sregex_iterator(); 
-        
+        auto end = sregex_iterator();
+
         for (sregex_iterator iter = begin; iter != end; ++iter)
         {
             smatch match = *iter;
             string value = match[3].str() + match[5].str() + match[7].str();
-            cout << "Match: --> " << match.str() <<  endl;
-            for(int i = 0; i < count; ++i)
+            cout << "Match: --> " << match.str() << endl;
+            for (int i = 0; i < count; ++i)
             {
-               cout << match[i].str() << endl;
+                cout << match[i].str() << endl;
             }
         }
     }

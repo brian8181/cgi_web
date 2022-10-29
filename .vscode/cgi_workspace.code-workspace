@@ -14,6 +14,15 @@
 		},
 		{
 			"path": "../../restc-cpp"
+		},
+		{
+			"path": "../../XQilla-2.3.4"
+		},
+		{
+			"path": "../../skitxier"
+		},
+		{
+			"path": "../../xerces-c-3.2.4"
 		}
 	],
 	"settings": {

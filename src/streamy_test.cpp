@@ -7,7 +7,7 @@
 
 using namespace std;
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
     streamy sm("test1", "test2", "test3", "test4");
     sm.assign("x", "5");
