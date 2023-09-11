@@ -1,6 +1,8 @@
 AA
 {if}
-ABC
+{HTML
+    ABC 
+}
 {include}
 EDF
 {else}
