@@ -4,7 +4,7 @@
         {
             "label": "MAKE DEBUGGDB",
             "type": "shell",
-            "command": "make -f ${workspaceFolder}/build/Makefile",
+            "command": "make -f ${workspaceFolder}/Makefile",
             "problemMatcher": [
                 "$gcc"
             ],
@@ -22,7 +22,7 @@
             ],
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": false
             }
         },
         {
@@ -34,7 +34,7 @@
             ],
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": false
             }
         },
         {
@@ -46,7 +46,7 @@
             ],
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": false
             }
         },
         {
@@ -58,7 +58,7 @@
             ],
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": false
             }
         },
         {

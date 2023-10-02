@@ -4,7 +4,7 @@
 #include <regex>
 #include <fstream>
 //#include <pair>
-//#include "utility.hpp"
+#include "utility.hpp"
 
 using namespace std;
 
@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
     cout << "content-type: text/html" << endl
          << endl;
 
-    string path = "./templates/index_test.tpl";
+    string path = "./test/templates/index_test.tpl";
     map<string, string> tags;
     assign("headers", "", tags);
     assign("page_title", "CGI CPP Test Page", tags);
