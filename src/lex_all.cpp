@@ -33,20 +33,17 @@ int main(int argc, char *argv[])
     // read file
     try
     {
-        // std::ifstream ifile_strm(path);
-        // std::string src((std::istreambuf_iterator<char>(ifile_strm)), std::istreambuf_iterator<char>());
-        // if (src == "")
-        // {
-        //     cout << "Error reading file, path (" + path + ") ..." << endl;
-        //     return 0;
-        // }
+        std::ifstream ifile_strm(path);
+        std::string src((std::istreambuf_iterator<char>(ifile_strm)), std::istreambuf_iterator<char>());
+        if (src == "")
+        {
+            cout << "Error reading file, path (" + path + ") ..." << endl;
+            return 0;
+        }
 
-        string src = ifs_read_all(path);
-        //src = fstream_read(path);
-
-        //cout << src << endl;
+        string tmp = ifs_read_all(path);
         // lex
-        output = lex_all(src);
+        output = lex_all(tmp);
     }
     catch (const std::exception &e)
     {
