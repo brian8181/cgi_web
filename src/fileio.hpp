@@ -1,6 +1,6 @@
 
-#ifndef _UTILITY_HPP
-#define _UTILITY_HPP
+#ifndef _FILEIO_HPP
+#define _FILEIO_HPP
 
 #include <string>
 #include <map>

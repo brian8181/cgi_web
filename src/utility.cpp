@@ -363,6 +363,7 @@ string lex_all(const string &src)
 {
     const string SIMPLE_ESCAPE = "\\{[\\w\\s\\]*\\}";
     const string ESCAPE = "\\{[\\w\\s\\[\\]+-=|$><^/#@~&*.%!~`_:;\"'\\\\,]*\\}";
+    const string CPP_ESCAPE = "\\<\\$cpp[\\w\\s\\[\\]+-=|$><^/#@~&*.%!~`_:;\"'\\\\,]*\\$\\>";
     regex exp = regex(ESCAPE, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
     auto end = sregex_iterator();
@@ -385,11 +386,11 @@ string lex_all(const string &src)
     }
 
     // get TEXT after last match
-    if (src_beg_pos < src.size())
-    {
-        // trim white space / newline
-        output += trim(src.substr(src_beg_pos, src.size() - src_beg_pos)) + "\n";
-    }
+    // if (src_beg_pos < src.size())
+    // {
+    //     // trim white space / newline
+    //     output += trim(src.substr(src_beg_pos, src.size() - src_beg_pos)) + "\n";
+    // }
     return output;
 }
 
