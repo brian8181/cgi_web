@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include "utility.hpp"
+#include "fileio.hpp"
 
 // const unsigned int DEFAULT_TEMPLATE = 1;
 // const unsigned int PROJECT_FOLDER = 2;
