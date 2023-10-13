@@ -27,7 +27,6 @@ int main(int argc, char *argv[])
         template_name = argv[1];
     }
     const string path = project_folder + "/test/templates/" + template_name;
-    //string path = "./test/t.txt";
 
     string output;
     // read file
@@ -41,9 +40,8 @@ int main(int argc, char *argv[])
             return 0;
         }
 
-        string tmp = ifs_read_all(path);
         // lex
-        output = lex_all(tmp);
+        output = lex_all(src);
     }
     catch (const std::exception &e)
     {

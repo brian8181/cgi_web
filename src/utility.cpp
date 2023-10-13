@@ -9,22 +9,53 @@
 #include "patterns.hpp"
 #include "utility.hpp"
 
-template <typename T1, typename T2>
-class pairz
-{
-    T1 t1;
-    T2 t2;
-};
+// template <typename T1, typename T2>
+// class pairz
+// {
+//     T1 t1;
+//     T2 t2;
+// };
 
-// open file
-ifstream open(string path)
+// // open file
+// ifstream open(string path)
+// {
+//     pairz<string, string> pz;
+//     string src;
+//     ifstream file;
+//     file.open(path, ios::in);
+//     return file;
+// }
+
+class myexception : public exception
 {
-    pairz<string, string> pz;
-    string src;
-    ifstream file;
-    file.open(path, ios::in);
-    return file;
-}
+    virtual const char *what() const throw()
+    {
+        return "My exception happened";
+    }
+} myex;
+
+// read all
+// string fstream_read(string path)
+// {
+//     string str;
+//     fstream file;
+//     file.open(path, ios::in);
+//     if (file.is_open())
+//     {
+//         char c[256];
+//         while (file.read(c, 256))
+//         {
+//             if (file.eof())
+//             {
+//                 throw myex;
+//             }
+//             // read data from file
+//             str.append(c);
+//         }
+//         file.close();
+//     }
+//     return str;
+// }
 
 // get file lines as vector
 vector<string> getlines(string path)
@@ -43,37 +74,6 @@ vector<string> getlines(string path)
         file.close();
     }
     return lines;
-}
-
-class myexception : public exception
-{
-    virtual const char *what() const throw()
-    {
-        return "My exception happened";
-    }
-} myex;
-
-// read all
-string fstream_read(string path)
-{
-    string str;
-    fstream file;
-    file.open(path, ios::in);
-    if (file.is_open())
-    {
-        char c[256];
-        while (file.read(c, 256))
-        {
-            if (file.eof())
-            {
-                throw myex;
-            }
-            // read data from file
-            str.append(c);
-        }
-        file.close();
-    }
-    return str;
 }
 
 // read all, (default read function)
@@ -362,7 +362,7 @@ string foreach_sequence_with_test(const string &src)
 string lex_all(const string &src)
 {
     const string ESCAPE = "\\{[\\w\\s]+\\}";
-    // const string TEXT = "[\\}]([.]+)[\\{]";
+    //const string TEXT = "[\\}]([.]+)[\\{]";
     //const string TEXT = "^[\\s\\w\\p<>/\\]*[^{][\\s\\w/\\<>]*$";
     //const string TEXT = ".*[^{}].*";
     //const string TEXT = "\\w*";
@@ -377,9 +377,6 @@ string lex_all(const string &src)
     {
         smatch match = *iter;
         int match_beg_pos = match.position();
-
-        //cout << "TAG: " << match.str() << endl;
-        // outout begin -> match
         // get from end of last match (src_beg_pos) to begin of current
         string pre_match_src = src.substr(src_beg_pos, match_beg_pos - src_beg_pos);
         output += "TEXT: " + trim(pre_match_src) + "\n";
