@@ -40,7 +40,7 @@
         {
             "label": "LEXING",
             "type": "shell",
-            "command": "make -f ${workspaceFolder}/build/Makefile lexing.cgi",
+            "command": "make -f ${workspaceFolder}/Makefile lexing.cgi",
             "problemMatcher": [
                 "$gcc"
             ],
@@ -52,7 +52,7 @@
         {
             "label": "LEX_ALL",
             "type": "shell",
-            "command": "make -f ${workspaceFolder}/build/Makefile lex_all.cgi",
+            "command": "make -f ${workspaceFolder}/Makefile lex_all.cgi",
             "problemMatcher": [
                 "$gcc"
             ],

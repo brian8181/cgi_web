@@ -361,8 +361,11 @@ string foreach_sequence_with_test(const string &src)
 // find text & tags
 string lex_all(const string &src)
 {
-    const string ESCAPE = "\\{.*?\\}";
+    const string ESCAPE = "\\{[\\w\\s]+\\}";
     // const string TEXT = "[\\}]([.]+)[\\{]";
+    //const string TEXT = "^[\\s\\w\\p<>/\\]*[^{][\\s\\w/\\<>]*$";
+    //const string TEXT = ".*[^{}].*";
+    //const string TEXT = "\\w*";
 
     regex exp = regex(ESCAPE, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
@@ -374,13 +377,17 @@ string lex_all(const string &src)
     {
         smatch match = *iter;
         int match_beg_pos = match.position();
+
+        //cout << "TAG: " << match.str() << endl;
         // outout begin -> match
+        // get from end of last match (src_beg_pos) to begin of current
         string pre_match_src = src.substr(src_beg_pos, match_beg_pos - src_beg_pos);
-        output += trim(pre_match_src) + "\n";
+        output += "TEXT: " + trim(pre_match_src) + "\n";
 
         string tokens = lex_tag(match.str());
-        output += tokens;
-        src_beg_pos = match_beg_pos + match.length();
+        output += "TAG: " + tokens;
+        src_beg_pos = match_beg_pos + match.length()+1;
+
     }
 
     // get TEXT after last match

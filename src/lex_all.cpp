@@ -8,6 +8,8 @@
 
 using namespace std;
 
+string fstream_read(string path);
+
 int main(int argc, char *argv[])
 {
     string root_path = "./src/lex_all.conf";
@@ -25,18 +27,24 @@ int main(int argc, char *argv[])
         template_name = argv[1];
     }
     const string path = project_folder + "/test/templates/" + template_name;
+    //string path = "./test/t.txt";
 
     string output;
     // read file
     try
     {
-        std::ifstream ifile_strm(path);
-        std::string src((std::istreambuf_iterator<char>(ifile_strm)), std::istreambuf_iterator<char>());
-        if (src == "")
-        {
-            cout << "Error reading file, path (" + path + ") ..." << endl;
-            return 0;
-        }
+        // std::ifstream ifile_strm(path);
+        // std::string src((std::istreambuf_iterator<char>(ifile_strm)), std::istreambuf_iterator<char>());
+        // if (src == "")
+        // {
+        //     cout << "Error reading file, path (" + path + ") ..." << endl;
+        //     return 0;
+        // }
+
+        string src = ifs_read_all(path);
+        //src = fstream_read(path);
+
+        //cout << src << endl;
         // lex
         output = lex_all(src);
     }
