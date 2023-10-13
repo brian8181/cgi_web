@@ -381,7 +381,8 @@ string lex_all(const string &src)
         string pre_match_src = src.substr(src_beg_pos, match_beg_pos - src_beg_pos);
         output += "TEXT: " + trim(pre_match_src) + "\n";
 
-        string tokens = lex_tag(match.str());
+        //string tokens = lex_tag(match.str());
+        string tokens = match.str();
         output += "TAG: " + tokens;
         src_beg_pos = match_beg_pos + match.length()+1;
 
