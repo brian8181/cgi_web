@@ -1,4 +1,3 @@
-
 #ifndef _FILEIO_HPP
 #define _FILEIO_HPP
 
@@ -12,12 +11,12 @@ string ifs_read_all(string path);
 vector<string> getlines(string path);
 map<string, string> get_config(string path);
 
-std::string ltrim(const std::string &s);
-std::string rtrim(const std::string &s);
-std::string trim(const std::string &s);
+string ltrim(const string &s);
+string rtrim(const string &s);
+string trim(const string &s);
 
-std::string& _ltrim(const std::string &s);
-std::string& _rtrim(const std::string &s);
-std::string& _trim(const std::string &s);
+string& _ltrim(const string &s);
+string& _rtrim(const string &s);
+string& _trim(const string &s);
 
 #endif
