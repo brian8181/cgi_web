@@ -30,50 +30,32 @@ string ifs_read_all(string path)
     return output;
 }
 
-// get test configuration map
-// map<string, string> get_config(string path)
-// {
-//     ifstream file;
-//     file.open(path, ios::in);
-
-//     map<string, string> config;
-//     pair<string, string> config_pair;
-
-//     if (file.is_open())
-//     {
-//         string line;
-//         while (getline(file, line))
-//         {
-//             size_t pos = line.find('=');
-            
-//             // trim(line.substr(0, pos - 1));
-//             // trim(line.substr(pos + 1));
-//             //pair<string, string> p(name, value);
-//             //config.insert(p);
-//         }
-//         file.close();
-//     }
-//     return config;
-// }
-
 void ltrim(std::string &s)
 {
-    auto it = std::find_if(s.begin(), s.end(),
-                           [](char c)
-                           {
-                               return !std::isspace<char>(c, std::locale::classic());
-                           });
-    s.erase(s.begin(), it);
+    int len = s.size();
+    int i = 0;
+    for(; i < len; ++i)
+    {
+        if(!std::isspace(s[i]))
+            break;
+    }
+
+    string::iterator beg = s.begin(); 
+    s.erase(beg, beg+i);
 }
 
 void rtrim(std::string &s)
 {
-    auto it = std::find_if(s.rbegin(), s.rend(),
-                           [](char c)
-                           {
-                               return !std::isspace<char>(c, std::locale::classic());
-                           });
-    s.erase(it.base(), s.end());
+    int len = s.size();
+    int i = len;
+    for(;i > 0; --i)
+    {
+        if(!std::isspace(s[i-1]))
+            break;
+    }
+
+    string::iterator end = s.end(); 
+    s.erase(end-i, end);
 }
 
 void trim(std::string &s)
