@@ -9,15 +9,53 @@
 #include "patterns.hpp"
 #include "utility.hpp"
 
-// open file
-ifstream open(string path)
+// template <typename T1, typename T2>
+// class pairz
+// {
+//     T1 t1;
+//     T2 t2;
+// };
+
+// // open file
+// ifstream open(string path)
+// {
+//     pairz<string, string> pz;
+//     string src;
+//     ifstream file;
+//     file.open(path, ios::in);
+//     return file;
+// }
+
+class myexception : public exception
 {
-    pair<string, string> pz;
-    string src;
-    ifstream file;
-    file.open(path, ios::in);
-    return file;
-}
+    virtual const char *what() const throw()
+    {
+        return "My exception happened";
+    }
+} myex;
+
+// read all
+// string fstream_read(string path)
+// {
+//     string str;
+//     fstream file;
+//     file.open(path, ios::in);
+//     if (file.is_open())
+//     {
+//         char c[256];
+//         while (file.read(c, 256))
+//         {
+//             if (file.eof())
+//             {
+//                 throw myex;
+//             }
+//             // read data from file
+//             str.append(c);
+//         }
+//         file.close();
+//     }
+//     return str;
+// }
 
 // get file lines as vector
 vector<string> getlines(string path)
@@ -38,6 +76,14 @@ vector<string> getlines(string path)
     return lines;
 }
 
+class myexception : public exception
+{
+    virtual const char *what() const throw()
+    {
+        return "My exception happened";
+    }
+} myex;
+
 // read all
 string fstream_read(string path)
 {
@@ -49,9 +95,9 @@ string fstream_read(string path)
         char c[256];
         while (file.read(c, 256))
         {
-            if (file.eof()) // possible on good read?
+            if (file.eof())
             {
-                return str;
+                throw myex;
             }
             // read data from file
             str.append(c);
@@ -346,9 +392,9 @@ string foreach_sequence_with_test(const string &src)
 // find text & tags
 string lex_all(const string &src)
 {
-    const string ESCAPE = "\\{.*?\\}";
-    // const string TEXT = "[\\}]([.]+)[\\{]";
-
+    const string SIMPLE_ESCAPE = "\\{[\\w\\s\\]*\\}";
+    const string ESCAPE = "\\{[\\w\\s\\[\\]+-=|$><^/#@~&*.%!~`_:;\"'\\\\,]*\\}";
+    const string CPP_ESCAPE = "\\<\\$cpp[\\w\\s\\[\\]+-=|$><^/#@~&*.%!~`_:;\"'\\\\,]*\\$\\>";
     regex exp = regex(ESCAPE, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
     auto end = sregex_iterator();
@@ -359,21 +405,23 @@ string lex_all(const string &src)
     {
         smatch match = *iter;
         int match_beg_pos = match.position();
-        // outout begin -> match
+        // get from end of last match (src_beg_pos) to begin of current
         string pre_match_src = src.substr(src_beg_pos, match_beg_pos - src_beg_pos);
-        output += trim(pre_match_src) + "\n";
+        //output += "TEXT: " + trim(pre_match_src) + "\n";
 
-        string tokens = lex_tag(match.str());
-        output += tokens;
-        src_beg_pos = match_beg_pos + match.length();
+        //string tokens = lex_tag(match.str());
+        string tokens = match.str() + "\n";
+        output += "TAG: " + tokens;
+        src_beg_pos = match_beg_pos + match.length()+1;
+
     }
 
     // get TEXT after last match
-    if (src_beg_pos < src.size())
-    {
-        // trim white space / newline
-        output += trim(src.substr(src_beg_pos, src.size() - src_beg_pos)) + "\n";
-    }
+    // if (src_beg_pos < src.size())
+    // {
+    //     // trim white space / newline
+    //     output += trim(src.substr(src_beg_pos, src.size() - src_beg_pos)) + "\n";
+    // }
     return output;
 }
 

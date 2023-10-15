@@ -4,7 +4,7 @@
         {
             "label": "MAKE DEBUGGDB",
             "type": "shell",
-            "command": "make -f ${workspaceFolder}/build/Makefile",
+            "command": "make -f ${workspaceFolder}/Makefile",
             "problemMatcher": [
                 "$gcc"
             ],
@@ -22,7 +22,7 @@
             ],
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": false
             }
         },
         {
@@ -34,31 +34,31 @@
             ],
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": false
             }
         },
         {
             "label": "LEXING",
             "type": "shell",
-            "command": "make -f ${workspaceFolder}/build/Makefile lexing.cgi",
+            "command": "make -f ${workspaceFolder}/Makefile lexing.cgi",
             "problemMatcher": [
                 "$gcc"
             ],
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": false
             }
         },
         {
             "label": "LEX_ALL",
             "type": "shell",
-            "command": "make -f ${workspaceFolder}/build/Makefile lex_all.cgi",
+            "command": "make -f ${workspaceFolder}/Makefile lex_all.cgi",
             "problemMatcher": [
                 "$gcc"
             ],
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": false
             }
         },
         {

@@ -2,11 +2,14 @@
 #include <string>
 #include <fstream>
 #include "utility.hpp"
+#include "fileio.hpp"
 
 // const unsigned int DEFAULT_TEMPLATE = 1;
 // const unsigned int PROJECT_FOLDER = 2;
 
 using namespace std;
+
+string fstream_read(string path);
 
 int main(int argc, char *argv[])
 {
@@ -37,6 +40,7 @@ int main(int argc, char *argv[])
             cout << "Error reading file, path (" + path + ") ..." << endl;
             return 0;
         }
+
         // lex
         output = lex_all(src);
     }
