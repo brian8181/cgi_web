@@ -1,0 +1,34 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/bkp/src/cgi_web'
+g++ -std=c++11 -DDEBUG -ggdb -c /home/bkp/src/cgi_web/src/utility.cpp -o /home/bkp/src/cgi_web/build/utility.o
+g++ -std=c++11 -DDEBUG -ggdb -c /home/bkp/src/cgi_web/src/load_conf.cpp -o /home/bkp/src/cgi_web/build/load_conf.o
+g++ -std=c++11 -DDEBUG -ggdb -c /home/bkp/src/cgi_web/src/dump.cpp -o /home/bkp/src/cgi_web/build/dump.o
+g++ -std=c++11 -DDEBUG -ggdb -c /home/bkp/src/cgi_web/src/find_tags.cpp -o /home/bkp/src/cgi_web/build/find_tags.o
+g++ -std=c++11 -DDEBUG -ggdb /home/bkp/src/cgi_web/build/find_tags.o /home/bkp/src/cgi_web/build/utility.o -o /home/bkp/src/cgi_web/build/find_tags.cgi
+g++ -std=c++11 -DDEBUG -ggdb -c /home/bkp/src/cgi_web/src/main.cpp -o /home/bkp/src/cgi_web/build/main.o
+g++ -std=c++11 -DDEBUG -ggdb -c /home/bkp/src/cgi_web/src/regex_find.cpp -o /home/bkp/src/cgi_web/build/regex_find.o
+g++ -std=c++11 -DDEBUG -ggdb /home/bkp/src/cgi_web/build/utility.o /home/bkp/src/cgi_web/build/main.o /home/bkp/src/cgi_web/build/regex_find.o -o /home/bkp/src/cgi_web/build/regex_find.cgi
+g++ -std=c++11 -DDEBUG -ggdb /home/bkp/src/cgi_web/build/utility.o /home/bkp/src/cgi_web/src/test_include.cpp -o /home/bkp/src/cgi_web/build/test_include.cgi
+g++ -std=c++11 -DDEBUG -ggdb /home/bkp/src/cgi_web/build/utility.o /home/bkp/src/cgi_web/src/test_variable.cpp -o /home/bkp/src/cgi_web/build/test_variable.cgi
+g++ -std=c++11 -DDEBUG -ggdb /home/bkp/src/cgi_web/build/utility.o /home/bkp/src/cgi_web/src/test_if_sequence.cpp -o /home/bkp/src/cgi_web/build/test_if_sequence.cgi
+g++ -std=c++11 -DDEBUG -ggdb /home/bkp/src/cgi_web/build/utility.o /home/bkp/src/cgi_web/src/test_foreach_sequence.cpp -o /home/bkp/src/cgi_web/build/test_foreach_sequence.cgi
+g++ -std=c++11 -DDEBUG -ggdb /home/bkp/src/cgi_web/build/utility.o /home/bkp/src/cgi_web/src/test_get_conf.cpp -o /home/bkp/src/cgi_web/build/test_get_conf.cgi
+g++ -std=c++11 -DDEBUG -ggdb /home/bkp/src/cgi_web/build/utility.o /home/bkp/src/cgi_web/src/lex_all.cpp -o /home/bkp/src/cgi_web/build/lex_all.cgi
+g++ -std=c++11 -DDEBUG -ggdb -c /home/bkp/src/streamy-cpp/src/streamy.cpp -o /home/bkp/src/cgi_web/build/streamy.o
+g++ -std=c++11 -DDEBUG -ggdb /home/bkp/src/cgi_web/src/streamy_test.cpp /home/bkp/src/cgi_web/build/streamy.o /home/bkp/src/cgi_web/build/utility.o -o /home/bkp/src/cgi_web/build/streamy_test.cgi
+g++ -std=c++11 -DDEBUG -ggdb /home/bkp/src/cgi_web/build/utility.o /home/bkp/src/cgi_web/src/test_sequence.cpp -o /home/bkp/src/cgi_web/build/test_sequence.cgi
+g++ -std=c++11 -DDEBUG -ggdb /home/bkp/src/cgi_web/build/load_conf.o /home/bkp/src/cgi_web/build/utility.o -o /home/bkp/src/cgi_web/build/load_conf.cgi
+g++ -std=c++11 -DDEBUG -ggdb /home/bkp/src/cgi_web/build/dump.o /home/bkp/src/cgi_web/build/utility.o -o /home/bkp/src/cgi_web/build/dump.cgi
+g++ -std=c++11 -DDEBUG -ggdb -c /home/bkp/src/cgi_web/src/dump_matches.cpp -o /home/bkp/src/cgi_web/build/dump_matches.o
+g++ -std=c++11 -DDEBUG -ggdb /home/bkp/src/cgi_web/src/index1.cpp /home/bkp/src/cgi_web/build/streamy.o /home/bkp/src/cgi_web/build/utility.o  -o /home/bkp/src/cgi_web/build/default.cgi
+ar rvs /home/bkp/src/cgi_web/build/streamy.a /home/bkp/src/cgi_web/build/streamy.o
+g++ -std=c++11 -DDEBUG -ggdb /home/bkp/src/cgi_web/src/cgi_test_script.cpp  -o /home/bkp/src/cgi_web/build/cgi_test_script.cgi
+cp -rf /home/bkp/src/cgi_web/src/cgi_test_script.sh /home/bkp/src/cgi_web/build/bash_test.cgi
+g++ -std=c++11 -DDEBUG -ggdb /home/bkp/src/cgi_web/src/default_test.cpp /home/bkp/src/cgi_web/build/streamy.o /home/bkp/src/cgi_web/build/utility.o  -o /home/bkp/src/cgi_web/build/default_test.cgi
+g++ -std=c++11 -DDEBUG -ggdb /home/bkp/src/cgi_web/build/utility.o /home/bkp/src/cgi_web/src/lex.cpp -o /home/bkp/src/cgi_web/build/lex.cgi
+g++ -std=c++11 -DDEBUG -ggdb /home/bkp/src/cgi_web/build/dump.o /home/bkp/src/cgi_web/build/utility.o -o /home/bkp/src/cgi_web/build/dump.cgi
+g++ -std=c++11 -DDEBUG -ggdb /home/bkp/src/cgi_web/build/dump_matches.o /home/bkp/src/cgi_web/build/utility.o -o /home/bkp/src/cgi_web/build/dump_matches.cgi
+g++ -std=c++11 -DDEBUG -ggdb /home/bkp/src/cgi_web/src/display_test.cpp /home/bkp/src/cgi_web/build/utility.o -o /home/bkp/src/cgi_web/build/display_test.cgi
+g++ -std=c++11 -DDEBUG -ggdb /home/bkp/src/cgi_web/src/replace_test.cpp /home/bkp/src/cgi_web/build/utility.o -o /home/bkp/src/cgi_web/build/replace_test.cgi
+make: Leaving directory '/home/bkp/src/cgi_web'
+ 

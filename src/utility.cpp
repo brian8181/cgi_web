@@ -9,17 +9,10 @@
 #include "patterns.hpp"
 #include "utility.hpp"
 
-template <typename T1, typename T2>
-class pairz
-{
-    T1 t1;
-    T2 t2;
-};
-
 // open file
 ifstream open(string path)
 {
-    pairz<string, string> pz;
+    pair<string, string> pz;
     string src;
     ifstream file;
     file.open(path, ios::in);
@@ -45,14 +38,6 @@ vector<string> getlines(string path)
     return lines;
 }
 
-class myexception : public exception
-{
-    virtual const char *what() const throw()
-    {
-        return "My exception happened";
-    }
-} myex;
-
 // read all
 string fstream_read(string path)
 {
@@ -64,9 +49,9 @@ string fstream_read(string path)
         char c[256];
         while (file.read(c, 256))
         {
-            if (file.eof())
+            if (file.eof()) // possible on good read?
             {
-                throw myex;
+                return str;
             }
             // read data from file
             str.append(c);

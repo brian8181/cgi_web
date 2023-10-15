@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void assign(string name, string val, map<string, string>& symbols);
+void assign(string name, string val, map<string, string>& symbols); 
 void display(string path, const map<string, string>& tags);
 void display2(string path, const map<string, string>& tags);
 void display(string tmpl);
