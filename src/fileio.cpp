@@ -33,11 +33,13 @@ string ifs_read_all(string path)
 void ltrim(std::string &s)
 {
     int len = s.size();
-    int i = 0;
-    for(; i < len; ++i)
+    int i;
+    for(i = 0; i < len; ++i)
     {
         if(!std::isspace(s[i]))
             break;
+
+       // s.erase(s.begin(), s.begin()+1);
     }
 
     string::iterator beg = s.begin(); 
@@ -50,6 +52,7 @@ void rtrim(std::string &s)
     int i = len;
     for(;i > 0; --i)
     {
+        cout << "i=" << i << endl;
         if(!std::isspace(s[i-1]))
             break;
     }

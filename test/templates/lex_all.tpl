@@ -1,15 +1,15 @@
 AA
-{if}
+{if}{test}
 {HTML ABC }
 {include}
 EDF
-{else}
+    {else}
 XYZ
 {config_load = file}
 AAAA
 {test}
 CCCC
-{foreach from}
+ {foreach from}
 {/foreach}
 {$test}
 {$two|default}

@@ -276,6 +276,27 @@
             ],
             "preLaunchTask": "MAKE DEBUGGDB",
             "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "fileio_trim",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/fileio_trim",
+            "args": [" hello "],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "MAKE DEBUGGDB",
+            "miDebuggerPath": "/usr/bin/gdb"
         }
   ]
 }

@@ -327,15 +327,14 @@ string lex_all(const string &src)
     for (sregex_iterator iter = begin; iter != end; ++iter)
     {
         smatch match = *iter;
-        int match_beg_pos = match.position();
-        // get from end of last match (src_beg_pos) to begin of current
-        string pre_match_src = src.substr(src_beg_pos, match_beg_pos - src_beg_pos);
-        //output += "TEXT: " + trim(pre_match_src) + "\n";
+        // int match_beg_pos = match.position();
+        // // get from end of last match (src_beg_pos) to begin of current
+        // string pre_match_src = src.substr(src_beg_pos, match_beg_pos - src_beg_pos);
+        // output += "TEXT: " + trim(pre_match_src) + "\n";
 
-        //string tokens = lex_tag(match.str());
-        string tokens = match.str() + "\n";
-        output += "TAG: " + tokens;
-        src_beg_pos = match_beg_pos + match.length()+1;
+        string token = match.str() + "\n";
+        output += "TAG: " + token;
+        // src_beg_pos = match_beg_pos + match.length()+1;
 
     }
 

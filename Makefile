@@ -56,6 +56,11 @@ find_tags.$(EXE): utility.o find_tags.o
 streamy_test.$(EXE): streamy.o
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/streamy_test.cpp $(BUILDDIR)/streamy.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/streamy_test.$(EXE)
 
+fileio_trim: 
+	$(CXX) $(CXXFLAGS) -c ./src/fileio_trim.cpp -o $(BUILDDIR)/fileio_trim.o	
+	$(CXX) $(CXXFLAGS) -c ./src/fileio.cpp -o $(BUILDDIR)/fileio.o	
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/fileio_trim.o $(BUILDDIR)/fileio.o -o $(BUILDDIR)/fileio_trim
+
 # fread.cgi: utility.o
 # 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/fread.cpp -o $(BUILDDIR)/fread.cgi
 
@@ -115,8 +120,6 @@ regex_find.o:
 
 utility.o:
 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/src/utility.cpp -o $(BUILDDIR)/utility.o
-
-
 
 # just copy & change extension to "cgi"
 bash_test.cgi:
