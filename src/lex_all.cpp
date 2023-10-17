@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <filesystem>
 #include "utility.hpp"
 #include "fileio.hpp"
 
@@ -8,7 +9,8 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    string root_path = "./src/lex_all.conf";
+    std::filesystem::path path(argv[0]);
+    string root_path = path.replace_extension("conf");
     map<string, string> pairs = get_config(root_path);
 
     const string project_folder = pairs["project_folder"];
@@ -17,21 +19,21 @@ int main(int argc, char *argv[])
     
     // check for input or use default
     string template_name = default_template;
-    if (argc == 2)
+    if (argc > 1)
     {
         template_name.clear();
         template_name = argv[1];
     }
 
-    const string path = template_folder + template_name;
+    const string file_path = template_folder + template_name;
     string output;
     try
     {
-        string src = ifs_read_all(path);
+        string src = ifs_read_all(file_path);
         if (src == "")
         {
-            cout << "Error reading file, path (" + path + ") ..." << endl;
-            return 0;
+            cout << "Error reading file, path (" + file_path + ") ..." << endl;
+            return -1;
         }
         output = lex_all(src);
     }

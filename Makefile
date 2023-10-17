@@ -7,7 +7,7 @@ man1dir = $(mandir)/man1
 
 # Compiler settings - Can be customized.
 CXX = g++
-CXXFLAGS = -std=c++11 -DDEBUG -g
+CXXFLAGS = -std=c++17 -DDEBUG -g
 
 # lib settings
 #LDFLAGS = -static -lcgicc -L/usr/lib/
@@ -75,6 +75,7 @@ lex.cgi: utility.o
 
 lex_all.cgi: utility.o
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/lex_all.cpp -o $(BUILDDIR)/lex_all.cgi
+	cp $(SRCDIR)/lex_all.conf $(BUILDDIR)/lex_all.conf  
 
 test_sequence.cgi: utility.o
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/test_sequence.cpp -o $(BUILDDIR)/test_sequence.cgi

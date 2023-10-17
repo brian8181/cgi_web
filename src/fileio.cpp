@@ -30,39 +30,38 @@ string ifs_read_all(string path)
     return output;
 }
 
-void ltrim(std::string &s)
+string& ltrim(std::string &s)
 {
+    std::cout << &s << endl;
     int len = s.size();
     int i;
     for(i = 0; i < len; ++i)
     {
         if(!std::isspace(s[i]))
             break;
-
-       // s.erase(s.begin(), s.begin()+1);
     }
-
     string::iterator beg = s.begin(); 
     s.erase(beg, beg+i);
+    return s;
 }
 
-void rtrim(std::string &s)
+string& rtrim(std::string &s)
 {
     int len = s.size();
     int i = len;
     for(;i > 0; --i)
     {
-        cout << "i=" << i << endl;
         if(!std::isspace(s[i-1]))
             break;
     }
-
     string::iterator end = s.end(); 
-    s.erase(end-i, end);
+    s.erase(end-(len-i), end);
+    return s;
 }
 
-void trim(std::string &s)
+string& trim(std::string &s)
 {
     rtrim(s);
     ltrim(s);
+    return s;
 }
