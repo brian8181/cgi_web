@@ -4,12 +4,7 @@
 #include "utility.hpp"
 #include "fileio.hpp"
 
-// const unsigned int DEFAULT_TEMPLATE = 1;
-// const unsigned int PROJECT_FOLDER = 2;
-
 using namespace std;
-
-string fstream_read(string path);
 
 int main(int argc, char *argv[])
 {
@@ -32,8 +27,7 @@ int main(int argc, char *argv[])
     string output;
     try
     {
-        std::ifstream ifile_strm(path);
-        std::string src((std::istreambuf_iterator<char>(ifile_strm)), std::istreambuf_iterator<char>());
+        string src = ifs_read_all(path);
         if (src == "")
         {
             cout << "Error reading file, path (" + path + ") ..." << endl;
