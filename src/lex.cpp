@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
         }
 
         // lex
-        output = lex(src);
+        //output = lex(src);
     }
     catch (const std::exception &e)
     {
