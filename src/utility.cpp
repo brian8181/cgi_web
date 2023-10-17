@@ -9,53 +9,7 @@
 #include "patterns.hpp"
 #include "utility.hpp"
 
-// template <typename T1, typename T2>
-// class pairz
-// {
-//     T1 t1;
-//     T2 t2;
-// };
 
-// // open file
-// ifstream open(string path)
-// {
-//     pairz<string, string> pz;
-//     string src;
-//     ifstream file;
-//     file.open(path, ios::in);
-//     return file;
-// }
-
-class myexception : public exception
-{
-    virtual const char *what() const throw()
-    {
-        return "My exception happened";
-    }
-} myex;
-
-// read all
-// string fstream_read(string path)
-// {
-//     string str;
-//     fstream file;
-//     file.open(path, ios::in);
-//     if (file.is_open())
-//     {
-//         char c[256];
-//         while (file.read(c, 256))
-//         {
-//             if (file.eof())
-//             {
-//                 throw myex;
-//             }
-//             // read data from file
-//             str.append(c);
-//         }
-//         file.close();
-//     }
-//     return str;
-// }
 
 // get file lines as vector
 vector<string> getlines(string path)
@@ -74,37 +28,6 @@ vector<string> getlines(string path)
         file.close();
     }
     return lines;
-}
-
-class myexception : public exception
-{
-    virtual const char *what() const throw()
-    {
-        return "My exception happened";
-    }
-} myex;
-
-// read all
-string fstream_read(string path)
-{
-    string str;
-    fstream file;
-    file.open(path, ios::in);
-    if (file.is_open())
-    {
-        char c[256];
-        while (file.read(c, 256))
-        {
-            if (file.eof())
-            {
-                throw myex;
-            }
-            // read data from file
-            str.append(c);
-        }
-        file.close();
-    }
-    return str;
 }
 
 // read all, (default read function)

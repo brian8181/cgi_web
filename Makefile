@@ -7,7 +7,7 @@ man1dir = $(mandir)/man1
 
 # Compiler settings - Can be customized.
 CXX = g++
-CXXFLAGS = -std=c++11 -DDEBUG -ggdb
+CXXFLAGS = -std=c++11 -DDEBUG -g
 
 # lib settings
 #LDFLAGS = -static -lcgicc -L/usr/lib/
@@ -18,20 +18,11 @@ INCLUDES = -I/usr/include/cgicc/
 APPNAME = cgi_web
 EXT = cpp
 EXE = cgi
-ROOTDIR  = /home/bkp/src/cgi_web
+ROOTDIR  = ~/src/cgi_web
 BUILDDIR = $(ROOTDIR)/build
 SRCDIR = $(ROOTDIR)/src
 OBJDIR = $(ROOTDIR)/build
-streamyDIR = /home/bkp/src/streamy-cpp
-
-# compile & link for debug
-# debug: 
-# 	#$(CXXFLAGS) += -DDEBUG -g
-# debug: all
-
-# # compile & link for debug GDBversion variable
-# debuggdb: 
-# 	#$(CXXFLAGS) += -DDEBUG -ggdb # compile & link
+streamyDIR = ~/src/streamy-cpp
 
 world: all dump_matches.o find_tags.o streamy_test.$(EXE) default.$(EXE) streamy.a cgi_test_script.cgi bash_test.cgi default_test.cgi lex.cgi
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.$(EXE)

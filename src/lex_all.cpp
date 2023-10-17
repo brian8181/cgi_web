@@ -17,9 +17,9 @@ int main(int argc, char *argv[])
     map<string, string> pairs = get_config(root_path);
 
     const string project_folder = pairs["project_folder"];
+    const string template_folder = pairs["template_folder"];
     const string default_template = pairs["default_template"];
-    const string conf_path = pairs["conf_path"];
-
+    
     // check for input or use default
     string template_name = default_template;
     if (argc == 2)
@@ -27,10 +27,9 @@ int main(int argc, char *argv[])
         template_name.clear();
         template_name = argv[1];
     }
-    const string path = project_folder + "/test/templates/" + template_name;
 
+    const string path = template_folder + template_name;
     string output;
-    // read file
     try
     {
         std::ifstream ifile_strm(path);
@@ -40,8 +39,6 @@ int main(int argc, char *argv[])
             cout << "Error reading file, path (" + path + ") ..." << endl;
             return 0;
         }
-
-        // lex
         output = lex_all(src);
     }
     catch (const std::exception &e)
