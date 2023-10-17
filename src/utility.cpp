@@ -76,6 +76,37 @@ vector<string> getlines(string path)
     return lines;
 }
 
+class myexception : public exception
+{
+    virtual const char *what() const throw()
+    {
+        return "My exception happened";
+    }
+} myex;
+
+// read all
+string fstream_read(string path)
+{
+    string str;
+    fstream file;
+    file.open(path, ios::in);
+    if (file.is_open())
+    {
+        char c[256];
+        while (file.read(c, 256))
+        {
+            if (file.eof())
+            {
+                throw myex;
+            }
+            // read data from file
+            str.append(c);
+        }
+        file.close();
+    }
+    return str;
+}
+
 // read all, (default read function)
 string ifs_read_all(string path)
 {
