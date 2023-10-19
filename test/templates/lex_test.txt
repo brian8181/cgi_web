@@ -1,6 +1,4 @@
-A
-{AA}
-BB 
+BB
 {BBB}
 CCCC
 {DDD}

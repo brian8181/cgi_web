@@ -73,8 +73,10 @@ test_foreach_sequence.cgi: utility.o
 lex.cgi: utility.o
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/lex.cpp -o $(BUILDDIR)/lex.cgi
 
-lex_all.cgi: utility.o
-	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/lex_all.cpp -o $(BUILDDIR)/lex_all.cgi
+lex_all.cgi:
+	$(CXX) $(CXXFLAGS) -c ./src/fileio.cpp -o $(BUILDDIR)/fileio.o	
+	$(CXX) $(CXXFLAGS) -c ./src/lex_all.cpp -o $(BUILDDIR)/lex_all.o	
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/fileio.o $(BUILDDIR)/lex_all.o -o $(BUILDDIR)/lex_all.cgi
 	cp $(SRCDIR)/lex_all.conf $(BUILDDIR)/lex_all.conf  
 
 test_sequence.cgi: utility.o

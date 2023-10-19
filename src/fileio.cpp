@@ -32,7 +32,6 @@ string ifs_read_all(string path)
 
 string& ltrim(std::string &s)
 {
-    std::cout << &s << endl;
     int len = s.size();
     int i;
     for(i = 0; i < len; ++i)
@@ -64,4 +63,29 @@ string& trim(std::string &s)
     rtrim(s);
     ltrim(s);
     return s;
+}
+
+// get test configuration map
+map<string, string> get_config(string path)
+{
+    ifstream file;
+    file.open(path, ios::in);
+
+    map<string, string> config;
+    pair<string, string> config_pair;
+
+    if (file.is_open())
+    {
+        string line;
+        while (getline(file, line))
+        {
+            size_t pos = line.find('=');
+            string name = line.substr(0, pos - 1);
+            string value = line.substr(pos + 1);
+            pair<string, string> p(trim(name), trim(value));
+            config.insert(p);
+        }
+        file.close();
+    }
+    return config;
 }

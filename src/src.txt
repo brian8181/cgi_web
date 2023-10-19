@@ -1,0 +1,1 @@
+"AA\n{if}\nHey\n{test}\n{XX}\n{include}\n{else}\nXYZ\n{config_load = file}\nAAAA\n{test}\nCCCC\n{foreach from}\n{/foreach}\n{$test}\n{$two|default}\n{default

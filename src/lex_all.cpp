@@ -2,10 +2,12 @@
 #include <string>
 #include <fstream>
 #include <filesystem>
-#include "utility.hpp"
+#include <regex>
 #include "fileio.hpp"
 
 using namespace std;
+
+string lex_all(const string &src);
 
 int main(int argc, char *argv[])
 {
@@ -30,11 +32,6 @@ int main(int argc, char *argv[])
     try
     {
         string src = ifs_read_all(file_path);
-        if (src == "")
-        {
-            cout << "Error reading file, path (" + file_path + ") ..." << endl;
-            return -1;
-        }
         output = lex_all(src);
     }
     catch (const std::exception &e)
@@ -43,4 +40,45 @@ int main(int argc, char *argv[])
     }
 
     cout << output;
+}
+
+// find text & tags
+string lex_all(const string &src)
+{
+    const string SIMPLE_ESCAPE = "\\{[\\w\\s\\]*\\}";
+    const string ESCAPE = "\\{[\\w\\s\\[\\]+-=|$><^/#@~&*.%!~`_:;\"'\\\\,]*\\}";
+    const string CPP_ESCAPE = "\\<\\$cpp[\\w\\s\\[\\]+-=|$><^/#@~&*.%!~`_:;\"'\\\\,]*\\$\\>";
+    regex exp = regex(ESCAPE, regex::ECMAScript); // match
+    auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
+    auto end = sregex_iterator();
+
+    int matches = 0;
+    string output;
+    sregex_iterator prev_iter = end;
+
+    for (sregex_iterator iter = begin; iter != end; ++iter)
+    {
+        smatch match = *iter;
+        smatch pmatch = *prev_iter;
+
+        int match_beg_pos = match.position();
+        int match_end_pos = 0;
+         
+        if(prev_iter != end)
+        {
+            match_end_pos = prev_iter->position() + prev_iter->length();
+        }
+       
+        // get from end of last match (src_beg_pos) to begin of current
+        string text = src.substr(match_end_pos, match_beg_pos);
+        if( match_end_pos != 0 &&  src[match_end_pos] == '\n' )
+            text += '\n';
+        output += "TEXT:" + text;
+
+        string token = match.str();
+        output += "TAG:" + token;
+
+        prev_iter = iter;
+    }
+    return output;
 }
