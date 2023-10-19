@@ -45,9 +45,7 @@ int main(int argc, char *argv[])
 // find text & tags
 string lex_all(const string &src)
 {
-    const string SIMPLE_ESCAPE = "\\{[\\w\\s\\]*\\}";
     const string ESCAPE = "\\{[\\w\\s\\[\\]+-=|$><^/#@~&*.%!~`_:;\"'\\\\,]*\\}";
-    const string CPP_ESCAPE = "\\<\\$cpp[\\w\\s\\[\\]+-=|$><^/#@~&*.%!~`_:;\"'\\\\,]*\\$\\>";
     regex exp = regex(ESCAPE, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
     auto end = sregex_iterator();
