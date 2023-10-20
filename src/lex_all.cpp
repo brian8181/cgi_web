@@ -38,7 +38,6 @@ int main(int argc, char *argv[])
     {
         std::cerr << "Error reading file ... " << e.what() << endl;
     }
-
     cout << output;
 }
 
@@ -47,8 +46,8 @@ string lex_all(const string &src)
 {
     const string ESCAPE = "\\{[\\w\\s\\[\\]+-=|$><^/#@~&*.%!~`_:;\"'\\\\,]*\\}";
     regex exp = regex(ESCAPE, regex::ECMAScript); // match
-    auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
-    auto end = sregex_iterator();
+    sregex_iterator begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
+    sregex_iterator end = sregex_iterator(src.end(), src.end(), exp, std::regex_constants::match_default);
 
     int matches = 0;
     string output;
@@ -66,11 +65,16 @@ string lex_all(const string &src)
         {
             match_end_pos = prev_iter->position() + prev_iter->length();
         }
-       
         // get from end of last match (src_beg_pos) to begin of current
         string text = src.substr(match_end_pos, match_beg_pos);
-        if( match_end_pos != 0 &&  src[match_end_pos] == '\n' )
+        if(src[match_beg_pos] == '\n')
             text += '\n';
+
+        string t = "testing";
+        t += '\n';
+        t += "new_line";
+        cout << t << endl;
+
         output += "TEXT:" + text;
 
         string token = match.str();
