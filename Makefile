@@ -24,37 +24,33 @@ SRCDIR = $(ROOTDIR)/src
 OBJDIR = $(ROOTDIR)/build
 streamyDIR = ~/src/streamy-cpp
 
-world: all dump_matches.o find_tags.o streamy_test.$(EXE) default.$(EXE) streamy.a cgi_test_script.cgi bash_test.cgi default_test.cgi lex.cgi
-	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.$(EXE)
+world: all dump_matches.o find_tags.o cgi_test_script.cgi bash_test.cgi
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump_matches.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump_matches.$(EXE)
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/display_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/display_test.$(EXE)
 	$(CXX) $(CXXFLAGS) $(SRCDIR)/replace_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/replace_test.$(EXE)
 		
-all: utility.o load_conf.o dump.o find_tags.$(EXE) regex_find.$(EXE) test_include.$(EXE) test_variable.$(EXE) \
-	test_if_sequence.$(EXE) test_foreach_sequence.$(EXE) test_get_conf.$(EXE) lex_all.$(EXE) test_get_conf.$(EXE) streamy_test.$(EXE) test_sequence.cgi
-
-	$(CXX) $(CXXFLAGS) $(BUILDDIR)/load_conf.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/load_conf.$(EXE)
-	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump.$(EXE)
+all: utility.o load_conf.o find_tags.$(EXE) test_include.$(EXE) test_variable.$(EXE) \
+	test_if_sequence.$(EXE) test_foreach_sequence.$(EXE) test_get_conf.$(EXE) lex_all.$(EXE) test_get_conf.$(EXE) test_sequence.cgi
 	
-default.$(EXE): streamy.o utility.o
-	$(CXX) $(CXXFLAGS) $(SRCDIR)/index1.cpp $(BUILDDIR)/streamy.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/default.$(EXE)
+# default.$(EXE): streamy.o utility.o
+# 	$(CXX) $(CXXFLAGS) $(SRCDIR)/index1.cpp $(BUILDDIR)/streamy.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/default.$(EXE)
 
-fast: default_test.$(EXE)
+# fast: default_test.$(EXE)
 
-default_test.$(EXE): streamy.o utility.o
-	$(CXX) $(CXXFLAGS) $(SRCDIR)/default_test.cpp $(BUILDDIR)/streamy.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/default_test.$(EXE)
+# default_test.$(EXE): streamy.o utility.o
+# 	$(CXX) $(CXXFLAGS) $(SRCDIR)/default_test.cpp $(BUILDDIR)/streamy.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/default_test.$(EXE)
 
 # index_.01.$(EXE): 
 #   	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.01.cpp -o $(BUILDDIR)/index.01.$(EXE)
 
-regex_find.$(EXE): utility.o main.o regex_find.o 
-	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(BUILDDIR)/main.o $(BUILDDIR)/regex_find.o -o $(BUILDDIR)/regex_find.$(EXE)
+# regex_find.$(EXE): utility.o main.o regex_find.o 
+# 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(BUILDDIR)/main.o $(BUILDDIR)/regex_find.o -o $(BUILDDIR)/regex_find.$(EXE)
 
 find_tags.$(EXE): utility.o find_tags.o
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/find_tags.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/find_tags.$(EXE)
 
-streamy_test.$(EXE): streamy.o
-	$(CXX) $(CXXFLAGS) $(SRCDIR)/streamy_test.cpp $(BUILDDIR)/streamy.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/streamy_test.$(EXE)
+# streamy_test.$(EXE): streamy.o
+# 	$(CXX) $(CXXFLAGS) $(SRCDIR)/streamy_test.cpp $(BUILDDIR)/streamy.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/streamy_test.$(EXE)
 
 fileio_trim: 
 	$(CXX) $(CXXFLAGS) -c ./src/fileio_trim.cpp -o $(BUILDDIR)/fileio_trim.o	
@@ -70,8 +66,8 @@ test_if_sequence.cgi: utility.o
 test_foreach_sequence.cgi: utility.o
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/test_foreach_sequence.cpp -o $(BUILDDIR)/test_foreach_sequence.cgi
 
-lex.cgi: utility.o
-	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/lex.cpp -o $(BUILDDIR)/lex.cgi
+# lex.cgi: utility.o
+# 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/lex.cpp -o $(BUILDDIR)/lex.cgi
 
 lex_all.cgi:
 	$(CXX) $(CXXFLAGS) -c ./src/fileio.cpp -o $(BUILDDIR)/fileio.o	
@@ -94,14 +90,14 @@ test_get_conf.cgi: utility.o
 test_variable.cgi: 
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/test_variable.cpp -o $(BUILDDIR)/test_variable.cgi
 
-streamy.a: streamy.o
-	ar rvs $(BUILDDIR)/streamy.a $(BUILDDIR)/streamy.o
+# streamy.a: streamy.o
+# 	ar rvs $(BUILDDIR)/streamy.a $(BUILDDIR)/streamy.o
 
-streamy.o: 
-	$(CXX) $(CXXFLAGS) -c $(streamyDIR)/src/streamy.cpp -o $(BUILDDIR)/streamy.o
+# streamy.o: 
+# 	$(CXX) $(CXXFLAGS) -c $(streamyDIR)/src/streamy.cpp -o $(BUILDDIR)/streamy.o
 
-main.o:
-	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/src/main.$(EXT) -o $(BUILDDIR)/main.o
+# main.o:
+# 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/src/main.$(EXT) -o $(BUILDDIR)/main.o
 
 load_conf.o:
 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/load_conf.cpp -o $(BUILDDIR)/load_conf.o
@@ -118,8 +114,8 @@ dump_matches.o:
 find_tags.o:
 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/find_tags.cpp -o $(BUILDDIR)/find_tags.o
 
-regex_find.o: 
-	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/regex_find.cpp -o $(BUILDDIR)/regex_find.o
+# regex_find.o: 
+# 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/regex_find.cpp -o $(BUILDDIR)/regex_find.o
 
 utility.o:
 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/src/utility.cpp -o $(BUILDDIR)/utility.o
