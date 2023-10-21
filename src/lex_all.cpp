@@ -11,6 +11,7 @@ string lex_all(const string &src);
 map<string, string> get_config(string path);
 
 void test_smatch();
+void lex();
 
 int main(int argc, char *argv[])
 {
@@ -43,6 +44,8 @@ int main(int argc, char *argv[])
     }
     cout << output;
     test_smatch();
+
+    lex();
     return 0;
 }
 
@@ -71,33 +74,75 @@ map<string, string> get_config(string path)
     return config;
 }
 
+void lex()
+{
+    cout << "Lexing..." << endl;
+    string s = "for a good time, call 867-5309 aaa 231-5555  ddd 8555-9999 444-7777";
+    regex rexp("\\d{3}-\\d{4}");
+    // const string ESCAPE = "\\{[\\w\\s\\[\\]+-=|$><^/#@~&*.%!~`_:;\"'\\\\,]*\\}";
+    // regex exp = regex(ESCAPE, regex::ECMAScript); // match
+    smatch phone_match;
+
+    while(std::regex_search(s, phone_match, rexp, std::regex_constants::match_default))
+    {
+        //std::string match_beg = phone_match.format("$`");
+        std::string match = phone_match.format("$`{$&}");
+        s = phone_match.format("$'");
+        //std::cout << match_beg;
+        std::cout << match;
+        //std::cout << match_end << '\n';
+    }
+
+    cout << "End Lexing..." << endl;
+}
+
 // find text & tags
 string lex_all(const string &src)
 {
     const string ESCAPE = "\\{[\\w\\s\\[\\]+-=|$><^/#@~&*.%!~`_:;\"'\\\\,]*\\}";
     regex exp = regex(ESCAPE, regex::ECMAScript); // match
 
-    const string s = "for a good time, call 867-5309";
+    const string s = "for a good time, call 867-5309 aaa 231-5555";
     smatch phone_match;
     regex phone_regex("\\d{3}-\\d{4}");
     //bool mathed = regex_match(s.end(), s.begin(), s_match, exp, std::regex_constants::match_default);
     if (std::regex_search(s, phone_match, phone_regex, std::regex_constants::match_default))
     {
-        std::string fmt_s = phone_match.format(
-            "$`"   // $` means characters before the match
-            "[$&]" // $& means the matched characters
-            "$'"); // $' means characters following the match
-        std::cout << fmt_s << '\n';
+        // std::string fmt_s = phone_match.format(
+        //     "$`"   // $` means characters before the match
+        //     "[$&]"); // $& means the matched characters
+        //     //"$'"); // $' means characters following the match
+        // std::cout << fmt_s << '\n';
+
+        // std::string fmt_s = phone_match.format("$`$&$'"); // $& means the matched characters
+        // std::cout << fmt_s << '\n';
+
+        if (std::regex_search(s, phone_match, phone_regex, std::regex_constants::match_default))
+        {
+            std::string match_beg = phone_match.format("$`");
+            std::string match = phone_match.format("$&");
+            std::string match_end = phone_match.format("$'");
+            std::cout << match_beg << '\n';
+            std::cout << match << '\n';
+            std::cout << match_end << '\n';
+        }
+        
+        // if (std::regex_search(fmt_s, phone_match, phone_regex, std::regex_constants::match_default))
+        // {
+        //     std::string fmt_s_end = phone_match.format("$`$&");
+        //     std::cout << fmt_s_end << '\n';
+        // }
     }
 
-    while(regex_match(s.end(), s.begin(), phone_match, phone_regex, std::regex_constants::match_default))
-    {
-        std::string fmt_s = phone_match.format(
-            "$`"   // $` means characters before the match
-            "[$&]" // $& means the matched characters
-            "$'"); // $' means characters following the match
-        std::cout << fmt_s << '\n';
-    }
+    //while(regex_match(s.end(), s.begin(), phone_match, phone_regex, std::regex_constants::match_default))
+    // while(std::regex_search(s, phone_match, phone_regex, std::regex_constants::match_default))
+    // {
+    //     std::string fmt_s = phone_match.format(
+    //         "$`"   // $` means characters before the match
+    //         "[$&]" // $& means the matched characters
+    //         "$'"); // $' means characters following the match
+    //     std::cout << fmt_s << '\n';
+    // }
 
     sregex_iterator begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
     sregex_iterator end = sregex_iterator(src.end(), src.end(), exp, std::regex_constants::match_default);
