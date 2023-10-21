@@ -37,29 +37,29 @@ int main(int argc, char *argv[])
 			++argc;
 		}
 		
-        // int opt = 0;
-        // int option_index = 0;
-        // bool file_flag = false;
-        // bool verbose_flag = false;
+        int opt = 0;
+        int option_index = 0;
+        bool file_flag = false;
+        bool verbose_flag = false;
         
-        // while ((opt = getopt (argc, argv, "abc:")) != -1)
-        // {
-        //     switch (opt)
-        //     {
-        //     case 'h':
-        //         //print_help();
-        //         return 0; 
-        //     case 'v':
-        //         verbose_flag = true;
-        //         break;
-        //     case 'f':
-        //         file_flag = true;
-        //         break; 
-        //     default: // unknown option before args
-        //         fprintf(stderr, "Unexpected option, -h for help\n");
-        //         return EXIT_FAILURE;
-        //     }
-        // }
+        while ((opt = getopt (argc, argv, "abc:")) != -1)
+        {
+            switch (opt)
+            {
+            case 'h':
+                //print_help();
+                return 0; 
+            case 'v':
+                verbose_flag = true;
+                break;
+            case 'f':
+                file_flag = true;
+                break; 
+            default: // unknown option before args
+                fprintf(stderr, "Unexpected option, -h for help\n");
+                return EXIT_FAILURE;
+            }
+        }
 
         string s = argv[1];
         char* cs = argv[1];
@@ -70,7 +70,6 @@ int main(int argc, char *argv[])
         std::cout << "Before ltrim \"" << s << "\"" << std::endl; 
         s = ltrim(s);
         std::cout << "After ltrim \"" << s << "\"" << std::endl; 
-
         std::cout << "Before rtrim \"" << s << "\"" << std::endl; 
         s = rtrim(s);
         std::cout << "After rtrim \"" << s << "\"" << std::endl; 

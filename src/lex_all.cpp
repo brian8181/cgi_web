@@ -7,7 +7,8 @@
 
 using namespace std;
 
-string lex_all(const string &src);
+map<string, string> get_config(string path);
+void  lex(string& s);
 
 int main(int argc, char *argv[])
 {
@@ -32,55 +33,58 @@ int main(int argc, char *argv[])
     try
     {
         string src = ifs_read_all(file_path);
-        output = lex_all(src);
+        lex(src);
     }
     catch (const std::exception &e)
     {
         std::cerr << "Error reading file ... " << e.what() << endl;
     }
     cout << output;
+    return 0;
 }
 
-// find text & tags
-string lex_all(const string &src)
+// get test configuration map
+map<string, string> get_config(string path)
 {
+    ifstream file;
+    file.open(path, ios::in);
+
+    map<string, string> config;
+    pair<string, string> config_pair;
+
+    if (file.is_open())
+    {
+        string line;
+        while (getline(file, line))
+        {
+            size_t pos = line.find('=');
+            string name = line.substr(0, pos - 1);
+            string value = line.substr(pos + 1);
+            pair<string, string> p(trim(name), trim(value));
+            config.insert(p);
+        }
+        file.close();
+    }
+    return config;
+}
+
+void  lex(string& s)
+{
+    cout << "Lexing..." << endl;
+
     const string ESCAPE = "\\{[\\w\\s\\[\\]+-=|$><^/#@~&*.%!~`_:;\"'\\\\,]*\\}";
     regex exp = regex(ESCAPE, regex::ECMAScript); // match
-    sregex_iterator begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
-    sregex_iterator end = sregex_iterator(src.end(), src.end(), exp, std::regex_constants::match_default);
+    smatch match;
 
-    int matches = 0;
-    string output;
-    sregex_iterator prev_iter = end;
-
-    for (sregex_iterator iter = begin; iter != end; ++iter)
+    while(std::regex_search(s, match, exp, std::regex_constants::match_default))
     {
-        smatch match = *iter;
-        smatch pmatch = *prev_iter;
-
-        int match_beg_pos = match.position();
-        int match_end_pos = 0;
-         
-        if(prev_iter != end)
-        {
-            match_end_pos = prev_iter->position() + prev_iter->length();
-        }
-        // get from end of last match (src_beg_pos) to begin of current
-        string text = src.substr(match_end_pos, match_beg_pos);
-        if(src[match_beg_pos] == '\n')
-            text += '\n';
-
-        string t = "testing";
-        t += '\n';
-        t += "new_line";
-        cout << t << endl;
-
-        output += "TEXT:" + text;
-
-        string token = match.str();
-        output += "TAG:" + token;
-
-        prev_iter = iter;
+        std::string fmt_match_beg = match.format("TEXT: $`");
+        std::string fmt_match = match.format("TAG $&");
+        s = match.format("$'");
+        std::cout << fmt_match_beg << endl;
+        std::cout << fmt_match << endl;
     }
-    return output;
+    cout << s << endl;
+
+    cout << "End Lexing..." << endl;
 }
