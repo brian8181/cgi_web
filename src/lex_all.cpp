@@ -12,6 +12,7 @@ map<string, string> get_config(string path);
 
 void test_smatch();
 void lex();
+void  lex_tmpl(string& s);
 
 int main(int argc, char *argv[])
 {
@@ -45,7 +46,10 @@ int main(int argc, char *argv[])
     cout << output;
     test_smatch();
 
-    lex();
+    //lex();
+
+    string s = "AAAA {TAG1}\nBBB {TAG2}\n{TAG3}ZZZ";
+    lex_tmpl(s);
     return 0;
 }
 
@@ -92,6 +96,28 @@ void lex()
         std::cout << match;
         //std::cout << match_end << '\n';
     }
+  
+
+    cout << "End Lexing..." << endl;
+}
+
+void  lex_tmpl(string& s)
+{
+    cout << "Lexing..." << endl;
+
+    const string ESCAPE = "\\{[\\w\\s\\[\\]+-=|$><^/#@~&*.%!~`_:;\"'\\\\,]*\\}";
+    regex exp = regex(ESCAPE, regex::ECMAScript); // match
+    smatch match;
+
+    while(std::regex_search(s, match, exp, std::regex_constants::match_default))
+    {
+        std::string fmt_match_beg = match.format("$`");
+        std::string fmt_match = match.format("$&");
+        s = match.format("$'");
+        std::cout << fmt_match_beg << endl;
+        std::cout << fmt_match << endl;
+    }
+    cout << s << endl;
 
     cout << "End Lexing..." << endl;
 }
