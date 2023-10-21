@@ -77,11 +77,22 @@ string lex_all(const string &src)
     const string ESCAPE = "\\{[\\w\\s\\[\\]+-=|$><^/#@~&*.%!~`_:;\"'\\\\,]*\\}";
     regex exp = regex(ESCAPE, regex::ECMAScript); // match
 
-    std::smatch s_match;
-    bool mathed = regex_match(src.end(), src.begin(), s_match, exp, std::regex_constants::match_default);
-    while(regex_match(src.end(), src.begin(), s_match, exp, std::regex_constants::match_default))
+    const string s = "for a good time, call 867-5309";
+    smatch phone_match;
+    regex phone_regex("\\d{3}-\\d{4}");
+    //bool mathed = regex_match(s.end(), s.begin(), s_match, exp, std::regex_constants::match_default);
+    if (std::regex_search(s, phone_match, phone_regex, std::regex_constants::match_default))
     {
-        std::string fmt_s = s_match.format(
+        std::string fmt_s = phone_match.format(
+            "$`"   // $` means characters before the match
+            "[$&]" // $& means the matched characters
+            "$'"); // $' means characters following the match
+        std::cout << fmt_s << '\n';
+    }
+
+    while(regex_match(s.end(), s.begin(), phone_match, phone_regex, std::regex_constants::match_default))
+    {
+        std::string fmt_s = phone_match.format(
             "$`"   // $` means characters before the match
             "[$&]" // $& means the matched characters
             "$'"); // $' means characters following the match
