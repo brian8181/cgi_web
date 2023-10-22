@@ -15,47 +15,30 @@ INCLUDES = -I/usr/include/cgicc/
 # add addtional libs here
 
 # Makefile settings - Can be customized.
-APPNAME = cgi_web
 EXT = cpp
 EXE = cgi
-ROOTDIR  = ~/src/cgi_web
-BUILDDIR = $(ROOTDIR)/build
-SRCDIR = $(ROOTDIR)/src
-OBJDIR = $(ROOTDIR)/build
-streamyDIR = ~/src/streamy-cpp
+BUILDDIR = ./build
+SRCDIR = ./src
+OBJDIR = ./build
 
-world: all dump_matches.o bash_test.cgi
-	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump_matches.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/dump_matches.$(EXE)
-	$(CXX) $(CXXFLAGS) $(SRCDIR)/display_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/display_test.$(EXE)
-	$(CXX) $(CXXFLAGS) $(SRCDIR)/replace_test.cpp $(BUILDDIR)/utility.o -o $(BUILDDIR)/replace_test.$(EXE)
-		
-all: utility.o load_conf.o test_include.$(EXE) test_variable.$(EXE) \
-	test_if_sequence.$(EXE) test_foreach_sequence.$(EXE) test_get_conf.$(EXE) lex_all.$(EXE) test_get_conf.$(EXE) test_sequence.cgi
-	
-# default.$(EXE): streamy.o utility.o
-# 	$(CXX) $(CXXFLAGS) $(SRCDIR)/index1.cpp $(BUILDDIR)/streamy.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/default.$(EXE)
+all: lex fileio_trim test_include.$(EXE) test_variable.$(EXE) test_if_sequence.$(EXE) test_foreach_sequence.$(EXE) test_get_conf.$(EXE) test_get_conf.$(EXE) test_sequence.$(EXE)
 
-# fast: default_test.$(EXE)
-
-default_test.$(EXE): streamy.o utility.o
-	$(CXX) $(CXXFLAGS) $(SRCDIR)/default_test.cpp $(BUILDDIR)/streamy.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/default_test.$(EXE)
-
-# index_.01.$(EXE): 
-#   	$(CXX) $(CXXFLAGS) $(SRCDIR)/index.01.cpp -o $(BUILDDIR)/index.01.$(EXE)
-
-# regex_find.$(EXE): utility.o main.o regex_find.o 
-# 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(BUILDDIR)/main.o $(BUILDDIR)/regex_find.o -o $(BUILDDIR)/regex_find.$(EXE)
-
-# find_tags.$(EXE): utility.o find_tags.o
-# 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/find_tags.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/find_tags.$(EXE)
-
-# streamy_test.$(EXE): streamy.o
-# 	$(CXX) $(CXXFLAGS) $(SRCDIR)/streamy_test.cpp $(BUILDDIR)/streamy.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/streamy_test.$(EXE)
+lex:
+	$(CXX) $(CXXFLAGS) -c ./src/fileio.cpp -o $(BUILDDIR)/fileio.o	
+	$(CXX) $(CXXFLAGS) -c ./src/lex.cpp -o $(BUILDDIR)/lex.o	
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/fileio.o $(BUILDDIR)/lex.o -o $(BUILDDIR)/lex
+	cp $(SRCDIR)/lex.conf $(BUILDDIR)/lex.conf  
 
 fileio_trim: 
 	$(CXX) $(CXXFLAGS) -c ./src/fileio_trim.cpp -o $(BUILDDIR)/fileio_trim.o	
 	$(CXX) $(CXXFLAGS) -c ./src/fileio.cpp -o $(BUILDDIR)/fileio.o	
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/fileio_trim.o $(BUILDDIR)/fileio.o -o $(BUILDDIR)/fileio_trim
+
+default_test.$(EXE): streamy.o utility.o
+	$(CXX) $(CXXFLAGS) $(SRCDIR)/default_test.cpp $(BUILDDIR)/streamy.o $(BUILDDIR)/utility.o $(LDFLAGS) -o $(BUILDDIR)/default_test.$(EXE)
+
+find_tags.$(EXE): utility.o find_tags.o
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/find_tags.o $(BUILDDIR)/utility.o -o $(BUILDDIR)/find_tags.$(EXE)
 
 test_if_sequence.cgi: utility.o
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/test_if_sequence.cpp -o $(BUILDDIR)/test_if_sequence.cgi
@@ -63,14 +46,9 @@ test_if_sequence.cgi: utility.o
 test_foreach_sequence.cgi: utility.o
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/test_foreach_sequence.cpp -o $(BUILDDIR)/test_foreach_sequence.cgi
 
-# lex.cgi: utility.o
-# 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/lex.cpp -o $(BUILDDIR)/lex.cgi
-
-lex_all.cgi:
-	$(CXX) $(CXXFLAGS) -c ./src/fileio.cpp -o $(BUILDDIR)/fileio.o	
-	$(CXX) $(CXXFLAGS) -c ./src/lex_all.cpp -o $(BUILDDIR)/lex_all.o	
-	$(CXX) $(CXXFLAGS) $(BUILDDIR)/fileio.o $(BUILDDIR)/lex_all.o -o $(BUILDDIR)/lex_all.$(EXE)
-	cp $(SRCDIR)/lex_all.conf $(BUILDDIR)/lex_all.conf  
+dump_matches.$(EXE):
+	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/dump_matches.cpp -o $(BUILDDIR)/dump_matches.o
+	$(CXX) $(CXXFLAGS) $(BUILDDIR)/dump_matches.o $(BUILDDIR)/utility.o -o $(BUIL/DDIR)/dump_matches.$(EXE)
 
 test_sequence.cgi: utility.o
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/test_sequence.cpp -o $(BUILDDIR)/test_sequence.cgi
@@ -87,33 +65,15 @@ test_get_conf.cgi: utility.o
 test_variable.cgi: 
 	$(CXX) $(CXXFLAGS) $(BUILDDIR)/utility.o $(SRCDIR)/test_variable.cpp -o $(BUILDDIR)/test_variable.cgi
 
-# streamy.a: streamy.o
-# 	ar rvs $(BUILDDIR)/streamy.a $(BUILDDIR)/streamy.o
-
-# streamy.o: 
-# 	$(CXX) $(CXXFLAGS) -c $(streamyDIR)/src/streamy.cpp -o $(BUILDDIR)/streamy.o
-
-# main.o:
-# 	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/src/main.$(EXT) -o $(BUILDDIR)/main.o
-
 load_conf.o:
 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/load_conf.cpp -o $(BUILDDIR)/load_conf.o
-
-dump.o:
-	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/dump.cpp -o $(BUILDDIR)/dump.o
-
-dump_matches.o:
-	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/dump_matches.cpp -o $(BUILDDIR)/dump_matches.o
 
 find_tags.o:
 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/find_tags.cpp -o $(BUILDDIR)/find_tags.o
 	$(CXX) $(CXXFLAGS)  $(BUILDDIR)/find_tags.o -o $(BUILDDIR)/find_tags.cgi
 
-# regex_find.o: 
-# 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/regex_find.cpp -o $(BUILDDIR)/regex_find.o
-
 utility.o:
-	$(CXX) $(CXXFLAGS) -c $(ROOTDIR)/src/utility.cpp -o $(BUILDDIR)/utility.o
+	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/utility.cpp -o $(BUILDDIR)/utility.o
 
 # just copy & change extension to "cgi"
 bash_test.cgi:
