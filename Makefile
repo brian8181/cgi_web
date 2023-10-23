@@ -1,9 +1,5 @@
 # cgi_web
 
-# prefix = /usr/local
-# mandir = $(prefix)/share/man
-# man1dir = $(mandir)0912d2761397101f7f911dcbfce341c0d86676a4 add all .../man1
-
 # Compiler settings - Can be customized.
 CXX = g++
 LDFLAGS = -static -lcgicc -L/usr/lib/
@@ -43,17 +39,17 @@ test_if_sequence.cgi: utility.o
 test_foreach_sequence.cgi: utility.o
 	$(CXX) $(CXXFLAGS) $(BLD)/utility.o $(SRC)/test_foreach_sequence.cpp -o $(BLD)/test_foreach_sequence.cgi
 
-dump_matches.$(EXE):
+dump_matches.$(EXE): utility.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/dump_matches.cpp -o $(BLD)/dump_matches.o
 	$(CXX) $(CXXFLAGS) $(BLD)/dump_matches.o $(BLD)/utility.o -o $(BUIL/DDIR)/dump_matches.$(EXE)
 
 test_sequence.cgi: utility.o
 	$(CXX) $(CXXFLAGS) $(BLD)/utility.o $(SRC)/test_sequence.cpp -o $(BLD)/test_sequence.cgi
 
-test_comment.cgi: 
+test_comment.cgi: utility.o
 	$(CXX) $(CXXFLAGS) $(BLD)/utility.o $(SRC)/test_comment.cpp -o $(BLD)/test_comment.cgi
 
-test_include.cgi: 
+test_include.cgi: utility.o
 	$(CXX) $(CXXFLAGS) $(BLD)/utility.o $(SRC)/test_include.cpp -o $(BLD)/test_include.cgi
 
 test_get_conf.cgi: utility.o
@@ -77,12 +73,12 @@ utility.o:
 
 .PHONY: upload
 upload:
-	cp -rf $(BUILDDIR)/*.$(EXE) /var/www/html/cgi
+	cp -rf $(BLD)/*.$(EXE) /var/www/html/cgi
 	
 .PHONY: clean_upload
 clean_upload:
-	rm $(BUILDDIR)/*.$(EXE)
+	rm $(BLD)/*.$(EXE)
 	
 .PHONY: clean
 clean:
-	-rm -f $(BUILDDIR)/*.$(EXE) $(BUILDDIR)/*.[oa]
+	-rm $(BLD)/*
