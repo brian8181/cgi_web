@@ -2,6 +2,7 @@
 #include <iterator>
 #include <regex>
 #include <string>
+#include "fileio.hpp"
 #include "utility.hpp"
 
 using namespace std;
