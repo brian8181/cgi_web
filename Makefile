@@ -8,20 +8,23 @@ INCLUDES = -I/usr/include/cgicc/
 
 # Makefile settings - Can be customized.
 EXT = cpp
-EXE = cgi
 SRC = ./src
 BLD = ./build
 OBJ = ./build
 
-all: lex fileio_trim test_include.cgi test_get_conf.cgi test_variable.cgi test_if_sequence.cgi 
+all: lex fileio_trim test_include.cgi test_get_conf.cgi test_variable.cgi test_if_sequence.cgi dump_matches.cgi
 
 obj: load_conf.o find_tags.o utility.o
 
-lex:
-	$(CXX) $(CXXFLAGS) -c $(SRC)/fileio.cpp -o $(BLD)/fileio.o	
+lex: fileio.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/lex.cpp -o $(BLD)/lex.o	
 	$(CXX) $(CXXFLAGS) $(BLD)/fileio.o $(BLD)/lex.o -o $(BLD)/lex
 	cp $(SRC)/lex.conf $(BLD)/lex.conf  
+
+index.cgi: utility.o
+	$(CXX) $(CXXFLAGS) -c $(SRC)/index.cpp -o $(BLD)/index.o	
+	$(CXX) $(CXXFLAGS) -c $(SRC)/streamy.cpp -o $(BLD)/streamy.o	
+	$(CXX) $(CXXFLAGS) $(BLD)/index.o $(BLD)/streamy.o $(BLD)\utility.o -o $(BLD)/fileio_trim
 
 fileio_trim: fileio.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/fileio_trim.cpp -o $(BLD)/fileio_trim.o	
@@ -39,9 +42,9 @@ test_if_sequence.cgi: utility.o
 test_foreach_sequence.cgi: utility.o
 	$(CXX) $(CXXFLAGS) $(BLD)/utility.o $(SRC)/test_foreach_sequence.cpp -o $(BLD)/test_foreach_sequence.cgi
 
-dump_matches.$(EXE): utility.o
+dump_matches.cgi: utility.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/dump_matches.cpp -o $(BLD)/dump_matches.o
-	$(CXX) $(CXXFLAGS) $(BLD)/dump_matches.o $(BLD)/utility.o -o $(BUIL/DDIR)/dump_matches.$(EXE)
+	$(CXX) $(CXXFLAGS) $(BLD)/dump_matches.o $(BLD)/utility.o -o $(BLD)/dump_matches.cgi
 
 test_sequence.cgi: utility.o
 	$(CXX) $(CXXFLAGS) $(BLD)/utility.o $(SRC)/test_sequence.cpp -o $(BLD)/test_sequence.cgi

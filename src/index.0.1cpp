@@ -35,10 +35,7 @@ std::string trim(const std::string &s)
 }
 
 // read all, (default read function)
-string ifs_read_all(string path)
-{
-    std::ifstream ifstrm(path);
-    std::string output((std::istreambuf_iterator<char>(ifstrm)), std::istreambuf_iterator<char>());
+string ifs_read_all(string path)fileiostd::istreambuf_iterator<char>());
     return output;
 }
 
