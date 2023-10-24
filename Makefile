@@ -1,12 +1,8 @@
 # cgi_web
-
-# Compiler settings - Can be customized.
 CXX = g++
+CXXFLAGS = -g -Wall -std=c++17 -DDEBUG
 LDFLAGS = -static -lcgicc -L/usr/lib/
 INCLUDES = -I/usr/include/cgicc/
-# add addtional libs here
-
-# Makefile settings - Can be customized.
 EXT = cpp
 SRC = ./src
 BLD = ./build
@@ -14,6 +10,7 @@ OBJ = ./build
 
 all: lex fileio_trim test_include.cgi test_get_conf.cgi test_variable.cgi test_if_sequence.cgi dump_matches.cgi
 
+# build as test
 obj: load_conf.o find_tags.o utility.o
 
 lex: fileio.o
@@ -21,10 +18,8 @@ lex: fileio.o
 	$(CXX) $(CXXFLAGS) $(BLD)/fileio.o $(BLD)/lex.o -o $(BLD)/lex
 	cp $(SRC)/lex.conf $(BLD)/lex.conf  
 
-index.cgi: utility.o
-	$(CXX) $(CXXFLAGS) -c $(SRC)/index.cpp -o $(BLD)/index.o	
-	$(CXX) $(CXXFLAGS) -c $(SRC)/streamy.cpp -o $(BLD)/streamy.o	
-	$(CXX) $(CXXFLAGS) $(BLD)/index.o $(BLD)/streamy.o $(BLD)\utility.o -o $(BLD)/fileio_trim
+index.cgi: streamy.o utility.o
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $(SRC)/index.cppo $(BLD)/streamy.o $(BLD)/utility.o $(LDFLAGS) -o $(BLD)/index.cgi
 
 fileio_trim: fileio.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/fileio_trim.cpp -o $(BLD)/fileio_trim.o	
@@ -58,21 +53,23 @@ test_include.cgi: utility.o
 test_get_conf.cgi: utility.o
 	$(CXX) $(CXXFLAGS) $(BLD)/utility.o $(SRC)/test_get_conf.cpp -o $(BLD)/test_get_conf.cgi
 
-test_variable.cgi: 
+test_variable.cgi: streamy.o
 	$(CXX) $(CXXFLAGS) $(BLD)/utility.o $(SRC)/test_variable.cpp -o $(BLD)/test_variable.cgi
 
 fileio.o:
 	$(CXX) $(CXXFLAGS) -c $(SRC)/fileio.cpp -o $(BLD)/fileio.o	
 
-find_tags.o: fileio.o
-	$(CXX) $(CXXFLAGS) -c $(SRC)/find_tags.cpp -o $(BLD)/find_tags.o
-	$(CXX) $(CXXFLAGS)  $(BLD)/find_tags.o -o $(BLD)/find_tags.cgi
+find_tags.cgi: fileio.o
+	$(CXX) $(CXXFLAGS) fileio.o $(SRC)/find_tags.cpp -o $(BLD)/find_tags.cgi
 
 load_conf.o:
 	$(CXX) $(CXXFLAGS) -c $(SRC)/load_conf.cpp -o $(BLD)/load_conf.o
 
 utility.o:
 	$(CXX) $(CXXFLAGS) -c $(SRC)/utility.cpp -o $(BLD)/utility.o
+
+streamy.o:
+	$(CXX) $(CXXFLAGS) -c $(SRC)/streamy.cpp -o $(BLD)/streamy.o
 
 .PHONY: upload
 upload:

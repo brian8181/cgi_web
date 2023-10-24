@@ -4,7 +4,7 @@
 #include "cgicc/Cgicc.h"
 #include "cgicc/HTTPHTMLHeader.h"
 #include "cgicc/HTMLClasses.h"
-#include "../../streamy-cpp/src/streamy.hpp"
+#include "streamy.hpp"
 #include "utility.hpp"
 
 using namespace std;
