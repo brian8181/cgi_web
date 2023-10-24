@@ -10,6 +10,8 @@ const unsigned int PROJECT_FOLDER = 2;
 
 using namespace std;
 
+string sequence(const string &src, const string &sequence);
+
 int main(int argc, char *argv[])
 {
     string path; // source (text to match)
@@ -31,4 +33,28 @@ int main(int argc, char *argv[])
          << "End text." << endl;
 
     sequence(src, exp);
+}
+
+string sequence(const string &src, const string &sequence)
+{
+    regex exp = regex(sequence, regex::ECMAScript); // match
+    auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
+    auto end = sregex_iterator();
+
+    string output;
+    int src_beg_pos = 0;
+    for (sregex_iterator iter = begin; iter != end; ++iter)
+    {
+        smatch match = *iter;
+        int len = match.size();
+
+        for (int i = 0; i < len; ++i)
+        {
+            if (match[i].matched)
+            {
+                cout << "match[" << i << "] = " << match[i].str() << endl;
+            }
+        }
+    }
+    return output;
 }

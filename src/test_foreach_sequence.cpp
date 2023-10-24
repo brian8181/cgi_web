@@ -1,12 +1,16 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <regex>
 #include "utility.hpp"
 
 const unsigned int DEFAULT_TEMPLATE = 1;
 const unsigned int PROJECT_FOLDER = 2;
 
 using namespace std;
+
+string foreach_sequence(const string &src);
+string foreach_sequence_with_test(const string &src)
 
 int main(int argc, char *argv[])
 {
@@ -37,4 +41,57 @@ int main(int argc, char *argv[])
 
     string s = foreach_sequence(src);
     cout << s;
+}
+// find foreach sequence
+string foreach_sequence(const string &src)
+{
+    string FOREACH_SEQUENCE = "";
+    regex exp = regex(FOREACH_SEQUENCE, regex::ECMAScript); // match
+    auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
+    auto end = sregex_iterator();
+
+    string output;
+    int src_beg_pos = 0;
+    for (sregex_iterator iter = begin; iter != end; ++iter)
+    {
+        smatch match = *iter;
+        std::ssub_match sub1 = match[2];
+        std::ssub_match sub2 = match[3];
+        // output text
+        if (sub1.matched)
+            output += sub1.str();
+        else if (sub2.matched)
+            output += sub2.str();
+    }
+    return output;
+}
+
+// find foreach_sequence with text!
+string foreach_sequence_with_test(const string &src)
+{
+    string FOREACH_SEQUENCE = "";
+    regex exp = regex(FOREACH_SEQUENCE, regex::ECMAScript); // match
+    auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
+    auto end = sregex_iterator();
+
+    string output;
+    int src_beg_pos = 0;
+    for (sregex_iterator iter = begin; iter != end; ++iter)
+    {
+        smatch match = *iter;
+        int match_beg_pos = match.position();
+
+        // outout begin -> match
+        string pre_match_src = src.substr(src_beg_pos, match_beg_pos - src_beg_pos);
+        output += pre_match_src;
+
+        std::ssub_match sub = match[1];
+        string tmp_str = sub.str();
+        string tag(tmp_str.substr(1, tmp_str.size() - 1));
+        // output text
+        output += tag;
+
+        src_beg_pos = match_beg_pos + match.length();
+    }
+    return output;
 }
