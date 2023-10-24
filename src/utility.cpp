@@ -219,38 +219,3 @@ string match_replace_tags(string path, const map<string, string> &tags)
     output += src.substr(sbeg);
     return output;
 }
-
-string& ltrim(std::string &s)
-{
-    int len = s.size();
-    int i;
-    for(i = 0; i < len; ++i)
-    {
-        if(!std::isspace(s[i]))
-            break;
-    }
-    string::iterator beg = s.begin(); 
-    s.erase(beg, beg+i);
-    return s;
-}
-
-string& rtrim(std::string &s)
-{
-    int len = s.size();
-    int i = len;
-    for(;i > 0; --i)
-    {
-        if(!std::isspace(s[i-1]))
-            break;
-    }
-    string::iterator end = s.end(); 
-    s.erase(end-(len-i), end);
-    return s;
-}
-
-string& trim(std::string &s)
-{
-    rtrim(s);
-    ltrim(s);
-    return s;
-}
