@@ -8,7 +8,7 @@ SRC = ./src
 BLD = ./build
 OBJ = ./build
 
-all: lex fileio_trim
+all: lex fileio_trim utility.o
 
 # build as test
 obj: load_conf.o find_tags.o utility.o

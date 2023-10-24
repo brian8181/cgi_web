@@ -10,8 +10,6 @@
 #include "fileio.hpp"
 #include "utility.hpp"
 
-
-
 // // get file lines as vector
 // vector<string> getlines(string path)
 // {
@@ -84,7 +82,8 @@ void display(string path, const map<string, string> &tags)
     {
         smatch match = *iter;
         std::ssub_match sub = match[1];
-        string tag = trim(sub.str());
+        string sm = sub.str();
+        string tag = trim(sm);
 
         int end_pos = match.position();
         output += src.substr(beg_pos, end_pos - beg_pos);
@@ -115,7 +114,6 @@ string lex(const string &src)
     auto end = sregex_iterator();
 
     string output;
-    int src_beg_pos = 0;
     for (sregex_iterator iter = begin; iter != end; ++iter)
     {
         smatch match = *iter;
@@ -136,7 +134,8 @@ string lex_tag(const string &src)
     for (sregex_iterator iter = begin; iter != end; ++iter)
     {
         smatch match = *iter;
-        output += trim(match.str()) + "\n";
+        string match_str = match.str();
+        output += trim(match_str) + "\n";
     }
     return output;
 }
@@ -204,7 +203,8 @@ string match_replace_tags(string path, const map<string, string> &tags)
     {
         smatch match = *iter;
         std::ssub_match sub = match[1];
-        string tag = trim(sub.str());
+        string sm_str = sub.str();
+        string tag = trim(sm_str);
 
         send = match.position();
         int len = send - sbeg;
