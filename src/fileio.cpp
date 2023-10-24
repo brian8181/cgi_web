@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
+#include "utility.hpp"
 #include "fileio.hpp"
 
 // get file lines as vector

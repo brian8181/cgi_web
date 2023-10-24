@@ -2,6 +2,7 @@
 #include <string>
 //#include "../../streamy-cpp/src/streamy.hpp"
 #include "utility.hpp"
+#include "fileio.hpp"
 
 using namespace std;
 

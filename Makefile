@@ -8,7 +8,7 @@ SRC = ./src
 BLD = ./build
 OBJ = ./build
 
-all: lex fileio_trim test_include.cgi test_get_conf.cgi test_variable.cgi test_if_sequence.cgi dump_matches.cgi
+all: lex fileio_trim
 
 # build as test
 obj: load_conf.o find_tags.o utility.o
@@ -18,8 +18,8 @@ lex: fileio.o
 	$(CXX) $(CXXFLAGS) $(BLD)/fileio.o $(BLD)/lex.o -o $(BLD)/lex
 	cp $(SRC)/lex.conf $(BLD)/lex.conf  
 
-index.cgi: streamy.o utility.o
-	$(CXX) $(CXXFLAGS) $(INCLUDES) $(SRC)/index.cppo $(BLD)/streamy.o $(BLD)/utility.o $(LDFLAGS) -o $(BLD)/index.cgi
+# index.cgi: streamy.o utility.o
+# 	$(CXX) $(CXXFLAGS) $(INCLUDES) $(SRC)/index.cppo $(BLD)/streamy.o $(BLD)/utility.o $(LDFLAGS) -o $(BLD)/index.cgi
 
 fileio_trim: fileio.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/fileio_trim.cpp -o $(BLD)/fileio_trim.o	
@@ -41,20 +41,20 @@ dump_matches.cgi: utility.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/dump_matches.cpp -o $(BLD)/dump_matches.o
 	$(CXX) $(CXXFLAGS) $(BLD)/dump_matches.o $(BLD)/utility.o -o $(BLD)/dump_matches.cgi
 
-test_sequence.cgi: utility.o
-	$(CXX) $(CXXFLAGS) $(BLD)/utility.o $(SRC)/test_sequence.cpp -o $(BLD)/test_sequence.cgi
+# test_sequence.cgi: utility.o
+# 	$(CXX) $(CXXFLAGS) $(BLD)/utility.o $(SRC)/test_sequence.cpp -o $(BLD)/test_sequence.cgi
 
-test_comment.cgi: utility.o
-	$(CXX) $(CXXFLAGS) $(BLD)/utility.o $(SRC)/test_comment.cpp -o $(BLD)/test_comment.cgi
+# test_comment.cgi: utility.o
+# 	$(CXX) $(CXXFLAGS) $(BLD)/utility.o $(SRC)/test_comment.cpp -o $(BLD)/test_comment.cgi
 
-test_include.cgi: utility.o
-	$(CXX) $(CXXFLAGS) $(BLD)/utility.o $(SRC)/test_include.cpp -o $(BLD)/test_include.cgi
+# test_include.cgi: utility.o
+# 	$(CXX) $(CXXFLAGS) $(BLD)/utility.o $(SRC)/test_include.cpp -o $(BLD)/test_include.cgi
 
-test_get_conf.cgi: utility.o
-	$(CXX) $(CXXFLAGS) $(BLD)/utility.o $(SRC)/test_get_conf.cpp -o $(BLD)/test_get_conf.cgi
+# test_get_conf.cgi: utility.o
+# 	$(CXX) $(CXXFLAGS) $(BLD)/utility.o $(SRC)/test_get_conf.cpp -o $(BLD)/test_get_conf.cgi
 
-test_variable.cgi: streamy.o
-	$(CXX) $(CXXFLAGS) $(BLD)/utility.o $(SRC)/test_variable.cpp -o $(BLD)/test_variable.cgi
+# test_variable.cgi: streamy.o
+# 	$(CXX) $(CXXFLAGS) $(BLD)/utility.o $(SRC)/test_variable.cpp -o $(BLD)/test_variable.cgi
 
 fileio.o:
 	$(CXX) $(CXXFLAGS) -c $(SRC)/fileio.cpp -o $(BLD)/fileio.o	

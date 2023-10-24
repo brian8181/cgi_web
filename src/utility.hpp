@@ -6,7 +6,6 @@
 #include <vector>
 
 using namespace std;
-//using std::map;
 
 void assign(string name, string val, map<string, string>& symbols); 
 void display(string path, const std::map<string, string>& tags);
@@ -33,13 +32,9 @@ ifstream open(string path);
 vector<string> getlines(string path);
 std::map<string, string> get_config(string path);
 
-std::string ltrim(const std::string &s);
-std::string rtrim(const std::string &s);
-std::string trim(const std::string &s);
-
-std::string& _ltrim(const std::string &s);
-std::string& _rtrim(const std::string &s);
-std::string& _trim(const std::string &s);
+string& ltrim(const string &s);
+string& rtrim(const string &s);
+string& trim(const string &s);
 
 const string project_folder = "/home/brian/src/cgi_web";
 const string template_dir = project_folder + "/www/templates";

@@ -450,49 +450,37 @@ string match_replace_tags(string path, const map<string, string> &tags)
     return output;
 }
 
-// trim functions
-const std::string WHITESPACE = " \n\r\t\f\v";
-
-std::string ltrim(const std::string &s)
+string& ltrim(std::string &s)
 {
-    size_t start = s.find_first_not_of(WHITESPACE);
-    return (start == std::string::npos) ? "" : s.substr(start);
-}
-
-std::string rtrim(const std::string &s)
-{
-    size_t end = s.find_last_not_of(WHITESPACE);
-    return (end == std::string::npos) ? "" : s.substr(0, end + 1);
-}
-
-std::string trim(const std::string &s)
-{
-    return rtrim(ltrim(s));
-}
-
-std::string &_ltrim(std::string &s)
-{
-    auto it = std::find_if(s.begin(), s.end(),
-                           [](char c)
-                           {
-                               return !std::isspace<char>(c, std::locale::classic());
-                           });
-    s.erase(s.begin(), it);
+    int len = s.size();
+    int i;
+    for(i = 0; i < len; ++i)
+    {
+        if(!std::isspace(s[i]))
+            break;
+    }
+    string::iterator beg = s.begin(); 
+    s.erase(beg, beg+i);
     return s;
 }
 
-std::string &_rtrim(std::string &s)
+string& rtrim(std::string &s)
 {
-    auto it = std::find_if(s.rbegin(), s.rend(),
-                           [](char c)
-                           {
-                               return !std::isspace<char>(c, std::locale::classic());
-                           });
-    s.erase(it.base(), s.end());
+    int len = s.size();
+    int i = len;
+    for(;i > 0; --i)
+    {
+        if(!std::isspace(s[i-1]))
+            break;
+    }
+    string::iterator end = s.end(); 
+    s.erase(end-(len-i), end);
     return s;
 }
 
-std::string &_trim(std::string &s)
+string& trim(std::string &s)
 {
-    return _ltrim(_rtrim(s));
+    rtrim(s);
+    ltrim(s);
+    return s;
 }

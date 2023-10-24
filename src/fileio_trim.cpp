@@ -38,9 +38,9 @@ int main(int argc, char *argv[])
 		}
 		
         int opt = 0;
-        int option_index = 0;
-        bool file_flag = false;
-        bool verbose_flag = false;
+        //int option_index = 0;
+        //bool file_flag = false;
+        //bool verbose_flag = false;
         
         while ((opt = getopt (argc, argv, "abc:")) != -1)
         {
@@ -50,10 +50,10 @@ int main(int argc, char *argv[])
                 //print_help();
                 return 0; 
             case 'v':
-                verbose_flag = true;
+                //verbose_flag = true;
                 break;
             case 'f':
-                file_flag = true;
+                //file_flag = true;
                 break; 
             default: // unknown option before args
                 fprintf(stderr, "Unexpected option, -h for help\n");
