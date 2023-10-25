@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <regex>
+#include "fileio.hpp"
 #include "streamy.hpp"
 #include "utility.hpp"
 

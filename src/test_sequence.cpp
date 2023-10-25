@@ -1,8 +1,9 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "utility.hpp"
 #include <regex>
+#include "fileio.hpp"
+#include "utility.hpp"
 #include "patterns.hpp"
 
 const unsigned int DEFAULT_TEMPLATE = 1;

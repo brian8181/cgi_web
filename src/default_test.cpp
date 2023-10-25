@@ -5,6 +5,7 @@
 #include "cgicc/HTTPHTMLHeader.h"
 #include "cgicc/HTMLClasses.h"
 #include "../../streamy-cpp/src/streamy.hpp"
+#include "fileio.hpp"
 #include "utility.hpp"
 //#include "../src/conf.hpp"
 
