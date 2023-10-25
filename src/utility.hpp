@@ -9,7 +9,6 @@ using namespace std;
 
 void assign(string name, string val, map<string, string>& symbols); 
 void display(string path, const std::map<string, string>& tags);
-string lex(const string& src);
 string lex_tag(const string& src);
 bool load_config(string path, std::map<string, string>& config);
 void find_tags(string path);

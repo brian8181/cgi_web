@@ -8,10 +8,7 @@ SRC = ./src
 BLD = ./build
 OBJ = ./build
 
-all: lex fileio_trim utility.o
-
-# build as test
-obj: load_conf.o find_tags.o utility.o
+all: lex fileio_trim find_tags.cgi utility.o streamy.o load_conf.o
 
 lex: fileio.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/lex.cpp -o $(BLD)/lex.o	
@@ -28,8 +25,8 @@ fileio_trim: fileio.o
 default_test.$(EXE): streamy.o utility.o
 	$(CXX) $(CXXFLAGS) $(SRC)/default_test.cpp $(BLD)/streamy.o $(BLD)/utility.o $(LDFLAGS) -o $(BLD)/default_test.$(EXE)
 
-find_tags.$(EXE): utility.o fileio.o find_tags.o
-	$(CXX) $(CXXFLAGS) $(BLD)/find_tags.o $(BLD)/utility.o -o $(BLD)/find_tags.$(EXE)
+find_tags.cgi: find_tags.o utility.o fileio.o
+	$(CXX) $(CXXFLAGS) $(BLD)/find_tags.o $(BLD)/fileio.o $(BLD)/utility.o -o $(BLD)/find_tags.cgi
 
 test_if_sequence.cgi: utility.o
 	$(CXX) $(CXXFLAGS) $(BLD)/utility.o $(SRC)/test_if_sequence.cpp -o $(BLD)/test_if_sequence.cgi
@@ -59,8 +56,8 @@ dump_matches.cgi: utility.o
 fileio.o:
 	$(CXX) $(CXXFLAGS) -c $(SRC)/fileio.cpp -o $(BLD)/fileio.o	
 
-find_tags.cgi: fileio.o
-	$(CXX) $(CXXFLAGS) fileio.o $(SRC)/find_tags.cpp -o $(BLD)/find_tags.cgi
+find_tags.o:
+	$(CXX) -c $(CXXFLAGS) $(SRC)/find_tags.cpp -o $(BLD)/find_tags.o
 
 load_conf.o:
 	$(CXX) $(CXXFLAGS) -c $(SRC)/load_conf.cpp -o $(BLD)/load_conf.o

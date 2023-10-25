@@ -10,58 +10,6 @@
 #include "fileio.hpp"
 #include "utility.hpp"
 
-// // get file lines as vector
-// vector<string> getlines(string path)
-// {
-//     ifstream file;
-//     file.open(path, ios::in);
-
-//     vector<string> lines;
-//     if (file.is_open())
-//     {
-//         string line;
-//         while (getline(file, line))
-//         {
-//             lines.push_back(line);
-//         }
-//         file.close();
-//     }
-//     return lines;
-// }
-
-// // read all, (default read function)
-// string ifs_read_all(string path)
-// {
-//     std::ifstream ifstrm(path);
-//     std::string output((std::istreambuf_iterator<char>(ifstrm)), std::istreambuf_iterator<char>());
-//     return output;
-// }
-
-// // get test configuration map
-// map<string, string> get_config(string path)
-// {
-//     ifstream file;
-//     file.open(path, ios::in);
-
-//     map<string, string> config;
-//     pair<string, string> config_pair;
-
-//     if (file.is_open())
-//     {
-//         string line;
-//         while (getline(file, line))
-//         {
-//             size_t pos = line.find('=');
-//             string name = trim(line.substr(0, pos - 1));
-//             string value = trim(line.substr(pos + 1));
-//             pair<string, string> p(name, value);
-//             config.insert(p);
-//         }
-//         file.close();
-//     }
-//     return config;
-// }
-
 void assign(string name, string val, map<string, string> &symbols)
 {
     pair<string, string> p(name, val);
@@ -96,31 +44,6 @@ void display(string path, const map<string, string> &tags)
     }
     output += src.substr(beg_pos);
     cout << output << endl;
-}
-
-// // display template
-// void display(string tmpl)
-// {
-//     cout << include(tmpl);
-// }
-
-
-// find tag (no text)
-string lex(const string &src)
-{
-    const string ESCAPE = "\\{.*?\\}";
-    regex exp = regex(ESCAPE, regex::ECMAScript); // match
-    auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
-    auto end = sregex_iterator();
-
-    string output;
-    for (sregex_iterator iter = begin; iter != end; ++iter)
-    {
-        smatch match = *iter;
-        string tokens = lex_tag(match.str());
-        output += tokens;
-    }
-    return output;
 }
 
 // lex the tag (inside curly braces), "{(.*)}"
