@@ -1,18 +1,21 @@
 # cgi_web
 CXX = g++
 CXXFLAGS = -g -Wall -std=c++17 -DDEBUG
-LDFLAGS = -static -lcgicc -L/usr/lib64/
+LDFLAGS = -static -lcgicc -lm -lc -lstdc++
 INCLUDES = -I/usr/include/cgicc/
 EXT = cpp
 SRC = ./src
 BLD = ./build
 OBJ = ./build
 
+# not linking !
+more: index.cgi default_test.cgi dump_matches.cgi find_tags.cgi
+
 all: lex fileio_trim find_tags.cgi test_if_sequence.cgi
 
 lex: fileio.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/lex.cpp -o $(BLD)/lex.o	
-	$(CXX) $(CXXFLAGS) $(BLD)/fileio.o $(BLD)/lex.o -o $(BLD)/lex
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $(BLD)/fileio.o $(BLD)/lex.o -o $(BLD)/lex
 	cp $(SRC)/lex.conf $(BLD)/lex.conf  
 
 # NOT LINKING!
@@ -23,8 +26,8 @@ fileio_trim: fileio.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/fileio_trim.cpp -o $(BLD)/fileio_trim.o	
 	$(CXX) $(CXXFLAGS) $(BLD)/fileio.o $(BLD)/fileio_trim.o -o $(BLD)/fileio_trim
 
-default_test.$(EXE): streamy.o utility.o
-	$(CXX) $(CXXFLAGS) $(SRC)/default_test.cpp $(BLD)/streamy.o $(BLD)/utility.o $(LDFLAGS) -o $(BLD)/default_test.$(EXE)
+default_test.cgi: streamy.o utility.o
+	$(CXX) $(CXXFLAGS) $(SRC)/default_test.cpp $(BLD)/streamy.o $(BLD)/utility.o $(LDFLAGS) -o $(BLD)/default_test.cgi
 
 find_tags.cgi: find_tags.o utility.o fileio.o
 	$(CXX) $(CXXFLAGS) $(BLD)/find_tags.o $(BLD)/fileio.o $(BLD)/utility.o -o $(BLD)/find_tags.cgi
@@ -75,11 +78,11 @@ streamy.o:
 
 .PHONY: upload
 upload:
-	cp -rf $(BLD)/*.$(EXE) /var/www/html/cgi
+	cp -rf $(BLD)/*.cgi /var/www/html/cgi
 	
 .PHONY: clean_upload
 clean_upload:
-	rm $(BLD)/*.$(EXE)
+	rm $(BLD)/*.cgi
 	
 .PHONY: clean
 clean:
