@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <regex>
+#include "fileio.hpp"
 #include "utility.hpp"
 
 const unsigned int DEFAULT_TEMPLATE = 1;
@@ -10,7 +11,7 @@ const unsigned int PROJECT_FOLDER = 2;
 using namespace std;
 
 string foreach_sequence(const string &src);
-string foreach_sequence_with_test(const string &src)
+string foreach_sequence_with_test(const string &src);
 
 int main(int argc, char *argv[])
 {

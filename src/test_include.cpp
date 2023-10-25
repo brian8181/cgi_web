@@ -1,5 +1,7 @@
 #include <iostream>
+#include <fstream>
 #include <string>
+#include <regex>
 //#include "../../streamy-cpp/src/streamy.hpp"
 #include "utility.hpp"
 #include "fileio.hpp"
@@ -29,6 +31,7 @@ int main(int argc, char *argv[])
 // find & process includes
 std::string include(const string &tmpl)
 {
+    string INCLUDE;
     // set up constants
     const string path = template_dir + "/" + tmpl;
 

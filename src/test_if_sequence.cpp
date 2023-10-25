@@ -3,8 +3,8 @@
 #include <fstream>
 #include <regex>
 #include "patterns.hpp"
-#include "utility.hpp"
 #include "fileio.hpp"
+#include "utility.hpp"
 
 const unsigned int DEFAULT_TEMPLATE = 1;
 const unsigned int PROJECT_FOLDER = 2;

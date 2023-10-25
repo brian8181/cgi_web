@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
-#include "../../streamy-cpp/src/streamy.hpp"
+//#include "../../streamy-cpp/src/streamy.hpp"
+#include "fileio.hpp"
 #include "utility.hpp"
 
 using namespace std;
