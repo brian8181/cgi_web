@@ -1,7 +1,7 @@
 # cgi_web
 CXX = g++
 CXXFLAGS = -g -Wall -std=c++17 -DDEBUG
-LDFLAGS = -static -lcgicc -L/usr/lib/
+LDFLAGS = -static -lcgicc -L/usr/lib64/
 INCLUDES = -I/usr/include/cgicc/
 EXT = cpp
 SRC = ./src
@@ -17,7 +17,7 @@ lex: fileio.o
 
 # NOT LINKING!
 index.cgi: streamy.o utility.o index.o
-	$(CXX) $(CXXFLAGS) $(INCLUDES) $(BLD)/streamy.o $(BLD)/utility.o $(BLD)/index.o $(LDFLAGS) -o $(BLD)/index.cgi
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $(BLD)/streamy.o $(BLD)/utility.o $(BLD)/index.o $(LDFLAGS) -lstdc++ -o $(BLD)/index.cgi
 
 fileio_trim: fileio.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/fileio_trim.cpp -o $(BLD)/fileio_trim.o	
@@ -34,7 +34,7 @@ test_if_sequence.cgi: fileio.o utility.o
 	$(CXX) $(CXXFLAGS) $(BLD)/fileio.o $(BLD)/utility.o $(SRC)/test_if_sequence.cpp -o $(BLD)/test_if_sequence.cgi
 
 test_foreach_sequence.cgi: utility.o
-	$(CXX) $(CXXFLAGS) $(BLD)/fileio_trim.o $(BLD)/utility.o $(SRC)/test_foreach_sequence.o -o $(BLD)/test_foreach_sequence.cgi
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $(BLD)/fileio_trim.o $(BLD)/utility.o $(SRC)/test_foreach_sequence.o $(LDFLAGS) -o $(BLD)/test_foreach_sequence.cgi
 
 dump_matches.cgi: utility.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/dump_matches.cpp -o $(BLD)/dump_matches.o
