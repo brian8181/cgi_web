@@ -7,7 +7,7 @@
 
 using namespace std;
 
-map<string, string> get_config(string path);
+//map<string, string> get_config(string path);
 void  lex(string& s);
 
 int main(int argc, char *argv[])
@@ -44,29 +44,29 @@ int main(int argc, char *argv[])
 }
 
 // get test configuration map
-map<string, string> get_config(string path)
-{
-    ifstream file;
-    file.open(path, ios::in);
+// map<string, string> get_config(string path)
+// {
+//     ifstream file;
+//     file.open(path, ios::in);
 
-    map<string, string> config;
-    pair<string, string> config_pair;
+//     map<string, string> config;
+//     pair<string, string> config_pair;
 
-    if (file.is_open())
-    {
-        string line;
-        while (getline(file, line))
-        {
-            size_t pos = line.find('=');
-            string name = line.substr(0, pos - 1);
-            string value = line.substr(pos + 1);
-            pair<string, string> p(trim(name), trim(value));
-            config.insert(p);
-        }
-        file.close();
-    }
-    return config;
-}
+//     if (file.is_open())
+//     {
+//         string line;
+//         while (getline(file, line))
+//         {
+//             size_t pos = line.find('=');
+//             string name = line.substr(0, pos - 1);
+//             string value = line.substr(pos + 1);
+//             pair<string, string> p(trim(name), trim(value));
+//             config.insert(p);
+//         }
+//         file.close();
+//     }
+//     return config;
+// }
 
 void  lex(string& s)
 {

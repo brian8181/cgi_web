@@ -1,9 +1,10 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "utility.hpp"
 #include <regex>
 #include "patterns.hpp"
+#include "utility.hpp"
+#include "fileio.hpp"
 
 const unsigned int DEFAULT_TEMPLATE = 1;
 const unsigned int PROJECT_FOLDER = 2;
@@ -53,7 +54,6 @@ string if_sequence(const string &src)
     auto end = sregex_iterator();
 
     string output;
-    int src_beg_pos = 0;
     for (sregex_iterator iter = begin; iter != end; ++iter)
     {
         smatch match = *iter;

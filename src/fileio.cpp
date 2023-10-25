@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
+#include <string>
 #include "utility.hpp"
 #include "fileio.hpp"
 
@@ -29,6 +30,32 @@ string ifs_read_all(string path)
     std::ifstream ifstrm(path);
     std::string output((std::istreambuf_iterator<char>(ifstrm)), std::istreambuf_iterator<char>());
     return output;
+}
+
+map<string, string> get_config(string path)
+{
+    ifstream file;
+    file.open(path, ios::in); //open a file
+
+    map<string, string> config;
+    pair<string, string> config_pair;
+
+    if (file.is_open()) 
+    {   
+        string line;
+        while(getline(file, line))
+        { 
+            size_t pos = line.find('=');
+            string name = line.substr(0, pos-1);
+            name = trim(name);
+            string value = line.substr(pos+1);
+            value = trim(value);
+            pair<string, string> p(name, value);
+            config.insert(p);
+        }
+        file.close(); //close the file
+    }
+    return config;
 }
 
 string& ltrim(std::string &s)
