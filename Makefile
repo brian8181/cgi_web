@@ -4,7 +4,7 @@
 
 CXX = g++
 CXXFLAGS = -g -Wall -std=c++17 -DDEBUG
-LDFLAGS = -lcgicc
+LDFLAGS = -lcgicc -L/usr/local/lib/
 INCLUDES = -I/usr/include/cgicc/
 EXT = cpp
 SRC = src
@@ -19,10 +19,10 @@ lex: fileio.o
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $(BLD)/fileio.o $(BLD)/lex.o -o $(BLD)/lex
 	
 index.cgi: fileio.o utility.o streamy.o
-	$(CXX) $(CXXFLAGS) $(INCLUDES) $(BLD)/fileio.o $(BLD)/utility.o $(BLD)/streamy.o $(SRC)/index.cpp $(LDFLAGS) -o $(BLD)/index.cgi
+	$(CXX) $(CXXFLAGS) $(BLD)/fileio.o $(BLD)/utility.o $(BLD)/streamy.o $(SRC)/index.cpp -lcgicc -o $(BLD)/index.cgi
 
 default_test.cgi: fileio.o utility.o streamy.o 
-	$(CXX) $(CXXFLAGS) $(BLD)/fileio.o $(BLD)/utility.o $(BLD)/streamy.o $(SRC)/default_test.cpp $(LDFLAGS) -o $(BLD)/default_test.cgi
+	$(CXX) $(CXXFLAGS) $(BLD)/fileio.o $(BLD)/utility.o $(BLD)/streamy.o $(SRC)/default_test.cpp $(LDFLAGS)-o $(BLD)/default_test.cgi
 
 cgi_test_script.cgi:
 	$(CXX) $(CXXFLAGS) $(SRC)/cgi_test_script.cpp -o $(BLD)/cgi_test_script.cgi	
