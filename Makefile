@@ -4,14 +4,14 @@ CXXFLAGS = -g -Wall -std=c++17 -DDEBUG
 LDFLAGS = -lcgicc
 INCLUDES = -I/usr/include/cgicc/
 EXT = cpp
-SRC = ./src
-BLD = ./build
-OBJ = ./build
-
-# not linking !
-more: index.cgi default_test.cgi dump_matches.cgi find_tags.cgi
+SRC = src
+BLD = build
+OBJ = build
 
 all: lex fileio_trim find_tags.cgi test_if_sequence.cgi
+
+# NOT LINKING!
+more: index.cgi default_test.cgi dump_matches.cgi find_tags.cgi
 
 lex: fileio.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/lex.cpp -o $(BLD)/lex.o	
@@ -20,26 +20,26 @@ lex: fileio.o
 
 # NOT LINKING!
 index.cgi: fileio.o utility.o streamy.o index.o
-	$(CXX) $(CXXFLAGS) $(INCLUDES) $(BLD)/streamy.o $(BLD)/utility.o $(BLD)/index.o $(LDFLAGS) -o $(BLD)/index.cgi
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $(BLD)/fileio.o $(BLD)/utility.o $(BLD)/streamy.o $(BLD)/index.o $(LDFLAGS) -o $(BLD)/index.cgi
 
 fileio_trim: fileio.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/fileio_trim.cpp -o $(BLD)/fileio_trim.o	
 	$(CXX) $(CXXFLAGS) $(BLD)/fileio.o $(BLD)/fileio_trim.o -o $(BLD)/fileio_trim
 
-default_test.cgi: streamy.o utility.o
+default_test.cgi: streamy.o fileio.o utility.o
 	$(CXX) $(CXXFLAGS) $(SRC)/default_test.cpp $(BLD)/streamy.o $(BLD)/utility.o $(LDFLAGS) -o $(BLD)/default_test.cgi
 
-find_tags.cgi: find_tags.o utility.o fileio.o
+find_tags.cgi: find_tags.o fileio.o utility.o 
 	$(CXX) $(CXXFLAGS) $(BLD)/find_tags.o $(BLD)/fileio.o $(BLD)/utility.o -o $(BLD)/find_tags.cgi
 
 test_if_sequence.cgi: fileio.o utility.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/test_if_sequence.cpp -o $(BLD)/test_if_sequence.cgi.o
 	$(CXX) $(CXXFLAGS) $(BLD)/fileio.o $(BLD)/utility.o $(SRC)/test_if_sequence.cpp -o $(BLD)/test_if_sequence.cgi
 
-test_foreach_sequence.cgi: utility.o
+test_foreach_sequence.cgi: fileio.o utility.o
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $(BLD)/fileio_trim.o $(BLD)/utility.o $(SRC)/test_foreach_sequence.o $(LDFLAGS) -o $(BLD)/test_foreach_sequence.cgi
 
-dump_matches.cgi: utility.o
+dump_matches.cgi: fileio.o utility.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/dump_matches.cpp -o $(BLD)/dump_matches.o
 	$(CXX) $(CXXFLAGS) $(BLD)/dump_matches.o $(BLD)/utility.o -o $(BLD)/dump_matches.cgi
 
@@ -67,11 +67,11 @@ utility.o:
 streamy.o:
 	$(CXX) $(CXXFLAGS) -c $(SRC)/streamy.cpp -o $(BLD)/streamy.o
 
-find_tags.o:
-	$(CXX) $(CXXFLAGS) -c $(SRC)/find_tags.cpp -o $(BLD)/find_tags.o
-
 index.o:
 	$(CXX) $(CXXFLAGS) -c $(SRC)/index.cpp -o $(BLD)/index.o
+
+find_tags.o:
+	$(CXX) $(CXXFLAGS) -c $(SRC)/find_tags.cpp -o $(BLD)/find_tags.o
 
 load_conf.o:
 	$(CXX) $(CXXFLAGS) -c $(SRC)/load_conf.cpp -o $(BLD)/load_conf.o

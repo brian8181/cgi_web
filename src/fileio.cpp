@@ -2,7 +2,6 @@
 #include <fstream>
 #include <algorithm>
 #include <string>
-#include "utility.hpp"
 #include "fileio.hpp"
 
 // get file lines as vector
