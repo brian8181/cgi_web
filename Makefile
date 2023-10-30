@@ -16,8 +16,7 @@ all: lex index.cgi fileio_trim default_test.cgi find_tags.cgi dump_matches.cgi \
 lex: fileio.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/lex.cpp -o $(BLD)/lex.o	
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $(BLD)/fileio.o $(BLD)/lex.o -o $(BLD)/lex
-	cp $(SRC)/lex.conf $(BLD)/lex.conf  
-
+	
 index.cgi: fileio.o utility.o streamy.o index.o
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $(BLD)/fileio.o $(BLD)/utility.o $(BLD)/streamy.o $(BLD)/index.o $(LDFLAGS) -o $(BLD)/index.cgi
 

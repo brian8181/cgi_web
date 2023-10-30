@@ -13,7 +13,7 @@ string foreach_sequence_with_test(const string &src);
 
 int main(int argc, char *argv[])
 {
-    string root_path = "../src/test_foreach_sequence.conf";
+    string root_path = "../conf/test_foreach_sequence.conf";
     map<string, string> pairs = get_config(root_path);
     const string project_folder = pairs["project_folder"];
     const string default_template = pairs["default_template"];
