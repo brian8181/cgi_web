@@ -43,7 +43,6 @@ string sequence(const string &src, const string &sequence)
     auto end = sregex_iterator();
 
     string output;
-    int src_beg_pos = 0;
     for (sregex_iterator iter = begin; iter != end; ++iter)
     {
         smatch match = *iter;

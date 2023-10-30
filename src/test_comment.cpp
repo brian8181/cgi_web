@@ -3,6 +3,7 @@
 //#include "../../streamy-cpp/src/streamy.hpp"
 #include "fileio.hpp"
 #include "utility.hpp"
+#include "streamy.hpp"
 
 using namespace std;
 

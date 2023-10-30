@@ -5,11 +5,9 @@
 #include "fileio.hpp"
 #include "utility.hpp"
 
-const unsigned int DEFAULT_TEMPLATE = 1;
-const unsigned int PROJECT_FOLDER = 2;
-
 using namespace std;
 
+string FOREACH_SEQUENCE = "";
 string foreach_sequence(const string &src);
 string foreach_sequence_with_test(const string &src);
 
@@ -40,19 +38,21 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    string s = foreach_sequence(src);
-    cout << s;
+    string s1 = foreach_sequence(src);
+    cout << s1;
+
+    string s2 = foreach_sequence_with_test(src);
+    cout << s2;
 }
+
 // find foreach sequence
 string foreach_sequence(const string &src)
 {
-    string FOREACH_SEQUENCE = "";
     regex exp = regex(FOREACH_SEQUENCE, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
     auto end = sregex_iterator();
 
     string output;
-    int src_beg_pos = 0;
     for (sregex_iterator iter = begin; iter != end; ++iter)
     {
         smatch match = *iter;
@@ -70,7 +70,6 @@ string foreach_sequence(const string &src)
 // find foreach_sequence with text!
 string foreach_sequence_with_test(const string &src)
 {
-    string FOREACH_SEQUENCE = "";
     regex exp = regex(FOREACH_SEQUENCE, regex::ECMAScript); // match
     auto begin = sregex_iterator(src.begin(), src.end(), exp, std::regex_constants::match_default);
     auto end = sregex_iterator();

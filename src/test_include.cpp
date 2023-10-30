@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     const string project_folder = "/home/brian/src/cgi_web";
     const string conf_path = project_folder + "./test/conf_test.txt";
 
-    // sstreamy sm(project_folder + "/www/templates", project_folder + "/www/compile", projec>
+    // streamy sm(project_folder + "/www/templates", project_folder + "/www/compile", projec>
     // template_dir = project_folder + "/www/templates";
     string html = include(template_name);
     cout << html << endl;
