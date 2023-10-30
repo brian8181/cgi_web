@@ -1,7 +1,7 @@
 # cgi_web
 CXX = g++
 CXXFLAGS = -g -Wall -std=c++17 -DDEBUG
-LDFLAGS = -static -lcgicc -lm -lc -lstdc++
+LDFLAGS = -lcgicc
 INCLUDES = -I/usr/include/cgicc/
 EXT = cpp
 SRC = ./src
@@ -19,8 +19,8 @@ lex: fileio.o
 	cp $(SRC)/lex.conf $(BLD)/lex.conf  
 
 # NOT LINKING!
-index.cgi: streamy.o utility.o index.o
-	$(CXX) $(CXXFLAGS) $(INCLUDES) $(BLD)/streamy.o $(BLD)/utility.o $(BLD)/index.o $(LDFLAGS) -lstdc++ -o $(BLD)/index.cgi
+index.cgi: fileio.o utility.o streamy.o index.o
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $(BLD)/streamy.o $(BLD)/utility.o $(BLD)/index.o $(LDFLAGS) -o $(BLD)/index.cgi
 
 fileio_trim: fileio.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/fileio_trim.cpp -o $(BLD)/fileio_trim.o	
@@ -61,6 +61,12 @@ dump_matches.cgi: utility.o
 fileio.o:
 	$(CXX) $(CXXFLAGS) -c $(SRC)/fileio.cpp -o $(BLD)/fileio.o	
 
+utility.o:
+	$(CXX) $(CXXFLAGS) -c $(SRC)/utility.cpp -o $(BLD)/utility.o
+
+streamy.o:
+	$(CXX) $(CXXFLAGS) -c $(SRC)/streamy.cpp -o $(BLD)/streamy.o
+
 find_tags.o:
 	$(CXX) $(CXXFLAGS) -c $(SRC)/find_tags.cpp -o $(BLD)/find_tags.o
 
@@ -69,12 +75,6 @@ index.o:
 
 load_conf.o:
 	$(CXX) $(CXXFLAGS) -c $(SRC)/load_conf.cpp -o $(BLD)/load_conf.o
-
-utility.o:
-	$(CXX) $(CXXFLAGS) -c $(SRC)/utility.cpp -o $(BLD)/utility.o
-
-streamy.o:
-	$(CXX) $(CXXFLAGS) -c $(SRC)/streamy.cpp -o $(BLD)/streamy.o
 
 .PHONY: upload
 upload:
