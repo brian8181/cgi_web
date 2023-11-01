@@ -62,6 +62,18 @@
             }
         },
         {
+            "label": "MAKE_INDEX",
+            "type": "shell",
+            "command": "make -f ${workspaceFolder}/Makefile index.cgi",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+        {
             "label": "echo",
             "type": "shell",
             "command": "echo ${workspaceFolder}"

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <filesystem>
 #include "cgicc/CgiDefs.h"
 #include "cgicc/Cgicc.h"
 #include "cgicc/HTTPHTMLHeader.h"
@@ -10,7 +11,9 @@
 #include "fileio.hpp"
 #include "utility.hpp"
 
-using namespace std;
+using std::cout;
+using std::endl;
+using std::string;
 using namespace cgicc;
 
 int main(int argc, char *argv[])
@@ -18,9 +21,12 @@ int main(int argc, char *argv[])
     Cgicc cgi;
     cout << HTTPHTMLHeader();
 
-    const string template_name = "default.tpl";
-    const string project_folder = "/home/brian/src/cgi_web";
-    const string conf_path = project_folder + "/test/conf_test.txt";
+    filesystem::path fs_path(argv[0]);
+    string project_path = fs_path.parent_path();
+
+    const string template_name = project_path + "/default.tpl";
+    const string project_folder = project_path + "/cgi_web";
+    const string conf_path = project_path + "/test/conf_test.txt";
 
     streamy sm(project_folder + "/www/templates", project_folder + "/www/compile", project_folder + "/www/config", project_folder + "/www/cache");
     sm.load_config(conf_path);

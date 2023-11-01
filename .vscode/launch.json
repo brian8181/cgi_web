@@ -89,27 +89,6 @@
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {
-            "name": "INDEX",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/build/index_test.cgi",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ],
-            "preLaunchTask": "MAKE INDEX",
-            "miDebuggerPath": "/usr/bin/gdb"
-        },
-        {
             "name": "DEFAULT VALUES",
             "type": "cppdbg",
             "request": "launch",
@@ -157,27 +136,6 @@
             "request": "launch",
             "program": "${workspaceFolder}/build/test_if_sequence.cgi",
             "args": ["test_if_sequence.tpl"],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ],
-            "preLaunchTask": "MAKE IF SEQ",
-            "miDebuggerPath": "/usr/bin/gdb"
-        },
-        {
-            "name": "IF SEQUENCE2",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/build/test_if_sequence.cgi",
-            "args": ["test_if_sequence2.tpl"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
@@ -254,6 +212,27 @@
                 }
             ],
             "preLaunchTask": "LEX_ALL",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "INDEX",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/index.cgi",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "MAKE_INDEX",
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {
