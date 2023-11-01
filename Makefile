@@ -1,6 +1,7 @@
 # cgi_web
 # Mon Oct 30 09:11:47 AM CDT 2023
 # Mon Oct 30 11:55:47 AM CDT 2023
+# Wed Nov  1 09:13:23 AM CDT 2023
 
 CXX = g++
 CXXFLAGS = -g -Wall -std=c++17 -DDEBUG
@@ -12,7 +13,7 @@ BLD = build
 OBJ = build
 
 all: lex index.cgi default_test.cgi cgi_test_script.cgi fileio_trim find_tags dump_matches load_conf \
-     test_sequence test_comment test_include test_get_conf test_variable test_if_sequence test_foreach_sequence
+	test_sequence test_comment test_include test_get_conf test_variable test_if_sequence test_foreach_sequence #unit_test
 
 lex: fileio.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/lex.cpp -o $(BLD)/lex.o	
@@ -70,6 +71,15 @@ utility.o:
 
 streamy.o:
 	$(CXX) $(CXXFLAGS) -c $(SRC)/streamy.cpp -o $(BLD)/streamy.o
+
+# unit_test: unit_test.o 000-CatchMain.o 
+# 	$(CXX) $(CXXFLAGS) $(BUILD)/unit_test.o $(BUILD)/000-CatchMain.o $(BUILD)/utility.o -o $(BUILD)/unit_test
+
+# unit_test.o:
+# 	$(CXX) $(CXXFLAGS) -c $(SRC)/unit_test.cpp -o $(BUILD)/unit_test.o
+
+# 000-CatchMain.o:
+# 	$(CXX) $(CXXFLAGS) -c $(SRC)/000-CatchMain.cpp -o $(BUILD)/000-CatchMain.o
 
 .PHONY: upload
 upload:
