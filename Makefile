@@ -22,7 +22,7 @@ index.cgi: fileio.o utility.o streamy.o
 	$(CXX) $(CXXFLAGS) $(BLD)/fileio.o $(BLD)/utility.o $(BLD)/streamy.o $(SRC)/index.cpp -lcgicc -o $(BLD)/index.cgi
 
 default_test.cgi: fileio.o utility.o streamy.o 
-	$(CXX) $(CXXFLAGS) $(BLD)/fileio.o $(BLD)/utility.o $(BLD)/streamy.o $(SRC)/default_test.cpp $(LDFLAGS)-o $(BLD)/default_test.cgi
+	$(CXX) $(CXXFLAGS) $(BLD)/fileio.o $(BLD)/utility.o $(BLD)/streamy.o $(SRC)/default_test.cpp $(LDFLAGS) -o $(BLD)/default_test.cgi
 
 cgi_test_script.cgi:
 	$(CXX) $(CXXFLAGS) $(SRC)/cgi_test_script.cpp -o $(BLD)/cgi_test_script.cgi	
