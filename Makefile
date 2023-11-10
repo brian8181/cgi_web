@@ -2,10 +2,11 @@
 # Mon Oct 30 09:11:47 AM CDT 2023
 # Mon Oct 30 11:55:47 AM CDT 2023
 # Wed Nov  1 09:13:23 AM CDT 2023
+# Fri Nov 10 01:42:29 PM CST 2023
 
 CXX = g++
 CXXFLAGS = -g -Wall -std=c++17 -DDEBUG
-LDFLAGS = -lcgicc -L/usr/local/lib/
+LDFLAGS = -lcgicc -lcppunit -L/usr/local/lib/
 INCLUDES = -I/usr/include/cgicc/
 EXT = cpp
 SRC = src
@@ -13,7 +14,7 @@ BLD = build
 OBJ = build
 
 all: lex index.cgi default_test.cgi cgi_test_script.cgi fileio_trim find_tags dump_matches load_conf \
-	test_sequence test_comment test_include test_get_conf test_variable test_if_sequence test_foreach_sequence #unit_test
+	test_sequence test_comment test_include test_get_conf test_variable test_if_sequence test_foreach_sequence
 
 lex: fileio.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/lex.cpp -o $(BLD)/lex.o	
@@ -67,19 +68,19 @@ fileio.o:
 	$(CXX) $(CXXFLAGS) -c $(SRC)/fileio.cpp -o $(BLD)/fileio.o	
 
 utility.o:
-	$(CXX) $(CXXFLAGS) -c $(SRC)/utility.cpp -o $(BLD)/utility.o
+	$(CXX) $(CXXFLAGS) -c $(SRC)/utility.cpp -o $(BLD)/utility.ostl_set_difference.cpp
 
 streamy.o:
 	$(CXX) $(CXXFLAGS) -c $(SRC)/streamy.cpp -o $(BLD)/streamy.o
 
-# unit_test: unit_test.o 000-CatchMain.o 
-# 	$(CXX) $(CXXFLAGS) $(BUILD)/unit_test.o $(BUILD)/000-CatchMain.o $(BUILD)/utility.o -o $(BUILD)/unit_test
+unit_test: unit_test.o 000-CatchMain.o 
+	$(CXX) $(CXXFLAGS) $(BLD)/unit_test.o $(BUILD)/000-CatchMain.o $(BLD)/utility.o -o $(BLD)/unit_test
 
-# unit_test.o:
-# 	$(CXX) $(CXXFLAGS) -c $(SRC)/unit_test.cpp -o $(BUILD)/unit_test.o
+unit_test.o:
+	$(CXX) $(CXXFLAGS) -lcppunit -I/usr/local/include/cppunit -c $(SRC)/unit_test.cpp -o $(BLD)/unit_test.o
 
-# 000-CatchMain.o:
-# 	$(CXX) $(CXXFLAGS) -c $(SRC)/000-CatchMain.cpp -o $(BUILD)/000-CatchMain.o
+000-CatchMain.o:
+	$(CXX) $(CXXFLAGS) -c $(SRC)/000-CatchMain.cpp -o $(BLD)/000-CatchMain.o
 
 .PHONY: upload
 upload:
@@ -87,8 +88,8 @@ upload:
 	
 .PHONY: clean_upload
 clean_upload:
-	rm $(BLD)/*
-	
+	-rm $(BLD)/index.cgi
+		
 .PHONY: clean
 clean:
 	-rm $(BLD)/*

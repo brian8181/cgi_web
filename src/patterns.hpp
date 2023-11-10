@@ -8,6 +8,7 @@ using std::string;
 
 const string ESCAPE = "\\{.*?\\}";
 const string SYMBOL_NAME = "\\$[-._~]*[A-Za-z][-.~A-Za-z0-9]*";
+const string SYMBOL_NAME2 = "\\b[_.~]*[A-Za-z][A-Za-z0-9_.-~]*\\b";
 const string INT_LITERAL = "/d*[.]?/d+";
 const string BOOL_LITERAL = "true|false";
 const string STRING_LITERAL = "(\\'[\\w*\\.]*\\')|(\\\"[\\w\\.]*\\\")"; // 'ABC' or "ABC"
@@ -39,11 +40,5 @@ const string IF_SEQUENCE = IF_KEYWORD + TEXT + ENDIF_KEYWORD;
 const string FOREACH_KEYWORD = "\\{foreach\\s+\\$" + SYMBOL_NAME + "\\s*\\}\\n";
 const string ENDFOREACH_KEYWORD = "\\{/foreach\\}\\n";
 const string FOREACH_SEQUENCE = FOREACH_KEYWORD + TEXT + ENDFOREACH_KEYWORD;
-
-// const string DEFAULT_FUNCTION = "\\|default:'(.*)'";
-// const string CAT_FUNCTION = "\\|cat:'(.*)'";
-// const string CAPITALIZE_FUNCTION = "\\|capitalize(:true)?";
-// const string LOWER_FUNCTION = "\\|lower(:true)?";
-// const string UPPER_FUNCTION = "\\|upper(:true)?";
 
 #endif

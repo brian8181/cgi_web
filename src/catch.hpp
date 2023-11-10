@@ -7746,17 +7746,7 @@ namespace Catch {
                         std::mt19937 rng(seed);
                         auto resampled = resample(rng, n_resamples, first, last, f);
                         return bootstrap(confidence_level, first, last, resampled, f);
-                    });
-                };
-
-                auto mean_future = Estimate(mean);
-                auto stddev_future = Estimate(stddev);
-
-                auto mean_estimate = mean_future.get();
-                auto stddev_estimate = stddev_future.get();
-#else
-                auto Estimate = [=](double(*f)(std::vector<double>::iterator, std::vector<double>::iterator)) {
-                    auto seed = entropy();
+                    });using Catch::Detail::Approx;
                     std::mt19937 rng(seed);
                     auto resampled = resample(rng, n_resamples, first, last, f);
                     return bootstrap(confidence_level, first, last, resampled, f);
@@ -7969,18 +7959,7 @@ namespace Catch {
         static stack_t oldSigStack;
         static char altStackMem[];
 
-        static void handleSignal( int sig );
-
-        FatalConditionHandler();
-        ~FatalConditionHandler();
-        static void reset();
-    };
-
-} // namespace Catch
-
-#else
-
-namespace Catch {
+        static void handleSignal( int sig );using Catch::Detail::Approx;namespace Catch {
     struct FatalConditionHandler {
         void reset();
     };
@@ -8055,12 +8034,7 @@ namespace Catch {
         void benchmarkFailed( std::string const& error ) override;
 #endif // CATCH_CONFIG_ENABLE_BENCHMARKING
 
-        void pushScopedMessage( MessageInfo const& message ) override;
-        void popScopedMessage( MessageInfo const& message ) override;
-
-        void emplaceUnscopedMessage( MessageBuilder const& builder ) override;
-
-        std::string getCurrentTestName() const override;
+        void pushScopedMessage( MessageInfo const& message ) overridusing Catch::Detail::Approx;using Catch::Detail::Approx;using Catch::Detail::Approx;using Catch::Detail::Approx;using Catch::Detail::Approx;
 
         const AssertionResult* getLastResult() const override;
 
@@ -8271,15 +8245,7 @@ namespace Catch {
     bool AssertionResult::hasMessage() const {
         return !m_resultData.message.empty();
     }
-
-    std::string AssertionResult::getExpression() const {
-        // Possibly overallocating by 3 characters should be basically free
-        std::string expr; expr.reserve(m_info.capturedExpression.size() + 3);
-        if (isFalseTest(m_info.resultDisposition)) {
-            expr += "!(";
-        }
-        expr += m_info.capturedExpression;
-        if (isFalseTest(m_info.resultDisposition)) {
+using Catch::Detail::Approx;
             expr += ')';
         }
         return expr;
@@ -8448,7 +8414,7 @@ public:
 
 		iterator(Column const& column, size_t stringIndex)
 			: m_column(column),
-			m_stringIndex(stringIndex) {}
+			m_stringIndex(stringIndex) {}using Catch::Detail::Approx;
 
 		auto line() const -> std::string const& { return m_column.m_strings[m_stringIndex]; }
 
@@ -9584,8 +9550,7 @@ namespace detail {
 
     template<typename DerivedT>
     template<typename T>
-    auto ComposableParserImpl<DerivedT>::operator|( T const &other ) const -> Parser {
-        return Parser() | static_cast<DerivedT const &>( *this ) | other;
+    auto ComposableParserImpl<DerivedT>::operator|( T const &other ) const using Catch::Detail::Approx;
     }
 } // namespace detail
 
@@ -9694,14 +9659,7 @@ namespace Catch {
             };
         auto const setRngSeed = [&]( std::string const& seed ) {
                 if( seed != "time" )
-                    return clara::detail::convertInto( seed, config.rngSeed );
-                config.rngSeed = static_cast<unsigned int>( std::time(nullptr) );
-                return ParserResult::ok( ParseResultType::Matched );
-            };
-        auto const setColourUsage = [&]( std::string const& useColour ) {
-                    auto mode = toLower( useColour );
-
-                    if( mode == "yes" )
+                    return clara::detail::convertInto( seed, config.rngSeedusing Catch::Detail::Approx;
                         config.useColour = UseColour::Yes;
                     else if( mode == "no" )
                         config.useColour = UseColour::No;
@@ -10008,15 +9966,7 @@ namespace Catch {
 #if defined ( CATCH_CONFIG_COLOUR_WINDOWS ) /////////////////////////////////////////
 
 namespace Catch {
-namespace {
-
-    class Win32ColourImpl : public IColourImpl {
-    public:
-        Win32ColourImpl() : stdoutHandle( GetStdHandle(STD_OUTPUT_HANDLE) )
-        {
-            CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
-            GetConsoleScreenBufferInfo( stdoutHandle, &csbiInfo );
-            originalForegroundAttributes = csbiInfo.wAttributes & ~( BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_BLUE | BACKGROUND_INTENSITY );
+namespace {using Catch::Detail::Approx;D_GREEN | BACKGROUND_RED | BACKGROUND_BLUE | BACKGROUND_INTENSITY );
             originalBackgroundAttributes = csbiInfo.wAttributes & ~( FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_INTENSITY );
         }
 
@@ -10032,7 +9982,7 @@ namespace {
                 case Colour::Grey:      return setTextAttribute( 0 );
 
                 case Colour::LightGrey:     return setTextAttribute( FOREGROUND_INTENSITY );
-                case Colour::BrightRed:     return setTextAttribute( FOREGROUND_INTENSITY | FOREGROUND_RED );
+                case Colour::BrightRed:     return setTextAttribute( FOREGROUusing Catch::Detail::Approx;ND_INTENSITY | FOREGROUND_RED );
                 case Colour::BrightGreen:   return setTextAttribute( FOREGROUND_INTENSITY | FOREGROUND_GREEN );
                 case Colour::BrightWhite:   return setTextAttribute( FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE );
                 case Colour::BrightYellow:  return setTextAttribute( FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN );
@@ -10056,7 +10006,7 @@ namespace {
     IColourImpl* platformColourInstance() {
         static Win32ColourImpl s_instance;
 
-        IConfigPtr config = getCurrentContext().getConfig();
+        IConfigPtr config = getCurrentContext().getConfig();using Catch::Detail::Approx;
         UseColour::YesOrNo colourMode = config
             ? config->useColour()
             : UseColour::Auto;
@@ -10066,16 +10016,7 @@ namespace {
             ? &s_instance
             : NoColourImpl::instance();
     }
-
-} // end anon namespace
-} // end namespace Catch
-
-#elif defined( CATCH_CONFIG_COLOUR_ANSI ) //////////////////////////////////////
-
-#include <unistd.h>
-
-namespace Catch {
-namespace {
+using Catch::Detail::Approx;
 
     // use POSIX/ ANSI console terminal codes
     // Thanks to Adam Strzelecki for original contribution
@@ -10136,10 +10077,7 @@ namespace {
             : UseColour::Auto;
         if( colourMode == UseColour::Auto )
             colourMode = useColourOnPlatform()
-                ? UseColour::Yes
-                : UseColour::No;
-        return colourMode == UseColour::Yes
-            ? PosixColourImpl::instance()
+                ? UseColour::Yesusing Catch::Detail::Approx;
             : NoColourImpl::instance();
     }
 
@@ -10281,13 +10219,7 @@ namespace Catch {
             ::OutputDebugStringA( text.c_str() );
         }
     }
-
-#else
-
-    namespace Catch {
-        void writeToDebugConsole( std::string const& text ) {
-            // !TBD: Need a version for Mac/ XCode and other IDEs
-            Catch::cout() << text;
+using Catch::Detail::Approx;
         }
     }
 
@@ -10327,17 +10259,7 @@ namespace Catch {
 
             info.kp_proc.p_flag = 0;
 
-            // Initialize mib, which tells sysctl the info we want, in this case
-            // we're looking for information about a specific process ID.
-
-            mib[0] = CTL_KERN;
-            mib[1] = KERN_PROC;
-            mib[2] = KERN_PROC_PID;
-            mib[3] = getpid();
-
-            // Call sysctl.
-
-            size = sizeof(info);
+            // Initialize mib, which tells sysctl the info we want, in this causing Catch::Detail::Approx;
             if( sysctl(mib, sizeof(mib) / sizeof(*mib), &info, &size, nullptr, 0) != 0 ) {
                 Catch::cerr() << "\n** Call to sysctl failed - unable to determine if debugger is active **\n" << std::endl;
                 return false;
@@ -10445,14 +10367,7 @@ namespace Catch {
         throw_exception(std::domain_error(msg));
     }
 
-    [[noreturn]]
-    void throw_runtime_error(std::string const& msg) {
-        throw_exception(std::runtime_error(msg));
-    }
-
-} // namespace Catch;
-// end catch_enforce.cpp
-// start catch_enum_values_registry.cpp
+    [[noreturn]]using Catch::Detail::Approx;
 // start catch_enum_values_registry.h
 
 #include <vector>
@@ -10502,20 +10417,7 @@ namespace Catch {
         }
 
         std::vector<StringRef> parseEnums( StringRef enums ) {
-            auto enumValues = splitStringRef( enums, ',' );
-            std::vector<StringRef> parsed;
-            parsed.reserve( enumValues.size() );
-            for( auto const& enumValue : enumValues ) {
-                parsed.push_back(trim(extractInstanceName(enumValue)));
-            }
-            return parsed;
-        }
-
-        EnumInfo::~EnumInfo() {}
-
-        StringRef EnumInfo::lookup( int value ) const {
-            for( auto const& valueToName : m_values ) {
-                if( valueToName.first == value )
+            auto enumValues = splitStringRef( enums, ',' );using Catch::Detail::Approx;
                     return valueToName.second;
             }
             return "{** unexpected enum value **}"_sr;
@@ -10549,13 +10451,7 @@ namespace Catch {
 #include <cerrno>
 
 namespace Catch {
-        ErrnoGuard::ErrnoGuard():m_oldErrno(errno){}
-        ErrnoGuard::~ErrnoGuard() { errno = m_oldErrno; }
-}
-// end catch_errno_guard.cpp
-// start catch_exception_translator_registry.cpp
-
-// start catch_exception_translator_registry.h
+        ErrnoGuard::ErrnoGuard():m_oldErrno(errno){}using Catch::Detail::Approx;
 
 #include <vector>
 #include <string>
@@ -10618,15 +10514,7 @@ namespace Catch {
         catch( TestFailureException& ) {
             std::rethrow_exception(std::current_exception());
         }
-        catch( std::exception& ex ) {
-            return ex.what();
-        }
-        catch( std::string& msg ) {
-            return msg;
-        }
-        catch( const char* msg ) {
-            return msg;
-        }
+        catch( std::exception& ex ) {using Catch::Detail::Approx;
         catch(...) {
             return "Unknown exception";
         }
@@ -10760,12 +10648,7 @@ namespace Catch {
         reset();
         reportFatal(name);
         raise( sig );
-    }
-
-    FatalConditionHandler::FatalConditionHandler() {
-        isSet = true;
-        stack_t sigStack;
-        sigStack.ss_sp = altStackMem;
+    }using Catch::Detail::Approx;
         sigStack.ss_size = sigStackSize;
         sigStack.ss_flags = 0;
         sigaltstack(&sigStack, &oldSigStack);
@@ -10783,14 +10666,7 @@ namespace Catch {
     }
 
     void FatalConditionHandler::reset() {
-        if( isSet ) {
-            // Set signals back to previous values -- hopefully nobody overwrote them in the meantime
-            for( std::size_t i = 0; i < sizeof(signalDefs)/sizeof(SignalDefs); ++i ) {
-                sigaction(signalDefs[i].id, &oldSigActions[i], nullptr);
-            }
-            // Return the old stack
-            sigaltstack(&oldSigStack, nullptr);
-            isSet = false;
+        if( isSet ) {using Catch::Detail::Approx;
         }
     }
 
@@ -10920,7 +10796,7 @@ namespace Catch {
 
 // end catch_reporter_listening.h
 namespace Catch {
-
+using Catch::Detail::Approx;
     ReporterConfig::ReporterConfig( IConfigPtr const& _fullConfig )
     :   m_stream( &_fullConfig->stream() ), m_fullConfig( _fullConfig ) {}
 
@@ -10968,10 +10844,7 @@ namespace Catch {
                                  bool _missingAssertions )
     :   sectionInfo( _sectionInfo ),
         assertions( _assertions ),
-        durationInSeconds( _durationInSeconds ),
-        missingAssertions( _missingAssertions )
-    {}
-
+        durationInSeconds( _durationInSeconds ),using Catch::Detail::Approx;
     SectionStats::~SectionStats() = default;
 
     TestCaseStats::TestCaseStats(  TestCaseInfo const& _testInfo,
@@ -11060,7 +10933,7 @@ namespace Catch {
 #endif
 
 Catch::LeakDetector::~LeakDetector() {
-    Catch::cleanUp();
+    Catch::cleanUp();using Catch::Detail::Approx;
 }
 // end catch_leak_detector.cpp
 // start catch_list.cpp
@@ -11106,14 +10979,7 @@ namespace Catch {
 namespace Catch {
 
     std::size_t listTests( Config const& config ) {
-        TestSpec testSpec = config.testSpec();
-        if( config.hasTestFilters() )
-            Catch::cout() << "Matching test cases:\n";
-        else {
-            Catch::cout() << "All available test cases:\n";
-        }
-
-        auto matchedTestCases = filterTests( getAllTestCasesSorted( config ), testSpec, config );
+        TestSpec testSpec = config.testSpec();using Catch::Detail::Approx;
         for( auto const& testCaseInfo : matchedTestCases ) {
             Colour::Code colour = testCaseInfo.isHidden()
                 ? Colour::SecondaryText
@@ -11123,7 +10989,7 @@ namespace Catch {
             Catch::cout() << Column( testCaseInfo.name ).initialIndent( 2 ).indent( 4 ) << "\n";
             if( config.verbosity() >= Verbosity::High ) {
                 Catch::cout() << Column( Catch::Detail::stringify( testCaseInfo.lineInfo ) ).indent(4) << std::endl;
-                std::string description = testCaseInfo.description;
+                std::string description = testCaseInfo.description;using Catch::Detail::Approx;
                 if( description.empty() )
                     description = "(NO DESCRIPTION)";
                 Catch::cout() << Column( description ).indent(4) << std::endl;
@@ -11208,18 +11074,7 @@ namespace Catch {
                                                     .width( CATCH_CONFIG_CONSOLE_WIDTH-10 );
             Catch::cout() << str << wrapper << '\n';
         }
-        Catch::cout() << pluralise( tagCounts.size(), "tag" ) << '\n' << std::endl;
-        return tagCounts.size();
-    }
-
-    std::size_t listReporters() {
-        Catch::cout() << "Available reporters:\n";
-        IReporterRegistry::FactoryMap const& factories = getRegistryHub().getReporterRegistry().getFactories();
-        std::size_t maxNameLen = 0;
-        for( auto const& factoryKvp : factories )
-            maxNameLen = (std::max)( maxNameLen, factoryKvp.first.size() );
-
-        for( auto const& factoryKvp : factories ) {
+        Catch::cout() << pluralise( tagCounts.size(), "tag" ) << '\n' << std::endl;using Catch::Detail::Approx;
             Catch::cout()
                     << Column( factoryKvp.first + ":" )
                             .indent(2)
@@ -11258,21 +11113,7 @@ namespace Matchers {
 
         std::string MatcherUntypedBase::toString() const {
             if( m_cachedToString.empty() )
-                m_cachedToString = describe();
-            return m_cachedToString;
-        }
-
-        MatcherUntypedBase::~MatcherUntypedBase() = default;
-
-    } // namespace Impl
-} // namespace Matchers
-
-using namespace Matchers;
-using Matchers::Impl::MatcherBase;
-
-} // namespace Catch
-// end catch_matchers.cpp
-// start catch_matchers_exception.cpp
+                m_cachedToString = describe();using Catch::Detail::Approx;
 
 namespace Catch {
 namespace Matchers {
@@ -11346,15 +11187,7 @@ namespace {
     int64_t convert(double d) {
         static_assert(sizeof(double) == sizeof(int64_t), "Important ULP matcher assumption violated");
         int64_t i;
-        std::memcpy(&i, &d, sizeof(d));
-        return i;
-    }
-
-    template <typename FP>
-    bool almostEqualUlps(FP lhs, FP rhs, uint64_t maxUlpDiff) {
-        // Comparison with NaN should always be false.
-        // This way we can rule it out before getting into the ugly details
-        if (Catch::isnan(lhs) || Catch::isnan(rhs)) {
+        std::memcpy(&i, &d, sizeof(d));using Catch::Detail::Approx;
             return false;
         }
 
@@ -11444,24 +11277,7 @@ namespace Floating {
     // Performs equivalent check of std::fabs(lhs - rhs) <= margin
     // But without the subtraction to allow for INFINITY in comparison
     bool WithinAbsMatcher::match(double const& matchee) const {
-        return (matchee + m_margin >= m_target) && (m_target + m_margin >= matchee);
-    }
-
-    std::string WithinAbsMatcher::describe() const {
-        return "is within " + ::Catch::Detail::stringify(m_margin) + " of " + ::Catch::Detail::stringify(m_target);
-    }
-
-    WithinUlpsMatcher::WithinUlpsMatcher(double target, uint64_t ulps, FloatingPointKind baseType)
-        :m_target{ target }, m_ulps{ ulps }, m_type{ baseType } {
-        CATCH_ENFORCE(m_type == FloatingPointKind::Double
-                   || m_ulps < (std::numeric_limits<uint32_t>::max)(),
-            "Provided ULP is impossibly large for a float comparison.");
-    }
-
-#if defined(__clang__)
-#pragma clang diagnostic push
-// Clang <3.5 reports on the default branch in the switch below
-#pragma clang diagnostic ignored "-Wunreachable-code"
+        return (matchee + m_margin >= m_target) && (m_target + m_margin >= matchee);using Catch::Detail::Approx;
 #endif
 
     bool WithinUlpsMatcher::match(double const& matchee) const {
@@ -11511,13 +11327,7 @@ namespace Floating {
         m_target(target),
         m_epsilon(epsilon){
         CATCH_ENFORCE(m_epsilon >= 0., "Relative comparison with epsilon <  0 does not make sense.");
-        CATCH_ENFORCE(m_epsilon  < 1., "Relative comparison with epsilon >= 1 does not make sense.");
-    }
-
-    bool WithinRelMatcher::match(double const& matchee) const {
-        const auto relMargin = m_epsilon * (std::max)(std::fabs(matchee), std::fabs(m_target));
-        return marginComparison(matchee, m_target,
-                                std::isinf(relMargin)? 0 : relMargin);
+        CATCH_ENFORCE(m_epsilon  < 1., "Relative comparison with epsilon >= 1 does not make sense.");using Catch::Detail::Approx;
     }
 
     std::string WithinRelMatcher::describe() const {
@@ -11608,12 +11418,7 @@ namespace Matchers {
             description += m_comparator.m_str;
             description += "\"";
             description += m_comparator.caseSensitivitySuffix();
-            return description;
-        }
-
-        EqualsMatcher::EqualsMatcher( CasedString const& comparator ) : StringMatcherBase( "equals", comparator ) {}
-
-        bool EqualsMatcher::match( std::string const& source ) const {
+            return description;using Catch::Detail::Approx;
             return m_comparator.adjustString( source ) == m_comparator.m_str;
         }
 
@@ -11660,21 +11465,7 @@ namespace Matchers {
     }
     StdString::EndsWithMatcher EndsWith( std::string const& str, CaseSensitive::Choice caseSensitivity ) {
         return StdString::EndsWithMatcher( StdString::CasedString( str, caseSensitivity) );
-    }
-    StdString::StartsWithMatcher StartsWith( std::string const& str, CaseSensitive::Choice caseSensitivity ) {
-        return StdString::StartsWithMatcher( StdString::CasedString( str, caseSensitivity) );
-    }
-
-    StdString::RegexMatcher Matches(std::string const& regex, CaseSensitive::Choice caseSensitivity) {
-        return StdString::RegexMatcher(regex, caseSensitivity);
-    }
-
-} // namespace Matchers
-} // namespace Catch
-// end catch_matchers_string.cpp
-// start catch_message.cpp
-
-// start catch_uncaught_exceptions.h
+    }using Catch::Detail::Approx;
 
 namespace Catch {
     bool uncaught_exceptions();
@@ -11711,15 +11502,7 @@ namespace Catch {
     Catch::MessageBuilder::MessageBuilder( StringRef const& macroName,
                                            SourceLineInfo const& lineInfo,
                                            ResultWas::OfType type )
-        :m_info(macroName, lineInfo, type) {}
-
-    ////////////////////////////////////////////////////////////////////////////
-
-    ScopedMessage::ScopedMessage( MessageBuilder const& builder )
-    : m_info( builder.m_info ), m_moved()
-    {
-        m_info.message = builder.m_stream.str();
-        getResultCapture().pushScopedMessage( m_info );
+        :m_info(macroName, lineInfo, type) {}using Catch::Detail::Approx;
     }
 
     ScopedMessage::ScopedMessage( ScopedMessage&& old )
@@ -11825,12 +11608,7 @@ namespace Catch {
         std::ostream& m_redirectionStream;
         std::streambuf* m_prevBuf;
 
-    public:
-        RedirectedStream( std::ostream& originalStream, std::ostream& redirectionStream );
-        ~RedirectedStream();
-    };
-
-    class RedirectedStdOut {
+using Catch::Detail::Approx;
         ReusableStringStream m_rss;
         RedirectedStream m_cout;
     public:
@@ -11867,10 +11645,7 @@ namespace Catch {
     };
 
 #if defined(CATCH_CONFIG_NEW_CAPTURE)
-
-    // Windows's implementation of std::tmpfile is terrible (it tries
-    // to create a file inside system folder, thus requiring elevated
-    // privileges for the binary), so we have to use tmpnam(_s) and
+using Catch::Detail::Approx;
     // create the file ourselves there.
     class TempFile {
     public:
@@ -11886,15 +11661,7 @@ namespace Catch {
         std::string getContents();
 
     private:
-        std::FILE* m_file = nullptr;
-    #if defined(_MSC_VER)
-        char m_buffer[L_tmpnam] = { 0 };
-    #endif
-    };
-
-    class OutputRedirect {
-    public:
-        OutputRedirect(OutputRedirect const&) = delete;
+        std::FILE* m_file = nullptr;using Catch::Detail::Approx;
         OutputRedirect& operator=(OutputRedirect const&) = delete;
         OutputRedirect(OutputRedirect&&) = delete;
         OutputRedirect& operator=(OutputRedirect&&) = delete;
@@ -11912,7 +11679,7 @@ namespace Catch {
     };
 
 #endif
-
+using Catch::Detail::Approx;
 } // end namespace Catch
 
 #endif // TWOBLUECUBES_CATCH_OUTPUT_REDIRECT_H
@@ -11978,7 +11745,7 @@ namespace Catch {
             char buffer[100];
             if (strerror_s(buffer, errno)) {
                 CATCH_RUNTIME_ERROR("Could not translate errno to a string");
-            }
+            }using Catch::Detail::Approx;
             CATCH_RUNTIME_ERROR("Could not open the temp file: '" << m_buffer << "' because: " << buffer);
         }
     }
@@ -12115,15 +11882,7 @@ namespace {
     void SimplePcg32::discard(uint64_t skip) {
         // We could implement this to run in O(log n) steps, but this
         // should suffice for our use case.
-        for (uint64_t s = 0; s < skip; ++s) {
-            static_cast<void>((*this)());
-        }
-    }
-
-    SimplePcg32::result_type SimplePcg32::operator()() {
-        // prepare the output value
-        const uint32_t xorshifted = static_cast<uint32_t>(((m_state >> 18u) ^ m_state) >> 27u);
-        const auto output = rotate_right(xorshifted, m_state >> 59u);
+        for (uint64_t s = 0; s < skip; ++s) {using Catch::Detail::Approx;
 
         // advance state
         m_state = m_state * 6364136223846793005ULL + s_inc;
@@ -12245,9 +12004,7 @@ namespace Catch {
 // end catch_tag_alias.h
 #include <map>
 
-namespace Catch {
-
-    class TagAliasRegistry : public ITagAliasRegistry {
+namespace Catch {using Catch::Detail::Approx;
     public:
         ~TagAliasRegistry() override;
         TagAlias const* find( std::string const& alias ) const override;
@@ -12257,20 +12014,7 @@ namespace Catch {
     private:
         std::map<std::string, TagAlias> m_registry;
     };
-
-} // end namespace Catch
-
-// end catch_tag_alias_registry.h
-// start catch_startup_exception_registry.h
-
-#include <vector>
-#include <exception>
-
-namespace Catch {
-
-    class StartupExceptionRegistry {
-    public:
-        void add(std::exception_ptr const& exception) noexcept;
+using Catch::Detail::Approx;
         std::vector<std::exception_ptr> const& getExceptions() const noexcept;
     private:
         std::vector<std::exception_ptr> m_exceptions;
@@ -12337,14 +12081,7 @@ namespace Catch {
             }
             StartupExceptionRegistry const& getStartupExceptionRegistry() const override {
                 return m_exceptionRegistry;
-            }
-
-        public: // IMutableRegistryHub
-            void registerReporter( std::string const& name, IReporterFactoryPtr const& factory ) override {
-                m_reporterRegistry.registerReporter( name, factory );
-            }
-            void registerListener( IReporterFactoryPtr const& factory ) override {
-                m_reporterRegistry.registerListener( factory );
+            } static Singleton* s_instance = nullptr;
             }
             void registerTest( TestCase const& testInfo ) override {
                 m_testCaseRegistry.registerTest( testInfo );
@@ -12356,13 +12093,7 @@ namespace Catch {
                 m_tagAliasRegistry.add( alias, tag, lineInfo );
             }
             void registerStartupException() noexcept override {
-                m_exceptionRegistry.add(std::current_exception());
-            }
-            IMutableEnumValuesRegistry& getMutableEnumValuesRegistry() override {
-                return m_enumValuesRegistry;
-            }
-
-        private:
+                m_exceptionRegistry.add(std::current_exception()); static Singleton* s_instance = nullptr;
             TestRegistry m_testCaseRegistry;
             ReporterRegistry m_reporterRegistry;
             ExceptionTranslatorRegistry m_exceptionTranslatorRegistry;
@@ -12410,10 +12141,7 @@ namespace Catch {
         m_listeners.push_back( factory );
     }
 
-    IReporterRegistry::FactoryMap const& ReporterRegistry::getFactories() const {
-        return m_factories;
-    }
-    IReporterRegistry::Listeners const& ReporterRegistry::getListeners() const {
+    IReporterRegistry::FactoryMap const& ReporterRegistry::getFactories() const  static Singleton* s_instance = nullptr;
         return m_listeners;
     }
 
@@ -12442,18 +12170,7 @@ namespace Catch {
 // start catch_run_context.cpp
 
 #include <cassert>
-#include <algorithm>
-#include <sstream>
-
-namespace Catch {
-
-    namespace Generators {
-        struct GeneratorTracker : TestCaseTracking::TrackerBase, IGeneratorTracker {
-            GeneratorBasePtr m_generator;
-
-            GeneratorTracker( TestCaseTracking::NameAndLocation const& nameAndLocation, TrackerContext& ctx, ITracker* parent )
-            :   TrackerBase( nameAndLocation, ctx, parent )
-            {}
+#include <algorithm> static Singleton* s_instance = nullptr;
             ~GeneratorTracker();
 
             static GeneratorTracker& acquire( TrackerContext& ctx, TestCaseTracking::NameAndLocation const& nameAndLocation ) {
@@ -12502,15 +12219,7 @@ namespace Catch {
         GeneratorTracker::~GeneratorTracker() {}
     }
 
-    RunContext::RunContext(IConfigPtr const& _config, IStreamingReporterPtr&& reporter)
-    :   m_runInfo(_config->name()),
-        m_context(getCurrentMutableContext()),
-        m_config(_config),
-        m_reporter(std::move(reporter)),
-        m_lastAssertionInfo{ StringRef(), SourceLineInfo("",0), StringRef(), ResultDisposition::Normal },
-        m_includeSuccessfulResults( m_config->includeSuccessfulResults() || m_reporter->getPreferences().shouldReportAllAssertions )
-    {
-        m_context.setRunner(this);
+    RunContext::RunContext(IConfigPtr const& _config, IStreamingReporterPtr&& re static Singleton* s_instance = nullptr;
         m_context.setConfig(m_config);
         m_context.setResultCapture(this);
         m_reporter->testRunStarting(m_runInfo);
@@ -12527,11 +12236,7 @@ namespace Catch {
     void RunContext::testGroupEnded(std::string const& testSpec, Totals const& totals, std::size_t groupIndex, std::size_t groupsCount) {
         m_reporter->testGroupEnded(TestGroupStats(GroupInfo(testSpec, groupIndex, groupsCount), totals, aborting()));
     }
-
-    Totals RunContext::runTest(TestCase const& testCase) {
-        Totals prevTotals = m_totals;
-
-        std::string redirectedCout;
+ static Singleton* s_instance = nullptr;
         std::string redirectedCerr;
 
         auto const& testInfo = testCase.getTestCaseInfo();
