@@ -68,7 +68,7 @@ fileio.o:
 	$(CXX) $(CXXFLAGS) -c $(SRC)/fileio.cpp -o $(BLD)/fileio.o	
 
 utility.o:
-	$(CXX) $(CXXFLAGS) -c $(SRC)/utility.cpp -o $(BLD)/utility.ostl_set_difference.cpp
+	$(CXX) $(CXXFLAGS) -c $(SRC)/utility.cpp -o $(BLD)/utility.o
 
 streamy.o:
 	$(CXX) $(CXXFLAGS) -c $(SRC)/streamy.cpp -o $(BLD)/streamy.o
@@ -84,7 +84,7 @@ unit_test.o:
 
 .PHONY: upload
 upload:
-	cp -rf $(BLD)/* /var/www/html/cgi
+	cp -rf $(BLD)/*.cgi /var/www/cgi-bin
 	
 .PHONY: clean_upload
 clean_upload:
