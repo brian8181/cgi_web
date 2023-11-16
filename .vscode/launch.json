@@ -173,10 +173,10 @@
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {
-            "name": "LEX_ALL",
+            "name": "LEX_ONLY",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/lex_all.cgi",
+            "program": "${workspaceFolder}/build/lex",
             "args": ["lex_all.tpl"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -190,28 +190,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "LEX_ALL",
-            "miDebuggerPath": "/usr/bin/gdb"
-        },
-        {
-            "name": "LEX_ALL2",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/build/lex_all.cgi",
-            "args": ["lex_all2.tpl"],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ],
-            "preLaunchTask": "LEX_ALL",
+            "preLaunchTask": "MAKE_LEX",
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {

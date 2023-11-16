@@ -50,9 +50,9 @@
             }
         },
         {
-            "label": "LEX_ALL",
+            "label": "MAKE_LEX",
             "type": "shell",
-            "command": "make -f ${workspaceFolder}/Makefile lex_all.cgi",
+            "command": "make -f ${workspaceFolder}/Makefile lex",
             "problemMatcher": [
                 "$gcc"
             ],
