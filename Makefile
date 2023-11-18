@@ -13,6 +13,7 @@ EXT = cpp
 SRC = src
 BLD = build
 OBJ = build
+TST = test
 
 all: lex index.cgi default_test.cgi cgi_test_script.cgi fileio_trim find_tags dump_matches load_conf \
 	test_sequence test_comment test_include test_get_conf test_variable test_if_sequence test_foreach_sequence
@@ -83,6 +84,10 @@ unit_test.o:
 000-CatchMain.o:
 	$(CXX) $(CXXFLAGS) -c $(SRC)/000-CatchMain.cpp -o $(BLD)/000-CatchMain.o
 
+.PHONY: upload_test
+upload_test:
+	-cp -f $(BLD)/*.cgi $(TST)/www
+
 .PHONY: upload
 upload:
 	# alpha only!
@@ -95,4 +100,5 @@ clean_upload:
 		
 .PHONY: clean
 clean:
-	-rm $(BLD)/*
+	-rm -rf $(BLD)/*
+	-rm -f $(TST)/www/*.cgi
