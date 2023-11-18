@@ -85,7 +85,9 @@ unit_test.o:
 
 .PHONY: upload
 upload:
+	# alpha only!
 	cp -rf $(BLD)/*.cgi /var/www/cgi-bin
+	# sftp 192.168.0.6 # todo
 	
 .PHONY: clean_upload
 clean_upload:
