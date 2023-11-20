@@ -90,14 +90,20 @@ upload_test:
 
 .PHONY: upload
 upload:
+	@echo uploading ...
 	# alpha only!
-	cp -rf $(BLD)/*.cgi /var/www/cgi-bin
+	# cp -rf $(BLD)/*.cgi /var/www/cgi-bin
 	# sftp 192.168.0.6 # todo
+	# echo "lorem ipsum" > foobar.txt
+	# curl -T foobar.txt -k sftp://127.0.0.1/~/Downloads/
+	@echo uploading complete.
 	
 .PHONY: clean_upload
 clean_upload:
-	-rm $(BLD)/index.cgi
-		
+	@echo cleaning upload ...
+	#-rm $(BLD)/index.cgi
+	@echo complete.
+	
 .PHONY: clean
 clean:
 	-rm -rf $(BLD)/*
