@@ -55,8 +55,8 @@ void  lex(string& s)
 
     while(std::regex_search(s, match, exp, std::regex_constants::match_default))
     {
-        std::string fmt_match_beg = match.format("TEXT: $`");
-        std::string fmt_match = match.format("TAG $&");
+        std::string fmt_match_beg = match.format("<TEXT>$`</TEXT>");
+        std::string fmt_match = match.format("<TAG>$&</TAG>");
         s = match.format("$'");
         std::cout << fmt_match_beg << endl;
         std::cout << fmt_match << endl;
