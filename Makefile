@@ -16,7 +16,8 @@ OBJ = build
 TST = test
 
 all: lex index.cgi default_test.cgi cgi_test_script.cgi fileio_trim find_tags dump_matches load_conf \
-	test_sequence test_comment test_include test_get_conf test_variable test_if_sequence test_foreach_sequence
+	test_sequence test_comment test_include test_get_conf test_variable test_if_sequence test_foreach_sequence #\
+	#libstreamy.so libstreamy.a
 
 lex: fileio.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/lex.cpp -o $(BLD)/lex.o	
@@ -83,6 +84,15 @@ unit_test.o:
 
 000-CatchMain.o:
 	$(CXX) $(CXXFLAGS) -c $(SRC)/000-CatchMain.cpp -o $(BLD)/000-CatchMain.o
+
+# libstreamy.so: streamy.o
+# 	$(CXX) $(CXXFLAGS) -fPIC --shared $(OBJ)/streamy.o -o $(BLD)/libstreamy.so
+# 	chmod 755 $(BLD)/libstreamy.so
+
+# libstreamy.a: streamy.o
+# 	ar rvs $(BLD)/libstreamy.a $(OBJ)/streamy.o
+# 	chmod 755 $(BLD)/libstreamy.a
+
 
 .PHONY: upload_test
 upload_test:
