@@ -103,7 +103,6 @@ clean_upload:
 	@echo cleaning upload ...
 	#-rm $(BLD)/index.cgi
 	@echo complete.
-	
 .PHONY: clean
 clean:
 	-rm -rf $(BLD)/*

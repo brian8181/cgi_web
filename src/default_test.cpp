@@ -6,7 +6,7 @@
 #include "cgicc/Cgicc.h"
 #include "cgicc/HTTPHTMLHeader.h"
 #include "cgicc/HTMLClasses.h"
-#include "../../streamy-cpp/src/streamy.hpp"
+#include "streamy.hpp"
 #include "fileio.hpp"
 #include "utility.hpp"
 //#include "../src/conf.hpp"
@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
     const string conf_path = project_folder + "/test/conf_test.txt";
 
     streamy sm(project_folder + "/www/templates", project_folder + "/www/compile", project_folder + "/www/config", project_folder + "/www/cache");
+    string s_out;
     sm.load_config(conf_path);
 
     // configure testing ...

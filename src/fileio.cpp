@@ -32,6 +32,14 @@ string ifs_read_all(string path)
     return output;
 }
 
+string& ifs_read_all(const string& path, /* out */string& out)
+{
+    std::ifstream ifstrm(path);
+    std::string output((std::istreambuf_iterator<char>(ifstrm)), std::istreambuf_iterator<char>());
+    out = output;
+    return out;
+}
+
 map<string, string> get_config(string path)
 {
     ifstream file;
