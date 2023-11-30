@@ -17,7 +17,6 @@ TST = test
 
 all: lex index.cgi default_test.cgi cgi_test_script.cgi fileio_trim find_tags dump_matches load_conf \
 	test_sequence test_comment test_include test_get_conf test_variable test_if_sequence test_foreach_sequence #\
-	#libstreamy.so libstreamy.a
 
 lex: fileio.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/lex.cpp -o $(BLD)/lex.o	
@@ -27,7 +26,7 @@ index.cgi: fileio.o utility.o streamy.o
 	$(CXX) $(CXXFLAGS) $(BLD)/fileio.o $(BLD)/utility.o $(BLD)/streamy.o $(SRC)/index.cpp -lcgicc -o $(BLD)/index.cgi
 
 default_test.cgi: fileio.o utility.o streamy.o 
-	$(CXX) $(CXXFLAGS) $(BLD)/fileio.o $(BLD)/utility.o $(BLD)/streamy.o $(SRC)/default_test.cpp $(LDFLAGS) -o $(BLD)/default_test.cgi
+	$(CXX) $(CXXFLAGS) $(BLD)/fileio.o $(BLD)/utility.o -lstreamy $(SRC)/default_test.cpp $(LDFLAGS) -o $(BLD)/default_test.cgi
 
 cgi_test_script.cgi:
 	$(CXX) $(CXXFLAGS) $(SRC)/cgi_test_script.cpp -o $(BLD)/cgi_test_script.cgi	
@@ -84,15 +83,6 @@ unit_test.o:
 
 000-CatchMain.o:
 	$(CXX) $(CXXFLAGS) -c $(SRC)/000-CatchMain.cpp -o $(BLD)/000-CatchMain.o
-
-# libstreamy.so: streamy.o
-# 	$(CXX) $(CXXFLAGS) -fPIC --shared $(OBJ)/streamy.o -o $(BLD)/libstreamy.so
-# 	chmod 755 $(BLD)/libstreamy.so
-
-# libstreamy.a: streamy.o
-# 	ar rvs $(BLD)/libstreamy.a $(OBJ)/streamy.o
-# 	chmod 755 $(BLD)/libstreamy.a
-
 
 .PHONY: upload_test
 upload_test:
