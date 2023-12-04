@@ -16,7 +16,9 @@ OBJ = build
 TST = test
 
 all: lex index.cgi default_test.cgi cgi_test_script.cgi fileio_trim find_tags dump_matches load_conf \
-	test_sequence test_comment test_include test_get_conf test_variable test_if_sequence test_foreach_sequence #\
+	test_sequence test_comment test_include test_get_conf test_variable test_if_sequence test_foreach_sequence \
+	#000-CatchMain.o
+
 
 lex: fileio.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/lex.cpp -o $(BLD)/lex.o	
