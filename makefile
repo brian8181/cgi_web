@@ -7,7 +7,8 @@
 
 CXX = g++
 CXXFLAGS = -g -Wall -std=c++17 -DDEBUG
-LDFLAGS = -lcgicc -lcppunit -L/usr/local/lib/
+#LDFLAGS = -lcgicc -lcppunit -L/usr/local/lib/
+LDFLAGS = -lcgicc -L/usr/local/lib/
 INCLUDES = -I/usr/include/cgicc/
 EXT = cpp
 SRC = src
@@ -17,8 +18,6 @@ TST = test
 
 all: lex index.cgi default_test.cgi cgi_test_script.cgi fileio_trim find_tags dump_matches load_conf \
 	test_sequence test_comment test_include test_get_conf test_variable test_if_sequence test_foreach_sequence \
-	#000-CatchMain.o
-
 
 lex: fileio.o
 	$(CXX) $(CXXFLAGS) -c $(SRC)/lex.cpp -o $(BLD)/lex.o	
@@ -27,8 +26,8 @@ lex: fileio.o
 index.cgi: fileio.o utility.o streamy.o
 	$(CXX) $(CXXFLAGS) $(BLD)/fileio.o $(BLD)/utility.o $(BLD)/streamy.o $(SRC)/index.cpp -lcgicc -o $(BLD)/index.cgi
 
-default_test.cgi: fileio.o utility.o streamy.o 
-	$(CXX) $(CXXFLAGS) $(BLD)/fileio.o $(BLD)/utility.o -lstreamy $(SRC)/default_test.cpp $(LDFLAGS) -o $(BLD)/default_test.cgi
+default_test.cgi: fileio.o utility.o
+	$(CXX) $(CXXFLAGS) $(BLD)/fileio.o $(BLD)/utility.o -I/usr/local/includes -lstreamy $(SRC)/default_test.cpp $(LDFLAGS) -o $(BLD)/default_test.cgi
 
 cgi_test_script.cgi:
 	$(CXX) $(CXXFLAGS) $(SRC)/cgi_test_script.cpp -o $(BLD)/cgi_test_script.cgi	

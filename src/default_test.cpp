@@ -6,9 +6,9 @@
 #include "cgicc/Cgicc.h"
 #include "cgicc/HTTPHTMLHeader.h"
 #include "cgicc/HTMLClasses.h"
-#include "streamy.hpp"
 #include "fileio.hpp"
 #include "utility.hpp"
+#include "/usr/local/include/streamy.hpp"
 //#include "../src/conf.hpp"
 
 using namespace std;
